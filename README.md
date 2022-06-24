@@ -23,6 +23,7 @@ from the [course's website](http://web.cecs.pdx.edu/~whitlock/).
 ## How do I use this repository?
 
 
+
 In order to use this repository, you must have a Git environment available on your development machine.
 I recommend [installing
 git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) on
