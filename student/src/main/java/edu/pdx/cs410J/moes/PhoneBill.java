@@ -9,21 +9,21 @@ import java.util.Collection;
 public class PhoneBill extends  AbstractPhoneBill{
 
     public String CustomerName;
-    public ArrayList<PhoneCall> calls;
+    public ArrayList<AbstractPhoneCall> calls;
 
     @Override
     public String getCustomer() {
-        return null;
+        return this.CustomerName;
     }
 
     @Override
     public void addPhoneCall(AbstractPhoneCall abstractPhoneCall) {
-
+        calls.add(abstractPhoneCall);
     }
 
     @Override
     public Collection getPhoneCalls() {
-        return null;
+        return calls;
     }
 
 }
