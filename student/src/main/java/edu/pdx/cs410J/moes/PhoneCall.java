@@ -14,6 +14,15 @@ public class PhoneCall extends AbstractPhoneCall {
     public String callBegin;
     public String callEnd;
 
+    public void print(){
+        System.out.println("Caller: " + this.caller);
+        System.out.println("Callee: " + this.callee);
+        System.out.println("Caller Number: " + this.callerNumber);
+        System.out.println("Callee Number" + this.calleeNumber);
+        System.out.println("Call Begin: " + this.callBegin);
+        System.out.println("Call End: " + this.callEnd);
+    }
+
     PhoneCall(String inp_caller, String inp_callee, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
         this.caller = inp_caller;
         this.callee = inp_callee;
