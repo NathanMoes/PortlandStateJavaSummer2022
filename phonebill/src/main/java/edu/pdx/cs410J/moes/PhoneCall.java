@@ -4,7 +4,7 @@ import edu.pdx.cs410J.AbstractPhoneCall;
 
 public class PhoneCall extends AbstractPhoneCall {
 
-  public String caller;
+  public String caller; // Caller name
   public String callee;
   public String callerNumber;
   public String calleeNumber;
