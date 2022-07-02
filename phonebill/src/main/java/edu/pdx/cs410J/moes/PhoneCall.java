@@ -12,12 +12,12 @@ public class PhoneCall extends AbstractPhoneCall {
   public String callEnd;
 
   PhoneCall(){
-      this.callEnd = "0:0:0";
-      this.callBegin = "0:0:0";
+      this.callEnd = "0:0";
+      this.callBegin = "0:0";
       this.caller = "None";
       this.callee = "None";
-      this.callerNumber = "None";
-      this.calleeNumber = "None";
+      this.callerNumber = "000-000-0000";
+      this.calleeNumber = "000-000-0000";
   }
 
   PhoneCall(String inp_caller, String inp_callee, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
@@ -27,6 +27,14 @@ public class PhoneCall extends AbstractPhoneCall {
     this.calleeNumber = inp_calleeNumber;
     this.callBegin = inp_callBegin;
     this.callEnd = inp_callEnd;
+  }
+
+  public String getCallerNumber(){
+    return this.callerNumber;
+  }
+
+  public String getCalleeNumber(){
+    return this.calleeNumber;
   }
 
   @Override
@@ -43,11 +51,13 @@ public class PhoneCall extends AbstractPhoneCall {
 
   @Override
   public String getBeginTimeString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    //throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.callBegin;
   }
 
   @Override
   public String getEndTimeString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    //throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.callEnd;
   }
 }
