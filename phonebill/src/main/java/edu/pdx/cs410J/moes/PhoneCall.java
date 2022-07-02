@@ -17,8 +17,8 @@ public class PhoneCall extends AbstractPhoneCall {
    */
 
   PhoneCall(){
-      this.callEnd = "0:0"; // default time 0 hour 0 min
-      this.callBegin = "0:0"; // default time 0 hour 0 min
+      this.callEnd = "00/00/0000 0:0"; // default time 0 hour 0 min
+      this.callBegin = "00/00/0000 0:0"; // default time 0 hour 0 min
       this.caller = "None"; // default caller is none
       this.callee = "None"; // default callee is none
       this.callerNumber = "000-000-0000"; // default number is 000-000-0000
