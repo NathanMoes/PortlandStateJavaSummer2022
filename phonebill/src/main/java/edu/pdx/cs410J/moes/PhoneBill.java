@@ -9,25 +9,53 @@ import java.util.Collection;
 
 public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
   private final String customer; //customer name
-  public ArrayList<PhoneCall> calls;
+  public ArrayList<PhoneCall> calls; // Array list of phone calls for the Phone Bill
 
-
-  public PhoneBill(String customer) {
-    this.customer = customer;
-    this.calls = new ArrayList<PhoneCall>();
+  /**
+   * Default constructor, set to null
+   */
+  PhoneBill(){
+    this.customer = null;
+    //calls = new ArrayList<PhoneCall>();
+    this.calls = null;
   }
 
+  /**
+   * constructor that takes in the customer as argument to set it
+   * @param customer is the customer name as a string
+   */
+  public PhoneBill(String customer) {
+    this.customer = customer;
+    //this.calls = new ArrayList<PhoneCall>();
+    this.calls = null;
+  }
+
+  /**
+   * gets the customer name from class
+   * @return returns the customer name as string
+   */
   @Override
   public String getCustomer() {
     return this.customer;
   }
 
+  /**
+   * adds a phone call to the phone bill
+   * @param call the call to add to the bill
+   */
   @Override
   public void addPhoneCall(PhoneCall call) {
+    if (this.calls == null){
+      this.calls = new ArrayList<PhoneCall>();
+    }
     calls.add(call);
     //throw new UnsupportedOperationException("This method is not implemented yet");
   }
 
+  /**
+   * gets the list of phone calls from the bill
+   * @return returns the array list of phone calls
+   */
   @Override
   public Collection<PhoneCall> getPhoneCalls() {
     return this.calls;
