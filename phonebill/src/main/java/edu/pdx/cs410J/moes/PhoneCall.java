@@ -11,6 +11,19 @@ public class PhoneCall extends AbstractPhoneCall {
   public String callBegin; // Call start time/begin time
   public String callEnd; // Call end time/finish time
 
+
+  /**
+   * Checks if the name is a valid name aka does not have numbers in it
+   */
+  public boolean validate_name(String to_validate){
+    boolean is_valid = true;
+    for (int i = 0; i < to_validate.length(); i+=1){
+      if (!Character.isLetter(to_validate.charAt(i)) && !Character.isWhitespace(to_validate.charAt(i)))
+        is_valid = false;
+    }
+    return is_valid;
+  }
+
   /**
    * Check if the number is a valid phone number
    */
@@ -118,9 +131,18 @@ public class PhoneCall extends AbstractPhoneCall {
     if (this.vali_date(inp_callEnd))
       this.callEnd = inp_callEnd;
     else
-      System.err.println("Invalid date begin");
-    this.caller = inp_caller;
-    this.callee = inp_callee;
+      System.err.println("Invalid date end");
+    if (this.validate_name(inp_caller))
+      this.caller = inp_caller;
+    else{
+      System.err.println("Invalid name given for caller");
+    }
+    if (this.validate_name(inp_callee))
+      this.callee = inp_callee;
+    else {
+      System.err.println("Invalid name given for callee");
+    }
+
     if (this.validate_number(inp_callerNumber))
       this.callerNumber = inp_callerNumber;
     else

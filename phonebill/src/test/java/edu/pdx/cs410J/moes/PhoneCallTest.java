@@ -113,5 +113,16 @@ public class PhoneCallTest {
     assertThat(call.vali_date("07/21/2100 10:30"), is(true));
   }
 
+  @Test
+  void testForValidNameCorrect(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.validate_name("Taco man"), is(true));
+  }
+
+  @Test
+  void testForValidNameIncorrect(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.validate_name("D4ve 3antos"), is(false));
+  }
 
 }

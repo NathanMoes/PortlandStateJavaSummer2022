@@ -25,12 +25,12 @@ public class Project1 {
       System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin> <end>");
       return;
     }
-    if (args.length < 5){
-      System.err.println("Expected at least 5 arguments");
+    if (args.length < 7){
+      System.err.println("Expected at least 7 arguments" + ". Arguments given: " + args.length);
       System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin> <end>");
       return;
     }
-    if (args.length >= 5){
+    if (args.length >= 7){
       System.out.println(""); // correct number of arguments
     }
     Scanner read_me = null;
@@ -56,7 +56,7 @@ public class Project1 {
      */
 
     if (args[0].equals("-print")) {
-      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4], args[5]);
+      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
       bill.addPhoneCall(test);
       test.toString();
       System.out.println("Caller: " + test.getCaller());
@@ -64,7 +64,7 @@ public class Project1 {
       System.out.println("Caller: " + test.getBeginTimeString());
       System.out.println("Caller: " + test.getEndTimeString());
     } else if (args[0].equals("-README")) {
-      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4], args[5]);
+      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
       bill.addPhoneCall(test);
       //BufferedReader readme = new BufferedReader("./README.md");
       while (read_me.hasNextLine()) {
@@ -74,7 +74,7 @@ public class Project1 {
       //TextDumper dump_readme = new TextDumper(read_me);
     }
     else {
-      PhoneCall test = new PhoneCall(args[0], "Testing stuff", args[1], args[2], args[3], args[4]);
+      PhoneCall test = new PhoneCall(args[0], "Testing stuff", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
       bill.addPhoneCall(test);
     }
   }
