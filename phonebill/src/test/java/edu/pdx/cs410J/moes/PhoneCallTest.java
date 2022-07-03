@@ -125,4 +125,29 @@ public class PhoneCallTest {
     assertThat(call.validate_name("D4ve 3antos"), is(false));
   }
 
+  @Test
+  void testForGetCalleeNumber(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.getCalleeNumber(), containsString("000-000-0000"));
+  }
+
+  @Test
+  void testForGetCalleeNumberNonDefault(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCalleeNumber(), containsString("333-333-3333"));
+  }
+
+
+  @Test
+  void testForGetCallerNumber(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.getCallerNumber(), containsString("000-000-0000"));
+  }
+
+  @Test
+  void testForGetCallerNumberNonDefault(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCallerNumber(), containsString("222-222-2222"));
+  }
+
 }
