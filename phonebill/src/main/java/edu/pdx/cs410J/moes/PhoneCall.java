@@ -13,6 +13,64 @@ public class PhoneCall extends AbstractPhoneCall {
 
 
   /**
+   * Checks if the date and time is valid
+   * returns true if valid and false else
+   */
+  public boolean vali_date(String to_validate){
+    boolean month = false;
+    boolean day = false;
+    boolean year = false;
+    boolean hour = false;
+    boolean min = false;
+    int check = 0;
+    for (int i = 0; i < to_validate.length(); i+=1){
+      if (Character.isDigit(to_validate.charAt(i))){
+        check += 1;
+      } else if ((to_validate.charAt(i) == '/') || (to_validate.charAt(i) == ' ') || (to_validate.charAt(i) == ':')) {
+        if ((i == 1 || i == 2) && (check == 1 || check == 2)){
+          if (check == 1){
+            month = to_validate.charAt(i - 1) != '0';
+          }
+          else {
+            month = true;
+          }
+          check = 0;
+        }
+        if ((i == 3 || i == 4 || i == 5) && (month) && (check == 1 || check == 2)){
+          if (check == 1){
+            day = to_validate.charAt(i - 1) != '0';
+          }
+          else {
+            day = true;
+          }
+          check = 0;
+        }
+        if ((i >= 7 && i <= 10) && (month && day) && (check == 4)){
+          year = true;
+          check = 0;
+        }
+        if ((i >= 10 && i <= 13) && (month && day && year) && (check == 1 || check == 2)) {
+          if (check == 1) {
+            hour = to_validate.charAt(i - 1) != '0';
+          } else {
+            hour = true;
+          }
+          check = 0;
+        }
+      }
+    }
+    System.out.println(to_validate.charAt(to_validate.length()-1));
+    if (to_validate.charAt(to_validate.length() - 1) == '0'){
+      if (to_validate.charAt(to_validate.length() - 2) != ':'){
+        min = true;
+      }
+    }
+    //return (month && day && year);
+    return month && day && year && hour && min;
+  }
+
+
+  /**
   default constructor for the class PhoneCall. Sets the values to their default values.
    */
 
@@ -36,12 +94,18 @@ public class PhoneCall extends AbstractPhoneCall {
    */
 
   PhoneCall(String inp_caller, String inp_callee, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
+    if (this.vali_date(inp_callBegin))
+      this.callBegin = inp_callBegin;
+    else
+      System.err.println("Invalid date begin");
+    if (this.vali_date(inp_callEnd))
+      this.callEnd = inp_callEnd;
+    else
+      System.err.println("Invalid date begin");
     this.caller = inp_caller;
     this.callee = inp_callee;
     this.callerNumber = inp_callerNumber;
     this.calleeNumber = inp_calleeNumber;
-    this.callBegin = inp_callBegin;
-    this.callEnd = inp_callEnd;
   }
 
   /**
@@ -99,4 +163,6 @@ public class PhoneCall extends AbstractPhoneCall {
     //throw new UnsupportedOperationException("This method is not implemented yet");
     return this.callEnd;
   }
+
+
 }
