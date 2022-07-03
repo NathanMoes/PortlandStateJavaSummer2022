@@ -70,4 +70,48 @@ public class PhoneCallTest {
     assertThat(call.getEndTime(), is(nullValue()));
   }
 
+  @Test
+  void testForInvalidNumberIsFalseLetters(){
+    PhoneCall call = new PhoneCall();
+    //assertThat((call.validate_number("abc-def-abdd")), false);
+    assertThat(call.validate_number("abc-def-hijk"), is(false));
+  }
+
+  @Test
+  void testForInvalidNumberIsFalseNumbers(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.validate_number("9999-2232-2123"), is(false));
+  }
+
+  @Test
+  void testForNumberIsTrue(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.validate_number("123-123-1234"), is(true));
+  }
+
+  @Test
+  void testForValidDateCorrectDate(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("07/3/2022 10:30"), is(true));
+  }
+
+  @Test
+  void testForValidDateIncorrectDate(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("0/0/2022 10:30"), is(false));
+  }
+
+  @Test
+  void testForValidDateIncorrectTime(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("07/21/2021 0:10"), is(false));
+  }
+
+  @Test
+  void testForValidDateCorrectTime(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("07/21/2100 10:30"), is(true));
+  }
+
+
 }

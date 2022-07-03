@@ -11,6 +11,23 @@ public class PhoneCall extends AbstractPhoneCall {
   public String callBegin; // Call start time/begin time
   public String callEnd; // Call end time/finish time
 
+  /**
+   * Check if the number is a valid phone number
+   */
+  public boolean validate_number(String to_validate){
+    int dashes = 0; // should be 2
+    int numbers = 0; // should be 10, 3-3-4
+    for (int i = 0; i < to_validate.length(); i+=1){
+      if (to_validate.charAt(i) == '-')
+        dashes += 1;
+      else if (Character.isDigit(to_validate.charAt(i))) {
+        numbers += 1;
+      }
+    }
+    return numbers == 10 && dashes == 2;
+  }
+  
+  
 
   /**
    * Checks if the date and time is valid
@@ -59,7 +76,7 @@ public class PhoneCall extends AbstractPhoneCall {
         }
       }
     }
-    System.out.println(to_validate.charAt(to_validate.length()-1));
+    //System.out.println(to_validate.charAt(to_validate.length()-1));
     if (to_validate.charAt(to_validate.length() - 1) == '0'){
       if (to_validate.charAt(to_validate.length() - 2) != ':'){
         min = true;
@@ -104,8 +121,14 @@ public class PhoneCall extends AbstractPhoneCall {
       System.err.println("Invalid date begin");
     this.caller = inp_caller;
     this.callee = inp_callee;
-    this.callerNumber = inp_callerNumber;
-    this.calleeNumber = inp_calleeNumber;
+    if (this.validate_number(inp_callerNumber))
+      this.callerNumber = inp_callerNumber;
+    else
+      System.err.println("Invalid caller phone number");
+    if (this.validate_number(inp_calleeNumber))
+      this.calleeNumber = inp_calleeNumber;
+    else
+      System.err.println("Invalid callee phone number");
   }
 
   /**
