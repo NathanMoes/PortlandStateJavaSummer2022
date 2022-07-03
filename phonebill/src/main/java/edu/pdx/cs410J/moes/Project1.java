@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /**
  * The main class for the CS410J Phone Bill Project
+ * Note to self, says data and time are seperate arumnets on line. so need to update that
  */
 public class Project1 {
 
@@ -30,7 +31,7 @@ public class Project1 {
       return;
     }
     if (args.length >= 5){
-      System.out.println("test");
+      System.out.println(""); // correct number of arguments
     }
     Scanner read_me = null;
     File readme = new File("./README.md");
@@ -53,21 +54,28 @@ public class Project1 {
     System.out.println("end: " + args[5]);
     System.out.println(args.length);
      */
-    PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4], args[5]);
-    bill.addPhoneCall(test);
+
     if (args[0].equals("-print")) {
+      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4], args[5]);
+      bill.addPhoneCall(test);
       test.toString();
       System.out.println("Caller: " + test.getCaller());
       System.out.println("Callee: " + test.getCallee());
       System.out.println("Caller: " + test.getBeginTimeString());
       System.out.println("Caller: " + test.getEndTimeString());
     } else if (args[0].equals("-README")) {
+      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4], args[5]);
+      bill.addPhoneCall(test);
       //BufferedReader readme = new BufferedReader("./README.md");
       while (read_me.hasNextLine()) {
         String data = read_me.nextLine();
         System.out.println(data);
       }
       //TextDumper dump_readme = new TextDumper(read_me);
+    }
+    else {
+      PhoneCall test = new PhoneCall(args[0], "Testing stuff", args[1], args[2], args[3], args[4]);
+      bill.addPhoneCall(test);
     }
   }
 
