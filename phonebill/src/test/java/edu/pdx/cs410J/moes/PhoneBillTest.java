@@ -46,6 +46,19 @@ public class PhoneBillTest {
         assertThat(testing.getCustomer(), is(nullValue()));
     }
 
+    @Test
+    void TestCustomerInit(){
+        PhoneBill testing = new PhoneBill("Tom");
+        assertThat(testing.getCustomer(), containsString("Tom"));
+    }
+
+    @Test
+    void TestCustomerInitCalls(){
+        PhoneBill testing = new PhoneBill("Tom");
+        assertThat(testing.getPhoneCalls(), is(nullValue()));
+    }
+
+
     /**
      * tests that the customer name is correct
      */
