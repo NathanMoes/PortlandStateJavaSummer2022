@@ -11,10 +11,10 @@ import java.util.Scanner;
  */
 public class Project1 {
 
-  @VisibleForTesting
-  static boolean isValidPhoneNumber(String phoneNumber) {
-    return true;
-  }
+  //@VisibleForTesting
+  //static boolean isValidPhoneNumber(String phoneNumber) {
+   // return true;
+  //}
 
 
   public static void main(String[] args) {
@@ -77,6 +77,7 @@ public class Project1 {
       PhoneCall test = new PhoneCall(args[0], "Testing stuff", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
       bill.addPhoneCall(test);
     }
+
   }
 
 }

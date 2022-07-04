@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static edu.pdx.cs410J.moes.Project1.main;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -28,4 +29,16 @@ class Project1Test {
       assertThat(line, containsString("This is a README file!"));
     }
   }
+
+  @Test
+  void testValidInput(){
+    String [] args = {"-print" , "Nathan Moes" , "971-205-0106" , "971-470-9758" , "09/26/2000" , "10:30" ,
+    "09/26/2000", "11:30"};
+    Project1 test = new Project1();
+    main(args);
+    //assertThat();
+    // -print "Nathan Moes" 971-205-0106 971-470-9758 09/26/2000 10:30 09/26/2000 11:30
+  }
+
+
 }
