@@ -30,12 +30,13 @@ class Project1Test {
     }
   }
 
-  @Test
-  void testValidInput(){
-    String [] args = {"-print" , "Nathan Moes" , "971-205-0106" , "971-470-9758" , "09/26/2000" , "10:30" ,
-    "09/26/2000", "11:30"};
-    Project1 test = new Project1();
-    main(args);
+  //@Test
+  //void testValidInput(){
+    //InputStream readme = Project1.class.getResourceAsStream("README.txt");
+    //String [] args = {"-print" , "Nathan Moes" , "971-205-0106" , "971-470-9758" , "09/26/2000" , "10:30" ,
+    //"09/26/2000", "11:30"};
+    //Project1 test = new Project1();
+    //assert(main(args), );
     //assertThat();
     // -print "Nathan Moes" 971-205-0106 971-470-9758 09/26/2000 10:30 09/26/2000 11:30
   }
