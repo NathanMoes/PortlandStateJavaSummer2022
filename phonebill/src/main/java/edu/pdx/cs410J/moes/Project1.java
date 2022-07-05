@@ -11,13 +11,34 @@ import java.util.Scanner;
  */
 public class Project1 {
 
-  //@VisibleForTesting
-  //static boolean isValidPhoneNumber(String phoneNumber) {
-   // return true;
-  //}
+  @VisibleForTesting
+  static boolean isValidPhoneNumber(String phoneNumber) {
+   return true;
+  }
 
+  /**
+   * This is the main function for project/program 1, it takes command line arguments and creates external class objects
+   * Namely phone call and phone class objects
+   * @param args is the arguments pass in from the command line
+   *             Does not return anything
+   */
 
   public static void main(String[] args) {
+    if (args[0].equals("-README")) {
+      try (InputStream read_meF = Project1.class.getResourceAsStream("README.txt"))
+      {
+        Scanner read_me = new Scanner(read_meF);
+        while (read_me.hasNextLine()) {
+          String data = read_me.nextLine();
+          System.out.println(data);
+        }
+        return;
+      }
+      catch (IOException e){
+        System.err.println("Could not open readmefile");
+      }
+      //TextDumper dump_readme = new TextDumper(read_me);
+    }
     PhoneBill bill = new PhoneBill();
     PhoneCall call = new PhoneCall();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
     if (args.length <= 1) {
@@ -32,57 +53,19 @@ public class Project1 {
       return;
     }
     if (args.length >= 7){
-      System.out.println(""); // correct number of arguments
+      System.out.println(""); // correct number of arguments not needed to keep in
     }
-    //Scanner read_me = read_meF;
-    //File readme = new File("./README.md");
-    //try {
-      //read_me = new Scanner(readme);
-   // }
-    //catch (FileNotFoundException exception){
-      //System.err.println("failed to open file");
-      //exception.printStackTrace();
-      //return;
-    //}
-    /**for (String arg : args) {
-      System.out.println(arg);
-    }
-    System.out.println("OPTION: " + args[0]);
-    System.out.println("customer: " + args[1]);
-    System.out.println("callerNumber: " + args[2]);
-    System.out.println("calleeNumber: " + args[3]);
-    System.out.println("begin: " + args[4]);
-    System.out.println("end: " + args[5]);
-    System.out.println(args.length);
-     */
-
     if (args[0].equals("-print")) {
-      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
+      PhoneCall test = new PhoneCall(args[1], "None", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
       bill.addPhoneCall(test);
       test.toString();
       System.out.println("Caller: " + test.getCaller());
       System.out.println("Callee: " + test.getCallee());
       System.out.println("Caller: " + test.getBeginTimeString());
       System.out.println("Caller: " + test.getEndTimeString());
-    } else if (args[0].equals("-README")) {
-      PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
-      bill.addPhoneCall(test);
-      //BufferedReader readme = new BufferedReader("./README.md");
-      try (InputStream read_meF = Project1.class.getResourceAsStream("README.txt"))
-      {
-        Scanner read_me = new Scanner(read_meF);
-        while (read_me.hasNextLine()) {
-          String data = read_me.nextLine();
-          System.out.println(data);
-        }
-      }
-      catch (IOException e){
-        System.err.println("Could not open readmefile");
-      }
-      //TextDumper dump_readme = new TextDumper(read_me);
     }
     else {
-      PhoneCall test = new PhoneCall(args[0], "Testing stuff", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
+      PhoneCall test = new PhoneCall(args[0], "None", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
       bill.addPhoneCall(test);
     }
 

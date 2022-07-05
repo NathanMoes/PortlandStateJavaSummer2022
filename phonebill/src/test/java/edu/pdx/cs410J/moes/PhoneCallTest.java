@@ -16,14 +16,17 @@ public class PhoneCallTest {
   /**
    * This unit test will need to be modified (likely deleted) as you implement
    * your project.
+   * validates the end time default value of 0:0
    */
-
   @Test
   void forProject1ItIsOkayIfGetEndTimeIsZero() {
     PhoneCall call = new PhoneCall();
     assertThat(call.getEndTimeString(), containsString("0:0"));
   }
 
+  /**
+   * This test tests to validate if the default time of 0:0 is init correctly
+   */
   @Test
   void forProject1ItIsOkayIfGetBeginTimeIsZero() {
     PhoneCall call = new PhoneCall();
@@ -33,6 +36,7 @@ public class PhoneCallTest {
   /**
    * This unit test will need to be modified (likely deleted) as you implement
    * your project.
+   * Check if phone call has correct default callee name
    */
   @Test
   void initiallyAllPhoneCallsHaveTheSameCallee() {
@@ -40,36 +44,54 @@ public class PhoneCallTest {
     assertThat(call.getCallee(), containsString("None"));
   }
 
+  /**
+   * Tests to see that the caller name default value is correct aka is none
+   */
   @Test
   void initiallyAllPhoneCallsHaveTheSameCaller() {
     PhoneCall call = new PhoneCall();
     assertThat(call.getCaller(), containsString("None"));
   }
 
+  /**
+   * Tests to validate the callee phone number of 000-000-0000 as a default value
+   */
   @Test
   void initiallyPhoneCalleeNumberIsZero(){
     PhoneCall call = new PhoneCall();
     assertThat(call.getCalleeNumber(), containsString("000-000-0000"));
   }
 
+  /**
+   * Tests if the caller number default is correct/valid
+   */
   @Test
   void initiallyPhoneCallerNumberIsZero(){
     PhoneCall call = new PhoneCall();
     assertThat(call.getCallerNumber(), containsString("000-000-0000"));
   }
 
+  /**
+   * Tests if its okay to have the begin time string as null
+   */
   @Test
   void forProject1ItIsOkayIfGetBeginTimeReturnsNull() {
     PhoneCall call = new PhoneCall();
     assertThat(call.getBeginTime(), is(nullValue()));
   }
 
+  /**
+   * Tests if its okay to have the end time is valid
+   */
   @Test
   void forProject1ItIsOkayIfGetEndTimeReturnsNull() {
     PhoneCall call = new PhoneCall();
     assertThat(call.getEndTime(), is(nullValue()));
   }
 
+  /**
+   * Tests that the phone number cannot contain chars
+   */
   @Test
   void testForInvalidNumberIsFalseLetters(){
     PhoneCall call = new PhoneCall();
@@ -77,73 +99,108 @@ public class PhoneCallTest {
     assertThat(call.validate_number("abc-def-hijk"), is(false));
   }
 
+  /**
+   * Tests that too many numbers for a phone number is invalid
+   */
   @Test
   void testForInvalidNumberIsFalseNumbers(){
     PhoneCall call = new PhoneCall();
     assertThat(call.validate_number("9999-2232-2123"), is(false));
   }
 
+  /**
+   * tests to check if a valid phone number is valid
+   */
   @Test
   void testForNumberIsTrue(){
     PhoneCall call = new PhoneCall();
     assertThat(call.validate_number("123-123-1234"), is(true));
   }
 
+  /**
+   * tests if a valid date is valid
+   */
   @Test
   void testForValidDateCorrectDate(){
     PhoneCall call = new PhoneCall();
     assertThat(call.vali_date("07/3/2022 10:30"), is(true));
   }
 
+  /**
+   * tests if a invalid date is invalid
+   */
   @Test
   void testForValidDateIncorrectDate(){
     PhoneCall call = new PhoneCall();
     assertThat(call.vali_date("0/0/2022 10:30"), is(false));
   }
 
+  /**
+   * tests that an invalid time is invalid
+   */
   @Test
   void testForValidDateIncorrectTime(){
     PhoneCall call = new PhoneCall();
     assertThat(call.vali_date("07/21/2021 0:10"), is(false));
   }
 
+  /**
+   * tests if a valid time is valid
+   */
   @Test
   void testForValidDateCorrectTime(){
     PhoneCall call = new PhoneCall();
     assertThat(call.vali_date("07/21/2100 10:30"), is(true));
   }
 
+  /**
+   * Tests if a valid name is valid
+   */
   @Test
   void testForValidNameCorrect(){
     PhoneCall call = new PhoneCall();
     assertThat(call.validate_name("Taco man"), is(true));
   }
 
+  /**
+   * tests if an invalid name is invalid, aka contains numbers
+   */
   @Test
   void testForValidNameIncorrect(){
     PhoneCall call = new PhoneCall();
     assertThat(call.validate_name("D4ve 3antos"), is(false));
   }
 
+  /**
+   * Tests if the default number is correct
+   */
   @Test
   void testForGetCalleeNumber(){
     PhoneCall call = new PhoneCall();
     assertThat(call.getCalleeNumber(), containsString("000-000-0000"));
   }
 
+  /**
+   * tests if callee number is set and returned correctly
+   */
   @Test
   void testForGetCalleeNumberNonDefault(){
     PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
     assertThat(call.getCalleeNumber(), containsString("333-333-3333"));
   }
 
-
+  /**
+   * Tests that we can get caller number correctly
+   */
   @Test
   void testForGetCallerNumber(){
     PhoneCall call = new PhoneCall();
     assertThat(call.getCallerNumber(), containsString("000-000-0000"));
   }
 
+  /**
+   * Tests to make sure that caller number is set and returned correctly
+   */
   @Test
   void testForGetCallerNumberNonDefault(){
     PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");

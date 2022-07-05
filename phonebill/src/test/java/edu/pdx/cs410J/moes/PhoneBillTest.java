@@ -6,6 +6,9 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Class is to test the phone bill class
+ */
 public class PhoneBillTest {
 
     /**
@@ -46,12 +49,18 @@ public class PhoneBillTest {
         assertThat(testing.getCustomer(), is(nullValue()));
     }
 
+    /**
+     * Tests if the PhoneBill can be created correctly with a customer name
+     */
     @Test
     void TestCustomerInit(){
         PhoneBill testing = new PhoneBill("Tom");
         assertThat(testing.getCustomer(), containsString("Tom"));
     }
 
+    /**
+     * Tests if phone call list/array is initialy null aka has no calls if none added yet
+     */
     @Test
     void TestCustomerInitCalls(){
         PhoneBill testing = new PhoneBill("Tom");
