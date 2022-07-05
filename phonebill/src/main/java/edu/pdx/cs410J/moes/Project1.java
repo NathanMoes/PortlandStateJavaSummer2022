@@ -22,7 +22,8 @@ public class Project1 {
     PhoneCall call = new PhoneCall();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
     if (args.length <= 1) {
       System.err.println("Missing command line arguments");
-      System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin> <end>");
+      System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin date> <begin time> " +
+              "<end date> <end time>");
       return;
     }
     if (args.length < 7){
@@ -33,16 +34,16 @@ public class Project1 {
     if (args.length >= 7){
       System.out.println(""); // correct number of arguments
     }
-    Scanner read_me = null;
-    File readme = new File("./README.md");
-    try {
-      read_me = new Scanner(readme);
-    }
-    catch (FileNotFoundException exception){
-      System.err.println("failed to open file");
-      exception.printStackTrace();
-      return;
-    }
+    //Scanner read_me = read_meF;
+    //File readme = new File("./README.md");
+    //try {
+      //read_me = new Scanner(readme);
+   // }
+    //catch (FileNotFoundException exception){
+      //System.err.println("failed to open file");
+      //exception.printStackTrace();
+      //return;
+    //}
     /**for (String arg : args) {
       System.out.println(arg);
     }
@@ -67,9 +68,16 @@ public class Project1 {
       PhoneCall test = new PhoneCall(args[1], "Testing stuff", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
       bill.addPhoneCall(test);
       //BufferedReader readme = new BufferedReader("./README.md");
-      while (read_me.hasNextLine()) {
-        String data = read_me.nextLine();
-        System.out.println(data);
+      try (InputStream read_meF = Project1.class.getResourceAsStream("README.txt"))
+      {
+        Scanner read_me = new Scanner(read_meF);
+        while (read_me.hasNextLine()) {
+          String data = read_me.nextLine();
+          System.out.println(data);
+        }
+      }
+      catch (IOException e){
+        System.err.println("Could not open readmefile");
       }
       //TextDumper dump_readme = new TextDumper(read_me);
     }
