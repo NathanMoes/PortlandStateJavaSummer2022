@@ -17,7 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * written to {@link System#out} and the like.
  */
 class Project1Test {
-
+  /**
+   * Tests if the readme can be read as a resource
+   * @throws IOException if there is a failure to open readme text as a resource
+   */
   @Test
   void readmeCanBeReadAsResource() throws IOException {
     try (

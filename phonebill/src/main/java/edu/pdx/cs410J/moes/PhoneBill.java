@@ -7,6 +7,9 @@ import org.checkerframework.checker.units.qual.A;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Phone Bill class, implements a phone bill with array of phone calls for a customer
+ */
 public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
   private final String customer; //customer name
   public ArrayList<PhoneCall> calls; // Array list of phone calls for the Phone Bill

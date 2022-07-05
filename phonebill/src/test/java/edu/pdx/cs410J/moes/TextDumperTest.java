@@ -10,8 +10,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
+/**
+ * Tests the text dumper class
+ */
 public class TextDumperTest {
-
+  /**
+   * tests if the class can correclty read in the phone bill thing
+   */
   @Test
   void appointmentBookOwnerIsDumpedInTextFormat() {
     String customer = "Test Phone Bill";
@@ -25,6 +30,12 @@ public class TextDumperTest {
     assertThat(text, containsString(customer));
   }
 
+  /**
+   * Tests that the text can be writen by a text dumper
+   * @param tempDir creates a temporary directory for testing
+   * @throws IOException if fails and IO operation on open file
+   * @throws ParserException If the class can not parse the file
+   */
   @Test
   void canParseTextWrittenByTextDumper(@TempDir File tempDir) throws IOException, ParserException {
     String customer = "Test Phone Bill";
