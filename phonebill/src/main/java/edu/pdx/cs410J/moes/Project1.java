@@ -24,6 +24,12 @@ public class Project1 {
    */
 
   public static void main(String[] args) {
+    if (args.length <= 1) {
+      System.err.println("Missing command line arguments");
+      System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin date> <begin time> " +
+              "<end date> <end time>");
+      return;
+    }
     if (args[0].equals("-README")) {
       try (InputStream read_meF = Project1.class.getResourceAsStream("README.txt"))
       {
@@ -41,12 +47,6 @@ public class Project1 {
     }
     PhoneBill bill = new PhoneBill();
     PhoneCall call = new PhoneCall();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
-    if (args.length <= 1) {
-      System.err.println("Missing command line arguments");
-      System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin date> <begin time> " +
-              "<end date> <end time>");
-      return;
-    }
     if (args.length < 7){
       System.err.println("Expected at least 7 arguments" + ". Arguments given: " + args.length);
       System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin> <end>");
