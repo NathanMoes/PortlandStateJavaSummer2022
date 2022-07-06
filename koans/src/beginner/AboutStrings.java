@@ -21,47 +21,47 @@ public class AboutStrings {
         // practice - generally it is redundant, and done repetitively can be slow
         String string = new String();
         String empty = "";
-        assertEquals(string.equals(empty), __);
+        assertEquals(string.equals(empty), "");
     }
 
     @Koan
     public void newStringIsRedundant() {
         String stringInstance = "zero";
         String stringReference = new String(stringInstance);
-        assertEquals(stringInstance.equals(stringReference), __);
+        assertEquals(stringInstance.equals(stringReference), true);
     }
 
     @Koan
     public void newStringIsNotIdentical() {
         String stringInstance = "zero";
         String stringReference = new String(stringInstance);
-        assertEquals(stringInstance == stringReference, __);
+        assertEquals(stringInstance == stringReference, false);
     }
 
     @Koan
     public void stringIsEmpty() {
-        assertEquals("".isEmpty(), __);
-        assertEquals("one".isEmpty(), __);
-        assertEquals(new String().isEmpty(), __);
-        assertEquals(new String("").isEmpty(), __);
-        assertEquals(new String("one").isEmpty(), __);
+        assertEquals("".isEmpty(), true);
+        assertEquals("one".isEmpty(), false);
+        assertEquals(new String().isEmpty(), true);
+        assertEquals(new String("").isEmpty(), true);
+        assertEquals(new String("one").isEmpty(), false);
     }
 
     @Koan
     public void stringLength() {
-        assertEquals("".length(), __);
-        assertEquals("one".length(), __);
-        assertEquals("the number is one".length(), __);
+        assertEquals("".length(), 0);
+        assertEquals("one".length(), 3);
+        assertEquals("the number is one".length(), 17);
     }
 
     @Koan
     public void stringTrim() {
-        assertEquals("".trim(), __);
+        assertEquals("".trim(), "");
         assertEquals("one".trim(), "one");
-        assertEquals(" one more time".trim(), __);
-        assertEquals(" one more time         ".trim(), __);
-        assertEquals(" and again\t".trim(), __);
-        assertEquals("\t\t\twhat about now?\t".trim(), __);
+        assertEquals(" one more time".trim(), "onemoretime");
+        assertEquals(" one more time         ".trim(), "onemoretime");
+        assertEquals(" and again\t".trim(), "andagain");
+        assertEquals("\t\t\twhat about now?\t".trim(), "whataboutnow");
     }
 
     @Koan
