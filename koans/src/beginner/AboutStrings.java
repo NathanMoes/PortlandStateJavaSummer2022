@@ -21,7 +21,7 @@ public class AboutStrings {
         // practice - generally it is redundant, and done repetitively can be slow
         String string = new String();
         String empty = "";
-        assertEquals(string.equals(empty), "");
+        assertEquals(string.equals(empty), true);
     }
 
     @Koan
