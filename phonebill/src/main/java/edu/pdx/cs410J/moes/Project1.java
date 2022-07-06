@@ -24,7 +24,7 @@ public class Project1 {
    */
 
   public static void main(String[] args) {
-    if (args.length <= 1) {
+    if (args.length < 1) {
       System.err.println("Missing command line arguments");
       System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin date> <begin time> " +
               "<end date> <end time>");
