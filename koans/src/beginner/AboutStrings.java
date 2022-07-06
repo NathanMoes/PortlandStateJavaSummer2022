@@ -7,7 +7,7 @@ import java.text.MessageFormat;
 import static com.sandwich.koan.constant.KoanConstants.__;
 import static com.sandwich.util.Assert.assertEquals;
 import static com.sandwich.util.Assert.fail;
-
+// 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
 public class AboutStrings {
 
     @Koan
@@ -58,10 +58,10 @@ public class AboutStrings {
     public void stringTrim() {
         assertEquals("".trim(), "");
         assertEquals("one".trim(), "one");
-        assertEquals(" one more time".trim(), "onemoretime");
-        assertEquals(" one more time         ".trim(), "onemoretime");
-        assertEquals(" and again\t".trim(), "andagain");
-        assertEquals("\t\t\twhat about now?\t".trim(), "whataboutnow");
+        assertEquals(" one more time".trim(), "one more time");
+        assertEquals(" one more time         ".trim(), "one more time");
+        assertEquals(" and again\t".trim(), "and again");
+        assertEquals("\t\t\twhat about now?\t".trim(), "what about now");
     }
 
     @Koan
