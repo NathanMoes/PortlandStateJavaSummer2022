@@ -132,8 +132,8 @@ public class AboutStrings {
     @Koan
     public void stringContains() {
         String str = "I AM a number ONE!";
-        assertEquals(str.contains("one"), __);
-        assertEquals(str.contains("ONE"), __);
+        assertEquals(str.contains("one"), false);
+        assertEquals(str.contains("ONE"), true);
     }
 
     @Koan
