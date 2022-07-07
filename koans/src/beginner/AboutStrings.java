@@ -112,21 +112,21 @@ public class AboutStrings {
 
     @Koan
     public void stringEndsWith() {
-        assertEquals("".endsWith("one"), __);
-        assertEquals("one".endsWith("one"), __);
-        assertEquals("the number is one".endsWith("one"), __);
-        assertEquals("the number is two".endsWith("one"), __);
-        assertEquals("the number is One".endsWith("one"), __);
+        assertEquals("".endsWith("one"), false);
+        assertEquals("one".endsWith("one"), true);
+        assertEquals("the number is one".endsWith("one"), true);
+        assertEquals("the number is two".endsWith("one"), false);
+        assertEquals("the number is One".endsWith("one"), false);
     }
 
     @Koan
     public void stringSubstring() {
         String str = "I AM a number ONE!";
-        assertEquals(str.substring(0), __);
-        assertEquals(str.substring(1), __);
-        assertEquals(str.substring(5), __);
-        assertEquals(str.substring(14, 17), __);
-        assertEquals(str.substring(7, str.length()), __);
+        assertEquals(str.substring(0), "I");
+        assertEquals(str.substring(1), " ");
+        assertEquals(str.substring(5), "a");
+        assertEquals(str.substring(14, 17), "ONE!");
+        assertEquals(str.substring(7, str.length()), "number ONE!");
     }
 
     @Koan
