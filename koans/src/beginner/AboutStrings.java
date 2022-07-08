@@ -3,6 +3,7 @@ package beginner;
 import com.sandwich.koan.Koan;
 
 import java.text.MessageFormat;
+import java.util.MissingFormatArgumentException;
 
 import static com.sandwich.koan.constant.KoanConstants.__;
 import static com.sandwich.util.Assert.assertEquals;
@@ -164,7 +165,7 @@ public class AboutStrings {
             String.format("%s %s %s", "a", "b");
             fail("No Exception was thrown!");
         } catch (Exception e) {
-            assertEquals(e.getClass(), String.class);
+            assertEquals(e.getClass(), MissingFormatArgumentException.class);
             assertEquals(e.getMessage(), false);
         }
     }
