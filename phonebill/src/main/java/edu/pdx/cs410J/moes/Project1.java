@@ -16,12 +16,42 @@ public class Project1 {
    return true;
   }
 
+  static String userDir = System.getProperty("user.dir");
+
+  /**
+   * This function is to find the first file that matches the name passed in so that other parts of the program can
+   * read and write to it.
+   * @param file_name is the name of the file as a string passed in to check against
+   * @param file is the file that is passed in on recursive calls and initialy so that there is a starting directory
+   */
+
+    static File find(String file_name, File file){
+      File[] start = file.listFiles();
+      if (start == null){
+        System.err.println("file is null");
+        return null;
+      }
+      if (file.getName().equals(file_name))
+        return file;
+      else{
+        for (File check : start){
+          if (check.isDirectory()){
+            find(file_name, check);
+          } else if (file_name.equalsIgnoreCase(check.getName())) {
+            return check;
+          }
+        }
+      }
+      return null;
+    }
+
   /**
    * This is the main function for project/program 1, it takes command line arguments and creates external class objects
    * Namely phone call and phone class objects
    * @param args is the arguments pass in from the command line
    *             Does not return anything
    */
+
 
   public static void main(String[] args) {
     if (args.length < 1) {
@@ -30,7 +60,7 @@ public class Project1 {
               "<end date> <end time>");
       return;
     }
-    if (args[0].equals("-README")) {
+    if (args[0].equals("-README") || args[1].equals("-README")) {
       try (InputStream read_meF = Project1.class.getResourceAsStream("README.txt"))
       {
         Scanner read_me = new Scanner(read_meF);
@@ -55,8 +85,17 @@ public class Project1 {
     if (args.length >= 7){
       System.out.println(""); // correct number of arguments not needed to keep in
     }
-    if (args[0].equals("-print")) {
-      PhoneCall test = new PhoneCall(args[1], "None", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
+    PhoneCall test;
+    if (args[0].equalsIgnoreCase("-textFile") ||  args[1].equalsIgnoreCase("-textFile")
+    || args[2].equalsIgnoreCase("-textFile"))
+    {
+      File cwd = new File(userDir);
+      System.out.println(Project1.find("README.md", cwd));
+      System.out.println(cwd.getName());
+      return;
+    }
+    if (args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print")) {
+      test = new PhoneCall(args[1], "None", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
       bill.addPhoneCall(test);
       test.toString();
       System.out.println("Caller: " + test.getCaller());
@@ -65,9 +104,10 @@ public class Project1 {
       System.out.println("Caller: " + test.getEndTimeString());
     }
     else {
-      PhoneCall test = new PhoneCall(args[0], "None", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
+      test = new PhoneCall(args[0], "None", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
       bill.addPhoneCall(test);
     }
+    return;
 
   }
 
