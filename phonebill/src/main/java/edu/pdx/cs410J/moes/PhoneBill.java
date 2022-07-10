@@ -51,6 +51,8 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
     if (this.calls == null){
       this.calls = new ArrayList<PhoneCall>();
     }
+    if (call == null)
+      return;
     calls.add(call);
     //throw new UnsupportedOperationException("This method is not implemented yet");
   }

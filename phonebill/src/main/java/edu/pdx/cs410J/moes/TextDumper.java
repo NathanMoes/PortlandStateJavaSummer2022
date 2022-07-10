@@ -20,7 +20,22 @@ public class TextDumper implements PhoneBillDumper<PhoneBill> {
       PrintWriter pw = new PrintWriter(this.writer)
     ) {
       pw.println(bill.getCustomer());
-
+      // pw.println('\n');
+      for (PhoneCall to_add : bill.calls){
+        pw.println(to_add.caller);
+        //pw.println(',');
+        pw.println(to_add.callee);
+        //pw.println(',');
+        pw.println(to_add.callerNumber);
+        //pw.println(',');
+        pw.println(to_add.calleeNumber);
+        //pw.println(',');
+        pw.println(to_add.callBegin);
+        //pw.println(',');
+        pw.println(to_add.callEnd);
+        //pw.println(',');
+        //pw.println('\n');
+      }
       pw.flush();
     }
   }
