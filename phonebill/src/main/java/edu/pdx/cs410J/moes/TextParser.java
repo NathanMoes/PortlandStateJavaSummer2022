@@ -22,9 +22,12 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
     ) {
       int phone_call_args = 0;
       String customer = br.readLine();
+      /**
       if (customer == null) {
+        System.err.println("NUll customer");
         throw new ParserException("Missing customer");
       }
+      */
       PhoneBill to_return = new PhoneBill(customer);
       PhoneCall to_add_in = null;
       String caller_name = null;
@@ -34,6 +37,7 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
       String start_time = null;
       String end_time = null;
       while (customer != null){
+        // System.err.println("doing the thing");
         customer = br.readLine();
         phone_call_args += 1;
         if (phone_call_args % 6 == 5){
@@ -74,6 +78,7 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
       return to_return;
 
     } catch (IOException e) {
+      System.err.println("failed to set buffered reader");
       throw new ParserException("While parsing phone bill text", e);
     }
   }

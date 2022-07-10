@@ -18,7 +18,7 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
    * Default constructor, set to null
    */
   PhoneBill(){
-    this.customer = null;
+    this.customer = "Default customer";
     //calls = new ArrayList<PhoneCall>();
     this.calls = null;
   }
