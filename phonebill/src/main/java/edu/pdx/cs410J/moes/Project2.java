@@ -10,7 +10,7 @@ import java.util.Scanner;
  * The main class for the CS410J Phone Bill Project
  * Note to self, says data and time are seperate arumnets on line. so need to update that
  */
-public class Project1 {
+public class Project2 {
 
   @VisibleForTesting
   static boolean isValidPhoneNumber(String phoneNumber) {
@@ -28,7 +28,8 @@ public class Project1 {
 
     static File find(String file_name, File file){
       File[] start = file.listFiles();
-      if (start == null){
+      // if ( start == null || start.length < 1){
+      if ( start == null){
         System.err.println("file is null");
         return null;
       }
@@ -67,6 +68,11 @@ public class Project1 {
     for (String to_check : args){
       if (to_check.startsWith("-")){
         call_argument_start_point += 1;
+        if (!to_check.equalsIgnoreCase("-print") && !to_check.equalsIgnoreCase("-README") &&
+                !to_check.equalsIgnoreCase("-textFile")){
+          System.err.println("Invalid command line argument(s) for options");
+          return;
+        }
       }
       if (to_check.equalsIgnoreCase("-textFile")){
         text_file_name = call_argument_start_point;
@@ -76,21 +82,23 @@ public class Project1 {
         to_print_check = true;
       }
     }
-    // System.out.println(call_argument_start_point);
+    if ((args.length - call_argument_start_point) > 7){
+      System.err.println("too many command line arguments");
+      return;
+    }
     if (call_argument_start_point > 3){
       System.err.println("Too many options arguments given, options include -README, Textfile, and print");
       return;
     }
     for (String to_check : args){
       if (to_check.equalsIgnoreCase("-README")){
-        try (InputStream read_meF = Project1.class.getResourceAsStream("README.txt"))
+        try (InputStream read_meF = Project2.class.getResourceAsStream("README.txt"))
         {
           Scanner read_me = new Scanner(read_meF);
           while (read_me.hasNextLine()) {
             String data = read_me.nextLine();
             System.out.println(data);
           }
-          // System.out.println(call_argument_start_point);
           return;
         }
         catch (IOException e){
@@ -98,31 +106,24 @@ public class Project1 {
         }
       }
     }
-    PhoneBill bill = new PhoneBill(args[call_argument_start_point]);
-    // System.out.println(bill.getCustomer());
-    //PhoneCall call = new PhoneCall();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
+    PhoneBill bill = null;
     if (args.length < 7){
       System.err.println("Expected at least 7 arguments" + ". Arguments given: " + args.length);
       System.err.println("Expected input is [options] <customer> <callerNumber> <calleeNumber> <begin> <end>");
       return;
     }
-    if (args.length > 10){
-      System.out.println("Too many args passed in from command line");
-      return;
-    }
-    PhoneCall test = null;
+    PhoneCall test;
     for (String to_check : args)
     {
       if (to_check.equalsIgnoreCase("-textFile")){
         File cwd = new File(userDir);
-        File result = Project1.find(args[text_file_name], cwd);
+        File result = Project2.find(args[text_file_name], cwd);
         test = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
                 args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
-        // Need to check if file exits first, if not then creates it.
         if (result == null) {
-          //PhoneBill new_bill = new PhoneBill(args[call_argument_start_point]);
+          bill = new PhoneBill(args[call_argument_start_point]);
           bill.addPhoneCall(test);
           File temp_file = new File(args[text_file_name]);
 
@@ -137,7 +138,7 @@ public class Project1 {
           TextDumper to_dump = new TextDumper(output_file);
           to_dump.dump(bill);
           if (to_print_check) {
-            test.toString();
+            System.out.println(test.toString());
             System.out.println("Caller: " + test.getCaller());
             System.out.println("Callee: " + test.getCallee());
             System.out.println("Caller: " + test.getBeginTimeString());
@@ -145,84 +146,75 @@ public class Project1 {
           }
           return;
         }
-        //System.out.println(result);
-        // System.out.println(call_argument_start_point);
-        // bill.addPhoneCall(test);
-        //File temp_file = new File(args[text_file_name]);
         FileReader read_from = null;
         try{read_from = new FileReader(result);}
-        catch (IOException E){ System.err.println("failed file read from");}
-        Writer output_file = null;
-        try{
-          output_file = new FileWriter(result);
-        }
-        catch (IOException e){
-          System.err.println("failed to write to file");
-        }
-        // TextDumper to_dump = new TextDumper(output_file);
-        // to_dump.dump(bill);
-        //File cwd = new File(userDir);
+        catch (IOException e){ System.err.println("failed file read from");}
         TextParser to_parse = new TextParser(read_from);
-        try {
-          bill = to_parse.parse();
-          System.out.println(bill.getCustomer());
+        if (result.length() > 0) {
+          try {
+            bill = to_parse.parse();
+          } catch (ParserException e) {
+            System.err.println("failed file parse from existing file");
+          }
         }
-        catch (ParserException e) { System.err.println("failed file parse from existing file"); }
         if (to_print_check) {
-          //test.toString();
+          System.out.println(test.toString());
           System.out.println("Caller: " + test.getCaller());
           System.out.println("Callee: " + test.getCallee());
           System.out.println("Caller: " + test.getBeginTimeString());
           System.out.println("Caller: " + test.getEndTimeString());
         }
-        TextDumper to_dump = new TextDumper(output_file);
-        bill.addPhoneCall(test);
-        to_dump.dump(bill);
+        if (bill != null) {
+          if (!bill.getCustomer().equals(args[call_argument_start_point])){
+            System.err.println("Name of customer file does not match the name provided");
+            return;
+          }
+          bill.addPhoneCall(test);
+          Writer output_file = null;
+          result.delete();
+          result = new File(args[text_file_name]);
+          try{
+            output_file = new FileWriter(result);
+          }
+          catch (IOException e){
+            System.err.println("failed to write to file");
+          }
+          TextDumper to_dump = new TextDumper(output_file);
+          to_dump.dump(bill);
+        }
+        else{
+          bill = new PhoneBill(args[call_argument_start_point]);
+          bill.addPhoneCall(test);
+          Writer output_file = null;
+          result.delete();
+          result = new File(args[text_file_name]);
+          try{
+            output_file = new FileWriter(result);
+          }
+          catch (IOException e){
+            System.err.println("failed to write to file");
+          }
+          TextDumper to_dump = new TextDumper(output_file);
+          to_dump.dump(bill);
+        }
       }
-      /**
-      test = new PhoneCall(args[1], "None", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
-      bill.addPhoneCall(test);
-      File temp_file = new File("Testing.txt");
-      Reader read_from = null;
-      try{read_from = new FileReader("Testing.txt");}
-      catch (IOException E){ System.err.println("failed file");}
-      Writer output_file = null;
-      try{
-        output_file = new FileWriter("Testing.txt");
+      if (to_check.equalsIgnoreCase("-print")){
+        bill = new PhoneBill(args[call_argument_start_point]);
+        PhoneCall call = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
+                args[call_argument_start_point+2],
+                args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
+                args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
+        bill.addPhoneCall(call);
+        System.out.println(call.toString());
+        System.out.println(call.getCaller());
+        System.out.println(call.getCallee());
+        System.out.println(call.getCallerNumber());
+        System.out.println(call.getCalleeNumber());
+        System.out.println(call.getBeginTimeString());
+        System.out.println(call.getEndTimeString());
       }
-      catch (IOException e){
-        System.err.println("failed to write to file");
-      }
-      TextDumper to_dump = new TextDumper(output_file);
-      to_dump.dump(bill);
-      File cwd = new File(userDir);
-      System.out.println(Project1.find("README.md", cwd));
-      System.out.println(cwd.getName());
-      TextParser to_parse = new TextParser(read_from);
-      try {PhoneBill read_from_thing = to_parse.parse();
-      System.out.println(   read_from_thing.getCustomer());
-      }
-      catch (ParserException e) { System.err.println("failed file parse"); }
-      */
       return;
     }
-    /**
-    if (args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print")) {
-      test = new PhoneCall(args[1], "None", args[2], args[3], args[4] + " " + args[5], args[6] + " " + args[7]);
-      bill.addPhoneCall(test);
-      test.toString();
-      System.out.println("Caller: " + test.getCaller());
-      System.out.println("Callee: " + test.getCallee());
-      System.out.println("Caller: " + test.getBeginTimeString());
-      System.out.println("Caller: " + test.getEndTimeString());
-    }
-    else {
-      test = new PhoneCall(args[0], "None", args[1], args[2], args[3] + " " + args[4], args[5] + " " + args[6]);
-      bill.addPhoneCall(test);
-    }
-     */
-    //return;
-
   }
 
 }

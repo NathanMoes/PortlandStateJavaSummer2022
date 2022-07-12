@@ -37,6 +37,14 @@ public class PhoneCall extends AbstractPhoneCall {
         numbers += 1;
       }
     }
+    if (dashes < 2){
+      System.err.println("too few dashes in phone number");
+    } else if (dashes > 2) {
+      System.err.println("too many dashes");
+    }
+    if (numbers != 10){
+      System.err.println("contains too many non number characters");
+    }
     return numbers == 10 && dashes == 2;
   }
   
@@ -89,13 +97,27 @@ public class PhoneCall extends AbstractPhoneCall {
         }
       }
     }
+    if (!month){
+      System.err.println("Invalid formed month");
+    }
+    if (!day){
+      System.err.println("Invalid formed day");
+    }
+    if (!year){
+      System.err.println("Invalid formed year");
+    }
+    if (!hour){
+      System.err.println("Invalid formed hour");
+    }
     //System.out.println(to_validate.charAt(to_validate.length()-1));
     if (to_validate.charAt(to_validate.length() - 1) == '0'){
       if (to_validate.charAt(to_validate.length() - 2) != ':'){
         min = true;
       }
     }
-    //return (month && day && year);
+    if (!min){
+      System.err.println("Invalid formed minute");
+    }
     return month && day && year && hour && min;
   }
 
@@ -126,31 +148,40 @@ public class PhoneCall extends AbstractPhoneCall {
   PhoneCall(String inp_caller, String inp_callee, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
     if (this.vali_date(inp_callBegin))
       this.callBegin = inp_callBegin;
-    else
+    else {
       System.err.println("Invalid date begin");
+      this.callBegin = null;
+    }
     if (this.vali_date(inp_callEnd))
       this.callEnd = inp_callEnd;
-    else
+    else {
       System.err.println("Invalid date end");
+      this.callEnd = null;
+    }
     if (this.validate_name(inp_caller))
       this.caller = inp_caller;
     else{
       System.err.println("Invalid name given for caller");
+      this.caller = null;
     }
     if (this.validate_name(inp_callee))
       this.callee = inp_callee;
     else {
       System.err.println("Invalid name given for callee");
+      this.callee = null;
     }
-
     if (this.validate_number(inp_callerNumber))
       this.callerNumber = inp_callerNumber;
-    else
+    else {
       System.err.println("Invalid caller phone number");
+      this.callerNumber = null;
+    }
     if (this.validate_number(inp_calleeNumber))
       this.calleeNumber = inp_calleeNumber;
-    else
+    else {
       System.err.println("Invalid callee phone number");
+      this.calleeNumber = null;
+    }
   }
 
   /**

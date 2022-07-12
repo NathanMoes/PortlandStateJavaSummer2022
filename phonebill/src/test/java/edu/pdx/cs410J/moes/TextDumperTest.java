@@ -7,8 +7,7 @@ import org.junit.jupiter.api.io.TempDir;
 import java.io.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Tests the text dumper class
@@ -49,4 +48,21 @@ public class TextDumperTest {
     PhoneBill read = parser.parse();
     assertThat(read.getCustomer(), equalTo(customer));
   }
+
+  /**
+   * Tests that the text dumper can actualy dump something into the file that can be read and entered as a call
+   * Such that there is a list of calls
+   */
+
+  @Test
+  void addsInSomeCalls(@TempDir File tempDir) throws IOException, ParserException {
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    PhoneBill bill = new PhoneBill("Name is");
+    bill.addPhoneCall(call);
+    File textFile = new File(tempDir, "apptbook.txt");
+    TextDumper dumper = new TextDumper(new FileWriter(textFile));
+    dumper.dump(bill);
+    assertThat(bill.getPhoneCalls(), is(notNullValue()));
+  }
+
 }

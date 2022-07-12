@@ -19,22 +19,27 @@ public class TextDumper implements PhoneBillDumper<PhoneBill> {
     try (
       PrintWriter pw = new PrintWriter(this.writer)
     ) {
-      pw.println(bill.getCustomer());
-      //pw.println('\n');
+      /**
+      pw.printf("%c%s%c%c", '"', bill.getCustomer(), '"', '\n');
       for (PhoneCall to_add : bill.getPhoneCalls()){
-        pw.println(to_add.getCaller());
-        //pw.println('\n');
-        pw.println(to_add.getCallee());
-        //pw.println('\n');
-        pw.println(to_add.getCallerNumber());
-        //pw.println('\n');
-        pw.println(to_add.getCalleeNumber());
-        //pw.println('\n');
-        pw.println(to_add.getBeginTimeString());
-        //pw.println('\n');
-        pw.println(to_add.getEndTimeString());
-        //pw.println('\n');
-        //pw.println('\n');
+        pw.printf("%c%s%c%c", '"' ,to_add.getCaller(), '"', '\n');
+        pw.printf("%c%s%c%c", '"' ,to_add.getCallee(), '"', '\n');
+        pw.printf("%c%s%c%c", '"' ,to_add.getCallerNumber(), '"', '\n');
+        pw.printf("%c%s%c%c", '"' ,to_add.getCalleeNumber(), '"', '\n');
+        pw.printf("%c%s%c%c", '"' ,to_add.getBeginTimeString(), '"', '\n');
+        pw.printf("%c%s%c%c", '"' ,to_add.getEndTimeString(), '"', '\n');
+      }
+       */
+      pw.println(bill.getCustomer());
+      if (bill.getPhoneCalls() != null) {
+        for (PhoneCall to_add : bill.getPhoneCalls()) {
+          pw.println(to_add.getCaller());
+          pw.println(to_add.getCallee());
+          pw.println(to_add.getCallerNumber());
+          pw.println(to_add.getCalleeNumber());
+          pw.println(to_add.getBeginTimeString());
+          pw.println(to_add.getEndTimeString());
+        }
       }
       pw.flush();
     }

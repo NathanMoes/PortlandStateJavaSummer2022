@@ -46,7 +46,7 @@ public class PhoneBillTest {
     @Test
     void TestNoCustomer(){
         PhoneBill testing = new PhoneBill();
-        assertThat(testing.getCustomer(), is(nullValue()));
+        assertThat(testing.getCustomer(), containsString("Default"));
     }
 
     /**

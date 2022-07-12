@@ -2,6 +2,8 @@ package edu.pdx.cs410J.moes;
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.color.ICC_ColorSpace;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -205,6 +207,92 @@ public class PhoneCallTest {
   void testForGetCallerNumberNonDefault(){
     PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
     assertThat(call.getCallerNumber(), containsString("222-222-2222"));
+  }
+
+  /**
+   * Tests to make sure that defualt constuctor works with default values
+   */
+  @Test
+  void testDefaultValues(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.getCallee(), containsString("None"));
+    assertThat(call.getCaller(), containsString("None"));
+    assertThat(call.getCallerNumber(), containsString("000-000-0000"));
+    assertThat(call.getCalleeNumber(), containsString("000-000-0000"));
+    assertThat(call.getBeginTimeString(), containsString("00/00/0000 0:0"));
+    assertThat(call.getEndTimeString(), containsString("00/00/0000 0:0"));
+  }
+
+  /**
+   * Tests that if there is too few dashed we get too few dashes error
+   */
+  @Test
+  void testTooFewDashes(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "2221222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCallerNumber(), is(nullValue()));
+  }
+
+  /**
+   * Tests that if there is too few dashed we get too few dashes error but for the callee
+   */
+  @Test
+  void testTooFewDashesCallee(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "3331333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCalleeNumber(), is(nullValue()));
+  }
+
+  /**
+   * Tests that if there is too few numbers we get an error and null
+   */
+  @Test
+  void testTooFewNumbers(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "aaa-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCalleeNumber(), is(nullValue()));
+  }
+
+  /**
+   * Tests that if there is too few numbers we get an error and null, but for the caller
+   */
+  @Test
+  void testTooFewNumbersCaller(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "bbb-222-2222", "123-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCallerNumber(), is(nullValue()));
+  }
+
+  /**
+   * Tests for malfromed minute in args
+   */
+  @Test
+  void TestInvalidMinute(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:3a", "01/01/1000 11:30");
+    assertThat(call.getBeginTimeString(), is(nullValue()));
+  }
+
+  /**
+   * Tests for malfromed minute in args
+   */
+  @Test
+  void TestInvalidMinuteEnd(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:3a");
+    assertThat(call.getEndTimeString(), is(nullValue()));
+  }
+
+  /**
+   * tests if a invalid date is invalid 2
+   */
+  @Test
+  void testForValidDateIncorrectDate2(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("100/0/2022 10:30"), is(false));
+  }
+
+  /**
+   * tests if a invalid date is invalid 3
+   */
+  @Test
+  void testForValidDateIncorrectDate3(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("10/222/2020 10:30"), is(false));
   }
 
 }
