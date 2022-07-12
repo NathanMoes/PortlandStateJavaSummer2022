@@ -1,10 +1,12 @@
 package edu.pdx.cs410J.moes;
 
+import edu.pdx.cs410J.InvokeMainTestCase;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.*;
-import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,6 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * written to {@link System#out} and the like.
  */
 class Project2Test {
+
   /**
    * Tests if the readme can be read as a resource
    * @throws IOException if there is a failure to open readme text as a resource
@@ -107,7 +110,6 @@ class Project2Test {
    */
   @Test
   void testMainResultIsNullAndToStringPrint(){
-    // -textFile tacos.txt "Nathan Moes" 342-234-2341 123-421-4362 11/11/2011 10:30 11/12/2011 11:30
     String [] args = {"-print", "-textFile", "empty-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30", "11/12/2011", "11:30"};
     Project2.main(args);
