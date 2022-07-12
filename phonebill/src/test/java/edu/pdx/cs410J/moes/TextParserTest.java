@@ -40,25 +40,45 @@ public class TextParserTest {
   }
 
   /**
+   * this test will test to check that the if else statements are run in the parser
+   */
+
   @Test
-  void noTextInFileMakesReturnEarly() throws IOException {
-    File tempDi = new File("test.txt");
-    FileReader fileReader = null;
-    PhoneBill catch_it = null;
-    try{
-      fileReader = new FileReader(tempDi);
-    }
-    catch (IOException e){
-      System.err.println(e.getMessage());
-    }
+  void usesTheIfElseStatementsInFull() throws IOException, ParserException{
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    PhoneBill bill = new PhoneBill("Name is");
+    File tempFile = new File("tempFile.txt");
+    // FileReader fileReader = new FileReader(tempFile);
+    FileWriter fileWriter = new FileWriter(tempFile);
+    bill.addPhoneCall(call);
+    FileReader fileReader = new FileReader(tempFile);
     TextParser parser = new TextParser(fileReader);
-    try {
-      catch_it = parser.parse();
+    TextDumper textDumper = new TextDumper(fileWriter);
+    textDumper.dump(bill);
+    PhoneBill bill_check = parser.parse();
+    assertThat(bill_check.getCustomer(), containsString("Name is"));
+  }
+
+
+  /**
+   * this test tests that the exception is thrown for ParserException
+
+
+  @Test
+  void badWriterThrows() throws IOException{
+    File temp = new File("tempfile.txt");
+    FileReader reader = new FileReader(temp);
+    TextParser parser = new TextParser(reader);
+    temp.delete();
+    try{
+      parser.parse();
     }
-    catch (ParserException e){
-      System.err.println(e.getMessage());
+    catch (ParserException exception){
+      assertThat(exception.getClass(), is(ParserException.class));
     }
-    assertThat(catch_it, is(nullValue()));
+    // assertThrows(ParserException.class, parser.parse());
   }
   */
+
+
 }

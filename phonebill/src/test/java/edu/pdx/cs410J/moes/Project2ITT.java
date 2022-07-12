@@ -54,6 +54,7 @@ class Project2ITT extends InvokeMainTestCase {
         String check_against = "Phone call from Mike to None from 11/11/2011 10:30 to 11/12/2011 11:30";
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
-
     }
+
+
 }

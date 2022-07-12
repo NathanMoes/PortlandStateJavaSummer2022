@@ -295,4 +295,32 @@ public class PhoneCallTest {
     assertThat(call.vali_date("10/222/2020 10:30"), is(false));
   }
 
+  /**
+   * tests if we get invalid name given for caller
+   */
+  @Test
+  void testInvalidCallerName(){
+    PhoneCall call = new PhoneCall("21312312", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCaller(), is(nullValue()));
+  }
+
+
+  /**
+   * tests if we get invalid name given for callee
+   */
+  @Test
+  void testInvalidCalleeName(){
+    PhoneCall call = new PhoneCall("bob robert", "123213", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCallee(), is(nullValue()));
+  }
+
+  /**
+   * Tests that if there is too many dashed we get too few dashes error
+   */
+  @Test
+  void testTooManyDashes(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222----2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    assertThat(call.getCallerNumber(), is(nullValue()));
+  }
+
 }
