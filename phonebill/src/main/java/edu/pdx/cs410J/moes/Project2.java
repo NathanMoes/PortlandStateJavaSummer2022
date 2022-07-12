@@ -33,6 +33,7 @@ public class Project2 {
         System.err.println("file is null");
         return null;
       }
+      // if (file.getName().equals(file_name))
       if (file.getName().equals(file_name))
         return file;
       else{
@@ -182,22 +183,21 @@ public class Project2 {
           }
           TextDumper to_dump = new TextDumper(output_file);
           to_dump.dump(bill);
+          return;
         }
-        else{
-          bill = new PhoneBill(args[call_argument_start_point]);
-          bill.addPhoneCall(test);
-          Writer output_file = null;
-          result.delete();
-          result = new File(args[text_file_name]);
-          try{
-            output_file = new FileWriter(result);
-          }
-          catch (IOException e){
-            System.err.println("failed to write to file");
-          }
-          TextDumper to_dump = new TextDumper(output_file);
-          to_dump.dump(bill);
+        bill = new PhoneBill(args[call_argument_start_point]);
+        bill.addPhoneCall(test);
+        Writer output_file = null;
+        result.delete();
+        result = new File(args[text_file_name]);
+        try{
+          output_file = new FileWriter(result);
         }
+        catch (IOException e){
+          System.err.println("failed to write to file");
+        }
+        TextDumper to_dump = new TextDumper(output_file);
+        to_dump.dump(bill);
       }
       if (to_check.equalsIgnoreCase("-print")){
         bill = new PhoneBill(args[call_argument_start_point]);

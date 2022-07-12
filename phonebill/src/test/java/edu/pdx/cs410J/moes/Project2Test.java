@@ -168,4 +168,25 @@ class Project2Test {
     TextParser parser = new TextParser(reader);
   }
 
+  /**
+   * Tests for a null returned from th file function
+   */
+  @Test
+  void testNullFileReturn(){
+    File tempDir = new File("tempasdsa");
+    tempDir.delete();
+    assertThat(Project2.find(null, tempDir), is(nullValue()));
+    //Project2.find(null, temp);
+  }
+
+  /**
+   * Tests that it will print with text args too
+   */
+  @Test
+  void testPrintWithTextArgs(){
+    String [] args = {"-textFile", "valid-phonebill.txt", "-print" , "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
+            "10:30", "11/12/2011", "11:30"};
+    Project2.main(args);
+  }
+
 }

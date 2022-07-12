@@ -57,4 +57,16 @@ class Project2ITT extends InvokeMainTestCase {
     }
 
 
+    /**
+     * Tests the we can get a null from result in search for file
+     */
+    @Test
+    void testWeGetNullInResultBranch() {
+        String [] args = {"-textFile", "definatrlynotafilethatexists.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
+                "10:30", "11/12/2011", "11:30"};
+        InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
+        // MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
+    }
+
+
 }
