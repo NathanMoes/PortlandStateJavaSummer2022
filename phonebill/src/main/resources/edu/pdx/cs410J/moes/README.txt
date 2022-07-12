@@ -10,3 +10,10 @@ Callee name is left as None, as the project specification says nothing as to how
 The input from command line will filter the phone number to ensure its correct as well as the dates/times
 The name input is not checked other than ensuring the input is using characters and spaces
 First a phone bill object for the created phone call object to be added to
+-textFile is used to specify when there is a file to read from or write to the data for a phone bill
+The data written is a representation of the PhoneBill data, such as the Customer name, and the needed values for each
+call
+If there is no file that matches the name after the textFile then one will be created
+If there is a matching file the system will attempt to read in all the data and create a phone bill object from it
+Else when a new file is created the new data will be written to if from the new PhoneBill and call
+If the name of the customer in the file does not match the name provided then there will be an error printed to the screen
