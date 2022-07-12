@@ -17,7 +17,7 @@ public class Project2 {
    return true;
   }
 
-  static String userDir = System.getProperty("user.dir");
+  // static String userDir = System.getProperty("user.dir");
 
   /**
    * This function is to find the first file that matches the name passed in so that other parts of the program can
@@ -56,6 +56,7 @@ public class Project2 {
 
 
   public static void main(String[] args) {
+    String userDir = System.getProperty("user.dir");
     int call_argument_start_point = 0;
     int text_file_name = 0;
     boolean to_print_check = false;
