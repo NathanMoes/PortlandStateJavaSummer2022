@@ -76,7 +76,7 @@ public class AboutConditionals {
         } else {
             x--;
         }
-        assertEquals(x, 10);
+        assertEquals(x, 0);
     }
 
     @Koan
