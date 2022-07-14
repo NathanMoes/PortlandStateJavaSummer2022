@@ -60,7 +60,7 @@ public class AboutInheritance {
         Animal barney = new Puppy();
         assertEquals(bob.makeSomeNoise(), "Moo!");
         assertEquals(max.makeSomeNoise(), "Woof!");
-        assertEquals(barney.makeSomeNoise(), "Squeak");
+        assertEquals(barney.makeSomeNoise(), "Squeak!");
         // but can max or barney (here as an Animal) fetch?
         // try to write it down here
     }
@@ -69,22 +69,22 @@ public class AboutInheritance {
     public void inheritanceHierarchy() {
         Animal someAnimal = new Cow();
         Animal bob = new Cow();
-        assertEquals(someAnimal.makeSomeNoise().equals(bob.makeSomeNoise()), __);
+        assertEquals(someAnimal.makeSomeNoise().equals(bob.makeSomeNoise()), true);
         // cow is a Cow, but it can also be an animal
-        assertEquals(bob instanceof Animal, __);
-        assertEquals(bob instanceof Cow, __);
+        assertEquals(bob instanceof Animal, true);
+        assertEquals(bob instanceof Cow, true);
         // but is it a Puppy?
-        assertEquals(bob instanceof Puppy, __);
+        assertEquals(bob instanceof Puppy, false);
     }
 
     @Koan
     public void deeperInheritanceHierarchy() {
         Dog max = new Dog();
         Puppy barney = new Puppy();
-        assertEquals(max instanceof Puppy, __);
-        assertEquals(max instanceof Dog, __);
-        assertEquals(barney instanceof Puppy, __);
-        assertEquals(barney instanceof Dog, __);
+        assertEquals(max instanceof Puppy, true);
+        assertEquals(max instanceof Dog, true);
+        assertEquals(barney instanceof Puppy, true);
+        assertEquals(barney instanceof Dog, true);
     }
 
     // TODO overriding
