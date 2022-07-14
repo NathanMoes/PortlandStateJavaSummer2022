@@ -81,7 +81,7 @@ public class AboutInheritance {
     public void deeperInheritanceHierarchy() {
         Dog max = new Dog();
         Puppy barney = new Puppy();
-        assertEquals(max instanceof Puppy, true);
+        assertEquals(max instanceof Puppy, false);
         assertEquals(max instanceof Dog, true);
         assertEquals(barney instanceof Puppy, true);
         assertEquals(barney instanceof Dog, true);
