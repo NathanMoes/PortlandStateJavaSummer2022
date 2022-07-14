@@ -183,6 +183,6 @@ public class AboutStrings {
 
     @Koan
     public void insufficientArgumentsToMessageFormatDoesNotReplaceTheToken() {
-        assertEquals(MessageFormat.format("{0} {1} {0}", "a"), "a   a");
+        assertEquals(MessageFormat.format("{0} {1} {0}", "a"), "a {1} a");
     }
 }
