@@ -97,8 +97,8 @@ public class AboutCasting {
     @Koan
     public void classCasting() {
         try {
-            Object o = new Object();
-            ((Grandparent) (Sleepable) o).sleep(); // would this even compile without the cast?
+            Object o = new Grandparent();
+            ( (Sleepable) o).sleep(); // would this even compile without the cast?
         } catch (ClassCastException x) {
             fail("Object does not implement Sleepable, maybe one of the people classes do?");
         }
