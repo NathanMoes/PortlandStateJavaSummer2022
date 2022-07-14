@@ -33,7 +33,7 @@ public class AboutArithmeticOperators {
         assertEquals(--i, 0);
         assertEquals(i, 0);
         assertEquals(i--, 0);
-        assertEquals(i, -2);
+        assertEquals(i, -1);
     }
 
     @Koan
