@@ -185,7 +185,7 @@ public class AboutPrimitives {
     @Koan
     public void floatsHaveASmallerRangeThanDoubles() {
         assertEquals(Float.MIN_VALUE, 1.4E-45f);
-        assertEquals(Float.MAX_VALUE, __);
+        assertEquals(Float.MAX_VALUE, 3.4028235E38f);
     }
 
     @Koan
