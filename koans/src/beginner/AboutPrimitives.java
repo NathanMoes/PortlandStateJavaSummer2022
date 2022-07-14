@@ -56,48 +56,48 @@ public class AboutPrimitives {
 
     @Koan
     public void wholeNumbersCanAlsoBeOfTypeShort() {
-        assertEquals(getType((short) 1), __); // The '(short)' is called an explicit cast - to type 'short'
+        assertEquals(getType((short) 1), short.class); // The '(short)' is called an explicit cast - to type 'short'
     }
 
     @Koan
     public void primitivesOfTypeShortHaveAnObjectTypeShort() {
         Object number = (short) 1;
-        assertEquals(getType(number), __);
+        assertEquals(getType(number), Short.class);
     }
 
     @Koan
     public void shortsHaveASmallerRangeThanInts() {
-        assertEquals(Short.MIN_VALUE, __);  // hint: You'll need an explicit cast
-        assertEquals(Short.MAX_VALUE, __);
+        assertEquals(Short.MIN_VALUE, (short) -32768);  // hint: You'll need an explicit cast
+        assertEquals(Short.MAX_VALUE, (short) 32767);
     }
 
     @Koan
     public void shortSize() {
-        assertEquals(Short.SIZE, __);
+        assertEquals(Short.SIZE, 16);
     }
 
     @Koan
     public void wholeNumbersCanAlsoBeOfTypeByte() {
-        assertEquals(getType((byte) 1), __);
+        assertEquals(getType((byte) 1), byte.class);
     }
 
     @Koan
     public void primitivesOfTypeByteHaveAnObjectTypeByte() {
         Object number = (byte) 1;
-        assertEquals(getType(number), __);
+        assertEquals(getType(number), Byte.class);
     }
 
     @Koan
     public void bytesHaveASmallerRangeThanShorts() {
-        assertEquals(Byte.MIN_VALUE, __);
-        assertEquals(Byte.MAX_VALUE, __);
+        assertEquals(Byte.MIN_VALUE, -128);
+        assertEquals(Byte.MAX_VALUE, 127);
 
         // Why would you use short or byte considering that you need to do explicit casts?
     }
 
     @Koan
     public void byteSize() {
-        assertEquals(Byte.SIZE, __);
+        assertEquals(Byte.SIZE, 8);
     }
 
     @Koan
