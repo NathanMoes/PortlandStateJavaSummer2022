@@ -29,7 +29,7 @@ public class AboutPrimitives {
 
     @Koan
     public void integerSize() {
-        assertEquals(Integer.SIZE, 4);  // This is the amount of bits used to store an int
+        assertEquals(Integer.SIZE, 32);  // This is the amount of bits used to store an int
     }
 
     @Koan
@@ -51,7 +51,7 @@ public class AboutPrimitives {
 
     @Koan
     public void longSize() {
-        assertEquals(Long.SIZE, 8);
+        assertEquals(Long.SIZE, 64);
     }
 
     @Koan
