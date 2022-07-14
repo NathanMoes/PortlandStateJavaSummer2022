@@ -102,41 +102,41 @@ public class AboutPrimitives {
 
     @Koan
     public void wholeNumbersCanAlsoBeOfTypeChar() {
-        assertEquals(getType((char) 1), __);
+        assertEquals(getType((char) 1), char.class);
     }
 
     @Koan
     public void singleCharactersAreOfTypeChar() {
-        assertEquals(getType('a'), __);
+        assertEquals(getType('a'), char.class);
     }
 
     @Koan
     public void primitivesOfTypeCharHaveAnObjectTypeCharacter() {
         Object number = (char) 1;
-        assertEquals(getType(number), __);
+        assertEquals(getType(number), Character.class);
     }
 
     @Koan
     public void charsCanOnlyBePositive() {
-        assertEquals((int) Character.MIN_VALUE, __);
-        assertEquals((int) Character.MAX_VALUE, __);
+        assertEquals((int) Character.MIN_VALUE, 0);
+        assertEquals((int) Character.MAX_VALUE, 65535);
 
         // Why did we cast MIN_VALUE and MAX_VALUE to int? Try it without the cast.
     }
 
     @Koan
     public void charSize() {
-        assertEquals(Character.SIZE, __);
+        assertEquals(Character.SIZE, 32);
     }
 
     @Koan
     public void decimalNumbersAreOfTypeDouble() {
-        assertEquals(getType(1.0), __);
+        assertEquals(getType(1.0), double.class);
     }
 
     @Koan
     public void primitivesOfTypeDoubleCanBeDeclaredWithoutTheDecimalPoint() {
-        assertEquals(getType(1d), __);
+        assertEquals(getType(1d), double.class);
     }
 
     @Koan
