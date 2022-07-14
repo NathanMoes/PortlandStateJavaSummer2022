@@ -72,15 +72,17 @@ public class AboutLoops {
             }
             s += " - ";
         }
-        assertEquals(s, "(0, 0) (0, 1) (0, 2) - (1, 0) (1, 1) (1, 2) - (2, 0) (2, 1) (2, 2)");
+        assertEquals(s, "(0, 0) (0, 1) (0, 2)  - (1, 0) (1, 1) (1, 2)  - (2, 0) (2, 1) (2, 2)");
     }
 
+
+    // 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
     @Koan
     public void extendedForLoop() {
         int[] is = {1, 2, 3, 4};
         String s = "";
         for (int j : is) {
-            s += j + " ";
+            s += j + "";
         }
         assertEquals(s, __);
     }
