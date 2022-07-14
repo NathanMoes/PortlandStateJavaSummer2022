@@ -168,7 +168,7 @@ public class AboutConditionals {
         if (trueCount.count() || falseCount.count()) {
             x = "kthxbai";
         }
-        assertEquals(x, "Hai");
+        assertEquals(x, "kthxbai");
         assertEquals(trueCount.count, 1);
         assertEquals(falseCount.count, 0);
     }
@@ -181,7 +181,7 @@ public class AboutConditionals {
         if (trueCount.count() | falseCount.count()) {
             x = "kthxbai";
         }
-        assertEquals(x, "Hai");
+        assertEquals(x, "kthxbai");
         assertEquals(trueCount.count, 1);
         assertEquals(falseCount.count, 1);
     }
