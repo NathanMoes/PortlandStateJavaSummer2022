@@ -102,7 +102,7 @@ public class AboutLoops {
         do {
             result++;
         } while (false);
-        assertEquals(result, 0);
+        assertEquals(result, 1);
     }
 
     @Koan
