@@ -32,7 +32,7 @@ public class AboutCasting {
         int a = 1;
         int b = Integer.MAX_VALUE;
         long c = a + b; // still overflows int... which is the Integer.MIN_VALUE, the operation occurs prior to assignment to long
-        assertEquals(c, __);
+        assertEquals(c, -2147483648);
     }
 
     interface Sleepable {
@@ -61,10 +61,10 @@ public class AboutCasting {
     public void upcastWithInheritance() {
         Child child = new Child();
         Parent parentReference = child; // Why isn't there an explicit cast?
-        assertEquals(child instanceof Child, __);
-        assertEquals(parentReference instanceof Child, __);
-        assertEquals(parentReference instanceof Parent, __);
-        assertEquals(parentReference instanceof Grandparent, __);
+        assertEquals(child instanceof Child, true);
+        assertEquals(parentReference instanceof Child, true);
+        assertEquals(parentReference instanceof Parent, true);
+        assertEquals(parentReference instanceof Grandparent, true);
     }
 
     @Koan
