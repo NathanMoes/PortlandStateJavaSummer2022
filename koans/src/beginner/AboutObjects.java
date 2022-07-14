@@ -43,13 +43,13 @@ public class AboutObjects {
                 return string;
             }
         };
-        assertEquals(string + object, __);
+        assertEquals(string + object, "haha");
     }
 
     @Koan
     public void toStringIsTestedForNullWhenInvokedImplicitly() {
         String string = "string";
-        assertEquals(string + null, __);
+        assertEquals(string + null, "string");
     }
 
     private Class<?>[] getAncestors(Object object) {
