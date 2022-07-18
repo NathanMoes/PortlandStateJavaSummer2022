@@ -1,8 +1,5 @@
 package edu.pdx.cs410J.moes;
 
-import edu.pdx.cs410J.InvokeMainTestCase;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -16,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * from <code>Project1IT</code> which is an integration test (and can capture data
  * written to {@link System#out} and the like.
  */
-class Project2Test {
+class Project3Test {
 
   /**
    * Tests if the readme can be read as a resource
@@ -25,7 +22,7 @@ class Project2Test {
   @Test
   void readmeCanBeReadAsResource() throws IOException {
     try (
-      InputStream readme = Project2.class.getResourceAsStream("README.txt")
+      InputStream readme = Project3.class.getResourceAsStream("README.txt")
     ) {
       assertThat(readme, not(nullValue()));
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
@@ -41,7 +38,7 @@ class Project2Test {
   void testValidInputPrint(){
     String [] args = {"-print" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30" ,
             "09/26/2000", "11:30"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -51,7 +48,7 @@ class Project2Test {
   void testValidInputReadme(){
     String [] args = {"-README" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30" ,
             "09/26/2000", "11:30"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -61,7 +58,7 @@ class Project2Test {
   void testTooManyArgs(){
     String [] args = {"-print" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30" ,
             "09/26/2000", "11:30", "And another one bits the dust"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
 
@@ -71,7 +68,7 @@ class Project2Test {
   @Test
   void testNotEnoughArgs(){
     String [] args = {"-print" , "Nathan Moes" , "971-655-7829"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -81,7 +78,7 @@ class Project2Test {
   void testCorrectTextFile(){
     String [] args = {"-textFile tacos.txt", "Nathan Moes", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30", "11/12/2011", "11:30"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -91,7 +88,7 @@ class Project2Test {
   void testMainMissingArgs(){
     PrintStream stream = new PrintStream(System.err);
     String [] args = {};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -102,7 +99,7 @@ class Project2Test {
     // -textFile tacos.txt "Nathan Moes" 342-234-2341 123-421-4362 11/11/2011 10:30 11/12/2011 11:30
     String [] args = {"-textFile", "Mike.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30", "11/12/2011", "11:30"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -112,7 +109,7 @@ class Project2Test {
   void testMainResultIsNullAndToStringPrint(){
     String [] args = {"-print", "-textFile", "empty-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30", "11/12/2011", "11:30"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -120,7 +117,7 @@ class Project2Test {
    */
   @Test
   void testNullReturnedForNullStartInFind(@TempDir File temp) {
-    assertThat(Project2.find("", temp), is(nullValue()));
+    assertThat(Project3.find("", temp), is(nullValue()));
   }
 
   /**
@@ -128,7 +125,7 @@ class Project2Test {
    */
   @Test
   void testisvalidnumber(){
-    assertThat(Project2.isValidPhoneNumber(""), is(true));
+    assertThat(Project3.isValidPhoneNumber(""), is(true));
   }
 
   /**
@@ -137,7 +134,7 @@ class Project2Test {
   @Test
   void testInvalidOption(){
     String [] args = {"-fred"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -146,7 +143,7 @@ class Project2Test {
   @Test
   void testTooManyOptions(){
     String [] args = {"-README", "-print", "-print", "-textFile"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
   /**
@@ -175,7 +172,7 @@ class Project2Test {
   void testNullFileReturn(){
     File tempDir = new File("tempasdsa");
     tempDir.delete();
-    assertThat(Project2.find(null, tempDir), is(nullValue()));
+    assertThat(Project3.find(null, tempDir), is(nullValue()));
     //Project2.find(null, temp);
   }
 
@@ -186,7 +183,7 @@ class Project2Test {
   void testPrintWithTextArgs(){
     String [] args = {"-textFile", "valid-phonebill.txt", "-print" , "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30", "11/12/2011", "11:30"};
-    Project2.main(args);
+    Project3.main(args);
   }
 
 }

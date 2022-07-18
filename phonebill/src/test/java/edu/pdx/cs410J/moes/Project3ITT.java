@@ -10,12 +10,12 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-class Project2ITT extends InvokeMainTestCase {
-    Project2ITT() {
+class Project3ITT extends InvokeMainTestCase {
+    Project3ITT() {
     }
 
     private InvokeMainTestCase.MainMethodResult invokeMain(String... args) {
-        return this.invokeMain(Project2.class, args);
+        return this.invokeMain(Project3.class, args);
     }
 
     @Test

@@ -10,7 +10,7 @@ import java.util.Scanner;
  * The main class for the CS410J Phone Bill Project
  * Note to self, says data and time are seperate arumnets on line. so need to update that
  */
-public class Project2 {
+public class Project3 {
 
   @VisibleForTesting
   static boolean isValidPhoneNumber(String phoneNumber) {
@@ -94,7 +94,7 @@ public class Project2 {
     }
     for (String to_check : args){
       if (to_check.equalsIgnoreCase("-README")){
-        try (InputStream read_meF = Project2.class.getResourceAsStream("README.txt"))
+        try (InputStream read_meF = Project3.class.getResourceAsStream("README.txt"))
         {
           Scanner read_me = new Scanner(read_meF);
           while (read_me.hasNextLine()) {
@@ -119,7 +119,7 @@ public class Project2 {
     {
       if (to_check.equalsIgnoreCase("-textFile")){
         File cwd = new File(userDir);
-        File result = Project2.find(args[text_file_name], cwd);
+        File result = Project3.find(args[text_file_name], cwd);
         test = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
