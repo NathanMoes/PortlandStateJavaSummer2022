@@ -4,7 +4,9 @@ import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.Scanner;
+import java.nio.file.*;
 
 /**
  * The main class for the CS410J Phone Bill Project
@@ -118,6 +120,12 @@ public class Project3 {
     for (String to_check : args)
     {
       if (to_check.equalsIgnoreCase("-textFile")){
+        Path path = Paths.get("temp.txt");
+        if (Files.exists(path))
+          System.err.println("IT DO");
+        else {
+          System.err.println("It donet");
+        }
         File cwd = new File(userDir);
         File result = Project3.find(args[text_file_name], cwd);
         test = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
