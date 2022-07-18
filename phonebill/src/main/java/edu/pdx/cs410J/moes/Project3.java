@@ -10,10 +10,10 @@ import java.nio.file.*;
 
 /**
  * The main class for the CS410J Phone Bill Project
- * Note to self, says data and time are seperate arumnets on line. so need to update that
+ * Note to self, need to make it so we can read and add in from a file with path aka moes/moes.txt etc
  */
 public class Project3 {
-
+  // -textFile valid-phonebill.txt -print Mike 342-234-2341 123-421-4362 11/11/2011 10:30 11/12/2011 11:30
   @VisibleForTesting
   static boolean isValidPhoneNumber(String phoneNumber) {
    return true;
@@ -50,6 +50,15 @@ public class Project3 {
       return null;
     }
 
+
+    static String getFileNameOnlyNotPath(String input){
+      // String to_return = "";
+      Path path = Paths.get(input);
+      // Path fileName = path.getFileName();
+      return (path.getFileName()).toString();
+      // return to_return;
+    }
+
   /**
    * This is the main function for project/program 1, it takes command line arguments and creates external class objects
    * Namely phone call and phone class objects
@@ -60,8 +69,12 @@ public class Project3 {
 
   public static void main(String[] args) {
     String userDir = System.getProperty("user.dir");
+    System.getProperty("root");
+    // System.out.println(userDir);
     int call_argument_start_point = 0;
     int text_file_name = 0;
+    int pretty_file_name = 0;
+    int numberOfOptions = 0;
     boolean to_print_check = false;
     if (args.length < 1) {
       System.err.println("Missing command line arguments");
@@ -69,32 +82,42 @@ public class Project3 {
               "<end date> <end time>");
       return;
     }
-    for (String to_check : args){
+    // for (String to_check : args){
+    String to_check = "";
+    int index = 0;
+    for (to_check = args[index]; index < args.length -1; to_check = args[index]){
+      index += 1;
       if (to_check.startsWith("-")){
-        call_argument_start_point += 1;
+        numberOfOptions += 1;
         if (!to_check.equalsIgnoreCase("-print") && !to_check.equalsIgnoreCase("-README") &&
-                !to_check.equalsIgnoreCase("-textFile")){
+                !to_check.equalsIgnoreCase("-textFile") && !to_check.equalsIgnoreCase("-pretty")){
           System.err.println("Invalid command line argument(s) for options");
           return;
         }
       }
       if (to_check.equalsIgnoreCase("-textFile")){
-        text_file_name = call_argument_start_point;
-        call_argument_start_point += 1;
+        text_file_name = call_argument_start_point + 1;
+        call_argument_start_point += 2;
       }
       if (to_check.equalsIgnoreCase("-print")){
         to_print_check = true;
+        call_argument_start_point += 1;
+      }
+      if (to_check.equalsIgnoreCase("-pretty")){
+        pretty_file_name = call_argument_start_point;
+        call_argument_start_point += 2;
       }
     }
     if ((args.length - call_argument_start_point) > 7){
       System.err.println("too many command line arguments");
       return;
     }
-    if (call_argument_start_point > 3){
+    if (numberOfOptions > 4){  // was 3
       System.err.println("Too many options arguments given, options include -README, Textfile, and print");
+      System.err.println("Given: " + call_argument_start_point);
       return;
     }
-    for (String to_check : args){
+    for (index = 0, to_check = args[index]; index < args.length; to_check = args[index], index += 1){
       if (to_check.equalsIgnoreCase("-README")){
         try (InputStream read_meF = Project3.class.getResourceAsStream("README.txt"))
         {
@@ -117,17 +140,20 @@ public class Project3 {
       return;
     }
     PhoneCall test;
-    for (String to_check : args)
-    {
+    index = 0;
+    for (to_check = args[index]; index < args.length - 1; to_check = args[index]){
+      index += 1;
       if (to_check.equalsIgnoreCase("-textFile")){
-        Path path = Paths.get("temp.txt");
-        if (Files.exists(path))
-          System.err.println("IT DO");
-        else {
-          System.err.println("It donet");
+        // System.out.println("text file called");
+        Path path = Paths.get(args[text_file_name]);
+        File result = null;
+        if (!Files.exists(path)) {
+          File cwd = new File(userDir);
+          result = Project3.find(getFileNameOnlyNotPath(args[text_file_name]), cwd);
         }
-        File cwd = new File(userDir);
-        File result = Project3.find(args[text_file_name], cwd);
+        else {
+          result = new File(args[text_file_name]);
+        }
         test = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
@@ -135,79 +161,75 @@ public class Project3 {
         if (result == null) {
           bill = new PhoneBill(args[call_argument_start_point]);
           bill.addPhoneCall(test);
-          File temp_file = new File(args[text_file_name]);
+          File temp_file = new File(getFileNameOnlyNotPath(args[text_file_name]));
 
           Writer output_file = null;
           try{
-            output_file = new FileWriter(args[text_file_name]);
+            output_file = new FileWriter(temp_file);
+            // output_file = new FileWriter(temp_file);
           }
           catch (IOException e){
+            System.err.println(e.getMessage());
             System.err.println("failed to write to file");
           }
 
           TextDumper to_dump = new TextDumper(output_file);
           to_dump.dump(bill);
-          if (to_print_check) {
-            System.out.println(test.toString());
-            System.out.println("Caller: " + test.getCaller());
-            System.out.println("Callee: " + test.getCallee());
-            System.out.println("Caller: " + test.getBeginTimeString());
-            System.out.println("Caller: " + test.getEndTimeString());
-          }
-          return;
         }
-        FileReader read_from = null;
-        try{read_from = new FileReader(result);}
-        catch (IOException e){ System.err.println("failed file read from");}
-        TextParser to_parse = new TextParser(read_from);
-        if (result.length() > 0) {
+        else {
+          FileReader read_from = null;
           try {
-            bill = to_parse.parse();
-          } catch (ParserException e) {
-            System.err.println("failed file parse from existing file");
+            read_from = new FileReader(result);
+          } catch (IOException e) {
+            System.err.println("failed file read from");
+          }
+          TextParser to_parse = new TextParser(read_from);
+          if (result.length() > 0) {
+            try {
+              bill = to_parse.parse();
+            } catch (ParserException e) {
+              System.err.println("failed file parse from existing file");
+            }
+          }
+          if (bill != null) {
+            if (!bill.getCustomer().equals(args[call_argument_start_point])) {
+              System.err.println("Name of customer file does not match the name provided");
+              return;
+            }
+            bill.addPhoneCall(test);
+            Writer output_file = null;
+            result.delete();
+            // result = new File(args[text_file_name]);
+            result = new File(getFileNameOnlyNotPath(args[text_file_name]));
+            try {
+              output_file = new FileWriter(result);
+            } catch (IOException e) {
+              System.err.println("failed to write to file");
+            }
+            TextDumper to_dump = new TextDumper(output_file);
+            to_dump.dump(bill);
+            // return;
+          }
+          else {
+            bill = new PhoneBill(args[call_argument_start_point]);
+            bill.addPhoneCall(test);
+            Writer output_file = null;
+            result.delete();
+            // result = new File(args[text_file_name]);
+            // getFileNameOnlyNotPath(args[text_file_name])
+            result = new File(getFileNameOnlyNotPath(args[text_file_name]));
+            try {
+              output_file = new FileWriter(result);
+            } catch (IOException e) {
+              System.err.println("failed to write to file");
+            }
+            TextDumper to_dump = new TextDumper(output_file);
+            to_dump.dump(bill);
           }
         }
-        if (to_print_check) {
-          System.out.println(test.toString());
-          System.out.println("Caller: " + test.getCaller());
-          System.out.println("Callee: " + test.getCallee());
-          System.out.println("Caller: " + test.getBeginTimeString());
-          System.out.println("Caller: " + test.getEndTimeString());
-        }
-        if (bill != null) {
-          if (!bill.getCustomer().equals(args[call_argument_start_point])){
-            System.err.println("Name of customer file does not match the name provided");
-            return;
-          }
-          bill.addPhoneCall(test);
-          Writer output_file = null;
-          result.delete();
-          result = new File(args[text_file_name]);
-          try{
-            output_file = new FileWriter(result);
-          }
-          catch (IOException e){
-            System.err.println("failed to write to file");
-          }
-          TextDumper to_dump = new TextDumper(output_file);
-          to_dump.dump(bill);
-          return;
-        }
-        bill = new PhoneBill(args[call_argument_start_point]);
-        bill.addPhoneCall(test);
-        Writer output_file = null;
-        result.delete();
-        result = new File(args[text_file_name]);
-        try{
-          output_file = new FileWriter(result);
-        }
-        catch (IOException e){
-          System.err.println("failed to write to file");
-        }
-        TextDumper to_dump = new TextDumper(output_file);
-        to_dump.dump(bill);
       }
       if (to_check.equalsIgnoreCase("-print")){
+        // System.out.println("print called");
         bill = new PhoneBill(args[call_argument_start_point]);
         PhoneCall call = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
@@ -222,7 +244,10 @@ public class Project3 {
         System.out.println(call.getBeginTimeString());
         System.out.println(call.getEndTimeString());
       }
-      return;
+      if (to_check.equalsIgnoreCase("-pretty"))
+      {
+        System.out.println("pretty called");
+      }
     }
   }
 

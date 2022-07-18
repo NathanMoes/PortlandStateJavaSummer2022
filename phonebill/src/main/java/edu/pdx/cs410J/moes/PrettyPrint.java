@@ -26,20 +26,22 @@ public class PrettyPrint {
         try (
                 PrintWriter pw = new PrintWriter(new FileWriter(file));
         ) {
-            pw.println(bill.getCustomer());
+            pw.println("Phone bill of " + bill.getCustomer() + ", with calls: ");
             if (bill.getPhoneCalls() != null) {
+                pw.println("Phone bill of " + bill.getCustomer() + ", with calls: ");
                 for (PhoneCall to_add : bill.getPhoneCalls()) {
-                    pw.println(to_add.getCaller());
-                    pw.println(to_add.getCallee());
-                    pw.println(to_add.getCallerNumber());
-                    pw.println(to_add.getCalleeNumber());
-                    pw.println(to_add.getBeginTimeString());
-                    pw.println(to_add.getEndTimeString());
+                    pw.println("Call from " + to_add.getCaller() + " to " + to_add.getCallee() + ", at " +
+                            to_add.getBeginTimeString() + " to " + to_add.getEndTimeString() + "." +
+                            " Originating from " + to_add.getCallerNumber() + " and contacting " +
+                            to_add.getCalleeNumber());
                 }
+            }
+            else {
+                pw.println("Phone bill of " + bill.getCustomer() + ", with zero calls");
             }
         }
         catch(IOException e){
-            e.getMessage();
+            System.err.println(e.getMessage());
         }
 
     }
