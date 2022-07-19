@@ -254,7 +254,10 @@ public class PhoneCall extends AbstractPhoneCall {
   public String getBeginTimeString() {
     // throw new UnsupportedOperationException("This method is not implemented yet");
     // return this.callBegin;
-    return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callBeginTime);
+    if (this.callBeginTime != null)
+      return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callBeginTime);
+    else
+      return null;
   }
 
   /**
@@ -265,7 +268,10 @@ public class PhoneCall extends AbstractPhoneCall {
   public String getEndTimeString() {
     // throw new UnsupportedOperationException("This method is not implemented yet");
     // return this.callEnd;
-    return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callEndTime);
+    if (this.callEndTime != null)
+      return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callEndTime);
+    else
+      return null;
   }
 
   /**

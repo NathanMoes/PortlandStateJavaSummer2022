@@ -29,7 +29,7 @@ class Project3ITT extends InvokeMainTestCase {
      */
     @Test
     void testInvalidOption(){
-        String [] args = {"-fred"};
+        String [] args = {"-fred", "2", "3" , "4" , "5" , "6" , "7"};
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         MatcherAssert.assertThat(result.getTextWrittenToStandardError(), CoreMatchers.containsString("Invalid command line argument(s) for options"));
     }
@@ -39,7 +39,7 @@ class Project3ITT extends InvokeMainTestCase {
      */
     @Test
     void testTooManyOptions(){
-        String [] args = {"-README", "-print", "-print", "-textFile"};
+        String [] args = {"-README", "-print", "-print", "-textFile", "-pretty", "adssadq"};
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         MatcherAssert.assertThat(result.getTextWrittenToStandardError(), CoreMatchers.containsString("Too many options arguments given, options include -README, Textfile, and print"));
     }
@@ -50,8 +50,8 @@ class Project3ITT extends InvokeMainTestCase {
     @Test
     void testMainResultIsNullAndToStringPrint(){
         String [] args = {"-print", "-textFile", "empty-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-                "10:30", "11/12/2011", "11:30"};
-        String check_against = "Phone call from Mike to None from 11/11/2011 10:30 to 11/12/2011 11:30";
+                "10:30 AM", "11/12/2011", "11:30 AM"};
+        String check_against = "Phone call from Mike to Not given from 11/11/11 to 11/12/11";
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
     }
@@ -63,7 +63,7 @@ class Project3ITT extends InvokeMainTestCase {
     @Test
     void testWeGetNullInResultBranch() {
         String [] args = {"-textFile", "definatrlynotafilethatexists.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-                "10:30", "11/12/2011", "11:30"};
+                "10:30 AM", "11/12/2011", "11:30 AM"};
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         // MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
     }

@@ -45,7 +45,7 @@ public class TextParserTest {
 
   @Test
   void usesTheIfElseStatementsInFull() throws IOException, ParserException{
-    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30", "01/01/1000 11:30");
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-222-2222", "333-333-3333", "01/01/1000 10:30 AM", "01/01/1000 11:30 AM");
     PhoneBill bill = new PhoneBill("Name is");
     File tempFile = new File("tempFile.txt");
     // FileReader fileReader = new FileReader(tempFile);

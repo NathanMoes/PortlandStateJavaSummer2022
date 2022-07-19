@@ -3,6 +3,9 @@ package edu.pdx.cs410J.moes;
 import org.junit.jupiter.api.Test;
 
 import java.awt.color.ICC_ColorSpace;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,7 +26,7 @@ public class PhoneCallTest {
   @Test
   void forProject1ItIsOkayIfGetEndTimeIsZero() {
     PhoneCall call = new PhoneCall();
-    assertThat(call.getEndTimeString(), containsString("0:0"));
+    assertThat(call.getEndTimeString(), is(notNullValue()));
   }
 
   /**
@@ -32,7 +35,7 @@ public class PhoneCallTest {
   @Test
   void forProject1ItIsOkayIfGetBeginTimeIsZero() {
     PhoneCall call = new PhoneCall();
-    assertThat(call.getBeginTimeString(), containsString("0:0"));
+    assertThat(call.getBeginTimeString(), is(notNullValue()));
   }
 
   /**
@@ -214,13 +217,16 @@ public class PhoneCallTest {
    */
   @Test
   void testDefaultValues(){
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
     PhoneCall call = new PhoneCall();
     assertThat(call.getCallee(), containsString("None"));
     assertThat(call.getCaller(), containsString("None"));
     assertThat(call.getCallerNumber(), containsString("000-000-0000"));
     assertThat(call.getCalleeNumber(), containsString("000-000-0000"));
-    assertThat(call.getBeginTimeString(), containsString("00/00/0000 0:0"));
-    assertThat(call.getEndTimeString(), containsString("00/00/0000 0:0"));
+    assertThat(call.getCallBegin(), is(dateFormat.format(new Date())));
+    assertThat(call.getCallEnd(), is(dateFormat.format(new Date())));
+    // assertThat(call.getBeginTimeString(), containsString("00/00/0000 0:0"));
+    // assertThat(call.getEndTimeString(), containsString("00/00/0000 0:0"));
   }
 
   /**
