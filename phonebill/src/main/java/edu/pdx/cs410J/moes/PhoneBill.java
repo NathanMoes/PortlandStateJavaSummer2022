@@ -66,4 +66,19 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
     return this.calls;
     //throw new UnsupportedOperationException("This method is not implemented yet");
   }
+
+  /**
+   * This function is made to sort the phone calls in the phone bill acroding to the start time and then acrding to
+   * Phone number
+   * It returns nothing as the sorting is done within the method and it is also set to the new things within too
+   */
+  public void sortCalls(){
+    long comp1 = 0;
+    long comp2 = 0;
+    for (int i = 0; i < this.calls.size(); i+= 1){
+      for (int j = 0; j < this.calls.size(); j+=1){
+        System.out.println("Doing things");
+      }
+    }
+  }
 }

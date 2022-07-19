@@ -5,6 +5,8 @@ import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Scanner;
 import java.nio.file.*;
 
@@ -51,13 +53,30 @@ public class Project3 {
     }
 
 
-    static String getFileNameOnlyNotPath(String input){
+  /**
+   * This function gets the file name from a path, makes things easier for naming new files if they don't exist
+   * @param input is the path of the file as a string
+   * @return returns a string representing the file's name
+   */
+  static String getFileNameOnlyNotPath(String input){
       // String to_return = "";
       Path path = Paths.get(input);
       // Path fileName = path.getFileName();
       return (path.getFileName()).toString();
       // return to_return;
     }
+
+
+  /**
+   * This method acts to get the time difference in minutes between the start and end of a call
+   * 60000 is the number of miliseconds in a minute
+   */
+  static boolean checkCallTimeNotZero(Date callBeginTime, Date callEndTime){
+    long startTime = callBeginTime.getTime();
+    long endTime = callEndTime.getTime();
+    long result =  ((endTime - startTime) / 60000);
+    return (result > 0);
+  }
 
   /**
    * This is the main function for project/program 1, it takes command line arguments and creates external class objects
@@ -154,6 +173,22 @@ public class Project3 {
         else {
           result = new File(args[text_file_name]);
         }
+        Date validateStart = null;
+        Date validateEnd = null;
+        try {
+          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4]);
+          validateEnd = new Date(args[call_argument_start_point + 5] + " " + args[call_argument_start_point + 6]);
+        }
+        catch (IllegalArgumentException e){
+          System.err.println(e.getMessage());
+          System.err.println("Incorrect formating for the date passed in");
+          return;
+        }
+        if (!Project3.checkCallTimeNotZero(validateStart, validateEnd))
+        {
+          System.err.println("The Time for the call was invalid. Meaning it has a zero or negative call time");
+          return;
+        }
         test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
@@ -231,6 +266,22 @@ public class Project3 {
       if (to_check.equalsIgnoreCase("-print")){
         // System.out.println("print called");
         bill = new PhoneBill(args[call_argument_start_point]);
+        Date validateStart = null;
+        Date validateEnd = null;
+        try {
+          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4]);
+          validateEnd = new Date(args[call_argument_start_point + 5] + " " + args[call_argument_start_point + 6]);
+        }
+        catch (IllegalArgumentException e){
+          System.err.println(e.getMessage());
+          System.err.println("Incorrect formating for the date passed in");
+          return;
+        }
+        if (!Project3.checkCallTimeNotZero(validateStart, validateEnd))
+        {
+          System.err.println("The Time for the call was invalid. Meaning it has a zero or negative call time");
+          return;
+        }
         PhoneCall call = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
@@ -261,6 +312,22 @@ public class Project3 {
           System.out.println(args[pretty_file_name]);
           result = new File(args[pretty_file_name]);
         }
+        Date validateStart = null;
+        Date validateEnd = null;
+        try {
+          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4]);
+          validateEnd = new Date(args[call_argument_start_point + 5] + " " + args[call_argument_start_point + 6]);
+        }
+        catch (IllegalArgumentException e){
+          System.err.println(e.getMessage());
+          System.err.println("Incorrect formating for the date passed in");
+          return;
+        }
+        if (!Project3.checkCallTimeNotZero(validateStart, validateEnd))
+        {
+          System.err.println("The Time for the call was invalid. Meaning it has a zero or negative call time");
+          return;
+        }
         test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
@@ -270,13 +337,20 @@ public class Project3 {
           result = new File(args[pretty_file_name]);
           // return;
         }
+        Collections.sort(bill.calls);
         PrettyPrinter prettyPrinter = new PrettyPrinter(bill);
         prettyPrinter.dump();
         if (to_check.contains("y"))
           System.out.println("contains correct");
         prettyPrinter.dump(result);
+        // Collections.sort(bill.calls);
         }
       }
     }
 }
+
+/**
+ * Need to add in a check for minutes in the addition of new calls to the bill // ADDED
+ * Need to make it so the phone bill is sorted first acroding to start time then acording to phone number (if equal)
+ */
 

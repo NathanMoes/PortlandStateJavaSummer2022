@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class PhoneCall extends AbstractPhoneCall {
+public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall>{
 
   public String caller; // Caller name
   public String callee; // Callee name
@@ -290,4 +290,28 @@ public class PhoneCall extends AbstractPhoneCall {
     return dateFormat.format(this.callEndTime);
   }
 
+
+  /**
+   * This method acts to get the time difference in minutes between the start and end of a call
+   * 60000 is the number of miliseconds in a minute
+   */
+  public long getCallTimeMinute(){
+    long startTime = this.callBeginTime.getTime();
+    long endTime = this.callEndTime.getTime();
+    return ((endTime - startTime) / 60000);
+  }
+
+  /**
+   * @param o the object to be compared.
+   * @return
+   */
+  @Override
+  public int compareTo(PhoneCall o) {
+    long startTime = this.callBeginTime.getTime();
+    long startTimeExternal = o.callBeginTime.getTime();
+    if (startTimeExternal - startTime == 0){
+      return o.getCallerNumber().compareTo(this.getCallerNumber());
+    }
+    return  (int) (startTimeExternal - startTime);
+  }
 }
