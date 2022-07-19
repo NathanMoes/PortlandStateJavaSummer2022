@@ -78,6 +78,7 @@ public class PhoneCall extends AbstractPhoneCall {
    * Checks if the date and time is valid
    * returns true if valid and false else
    depricated
+   */
   public boolean vali_date(String to_validate){
     boolean month = false;
     boolean day = false;
@@ -144,9 +145,6 @@ public class PhoneCall extends AbstractPhoneCall {
     }
     return month && day && year && hour && min;
   }
-
-   */
-
 
   /**
   default constructor for the class PhoneCall. Sets the values to their default values.
