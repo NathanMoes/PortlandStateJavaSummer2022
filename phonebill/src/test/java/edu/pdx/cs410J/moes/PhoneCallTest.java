@@ -323,4 +323,30 @@ public class PhoneCallTest {
     assertThat(call.getCallerNumber(), is(nullValue()));
   }
 
+
+  /**
+   * Tests that a valid date is returned as true/valid
+   */
+  @Test
+  void testJavaDateValidIsValid(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-211-2222", "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am");
+    assertThat(call.validateJavaDate("01/02/2022 9:16 pm"), is(true));
+    assertThat(call.getCallBegin(), containsString("01/01/1000 10:30 AM"));
+  }
+
+  /**
+   * Tests that an invalid date is returned as false/invalid
+   */
+  @Test
+  void testJavaDateInvalidIsInvalid(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.validateJavaDate("01/02/2022 9.23 fm"), is(false));
+  }
+
+  @Test
+  void testGetBeginTimeNewDate(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-211-2222", "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am");
+    System.out.println(call.getEndTimeString());
+  }
+
 }

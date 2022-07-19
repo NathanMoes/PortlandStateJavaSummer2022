@@ -1,6 +1,12 @@
 package edu.pdx.cs410J.moes;
 
 import edu.pdx.cs410J.AbstractPhoneCall;
+import edu.pdx.cs410J.ParserException;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PhoneCall extends AbstractPhoneCall {
 
@@ -8,8 +14,26 @@ public class PhoneCall extends AbstractPhoneCall {
   public String callee; // Callee name
   public String callerNumber; // Caller Number
   public String calleeNumber; // Callee Number
-  public String callBegin; // Call start time/begin time
-  public String callEnd; // Call end time/finish time
+  // public String callBegin; // Call start time/begin time
+  // public String callEnd; // Call end time/finish time
+  public Date callBeginTime; // Call begin time as java.util.date
+  public Date callEndTime; // Call End time as java.util.date
+
+
+  /**
+   * Checks to see if the java.util.date is a valid date
+   */
+  public boolean validateJavaDate(String to_validate){
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    try{
+      dateFormat.parse(to_validate);
+    }
+    catch (ParseException e){
+      System.err.println(e.getMessage());
+      return false;
+    }
+    return true;
+  }
 
 
   /**
@@ -53,7 +77,7 @@ public class PhoneCall extends AbstractPhoneCall {
   /**
    * Checks if the date and time is valid
    * returns true if valid and false else
-   */
+   depricated
   public boolean vali_date(String to_validate){
     boolean month = false;
     boolean day = false;
@@ -121,14 +145,18 @@ public class PhoneCall extends AbstractPhoneCall {
     return month && day && year && hour && min;
   }
 
+   */
+
 
   /**
   default constructor for the class PhoneCall. Sets the values to their default values.
    */
 
   PhoneCall(){
-      this.callEnd = "00/00/0000 0:0"; // default time 0 hour 0 min
-      this.callBegin = "00/00/0000 0:0"; // default time 0 hour 0 min
+      // this.callEnd = "00/00/0000 0:0"; // default time 0 hour 0 min
+      // this.callBegin = "00/00/0000 0:0"; // default time 0 hour 0 min
+      this.callBeginTime = new Date(); // default date for the call begin time
+      this.callEndTime = new Date(); // default date for the call end time
       this.caller = "None"; // default caller is none
       this.callee = "None"; // default callee is none
       this.callerNumber = "000-000-0000"; // default number is 000-000-0000
@@ -146,17 +174,17 @@ public class PhoneCall extends AbstractPhoneCall {
    */
 
   PhoneCall(String inp_caller, String inp_callee, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
-    if (this.vali_date(inp_callBegin))
-      this.callBegin = inp_callBegin;
+    if (this.validateJavaDate(inp_callBegin))
+      this.callBeginTime = new Date(inp_callBegin); // Throws illegal arument exception?
     else {
-      System.err.println("Invalid date begin");
-      this.callBegin = null;
+      System.err.println("Invalid date begin format");
+      this.callBeginTime = null;
     }
-    if (this.vali_date(inp_callEnd))
-      this.callEnd = inp_callEnd;
+    if (this.validateJavaDate(inp_callEnd))
+      this.callEndTime = new Date(inp_callEnd);
     else {
-      System.err.println("Invalid date end");
-      this.callEnd = null;
+      System.err.println("Invalid date end format");
+      this.callEndTime = null;
     }
     if (this.validate_name(inp_caller))
       this.caller = inp_caller;
@@ -226,8 +254,9 @@ public class PhoneCall extends AbstractPhoneCall {
    */
   @Override
   public String getBeginTimeString() {
-    //throw new UnsupportedOperationException("This method is not implemented yet");
-    return this.callBegin;
+    // throw new UnsupportedOperationException("This method is not implemented yet");
+    // return this.callBegin;
+    return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callBeginTime);
   }
 
   /**
@@ -236,9 +265,25 @@ public class PhoneCall extends AbstractPhoneCall {
    */
   @Override
   public String getEndTimeString() {
-    //throw new UnsupportedOperationException("This method is not implemented yet");
-    return this.callEnd;
+    // throw new UnsupportedOperationException("This method is not implemented yet");
+    // return this.callEnd;
+    return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callEndTime);
   }
 
+  /**
+   * gets the begin time for a call but preserves the date and time information
+   */
+  public String getCallBegin(){
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    return dateFormat.format(this.callBeginTime);
+  }
+
+  /**
+   * gets the end time for a call but preserves the date and time information
+   */
+  public String getCallEnd(){
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    return dateFormat.format(this.callEndTime);
+  }
 
 }

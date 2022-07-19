@@ -34,9 +34,11 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
       String callee_num = null;
       String start_time = null;
       String end_time = null;
+      // System.err.println("doing the thing " + customer);
       while (customer != null){
         // System.err.println("doing the thing " + customer);
         customer = br.readLine();
+        // System.err.println("doing the thing " + customer);
         // phone_call_args += 1;
         if (phone_call_args % 6 == 5){
           end_time = customer;
@@ -48,10 +50,11 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
             return to_return;
          }
           to_add_in = new PhoneCall(caller_name, callee_name, caller_num, callee_num, start_time, end_time);
-          if (to_add_in.callEnd == null || to_add_in.callBegin == null || to_add_in.calleeNumber == null ||
+          if (to_add_in.callEndTime == null || to_add_in.callBeginTime == null || to_add_in.calleeNumber == null ||
                   to_add_in.callerNumber == null || to_add_in.caller == null || to_add_in.callee == null)
           {
             System.err.println("Malformed file");
+            // System.err.println(to_add_in.ca);
             return to_return;
           }
           to_return.addPhoneCall(to_add_in);

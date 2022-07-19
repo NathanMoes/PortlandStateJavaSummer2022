@@ -104,7 +104,7 @@ public class Project3 {
         call_argument_start_point += 1;
       }
       if (to_check.equalsIgnoreCase("-pretty")){
-        pretty_file_name = call_argument_start_point;
+        pretty_file_name = call_argument_start_point + 1;
         call_argument_start_point += 2;
       }
     }
@@ -154,7 +154,7 @@ public class Project3 {
         else {
           result = new File(args[text_file_name]);
         }
-        test = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
+        test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
                 args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
@@ -231,7 +231,7 @@ public class Project3 {
       if (to_check.equalsIgnoreCase("-print")){
         // System.out.println("print called");
         bill = new PhoneBill(args[call_argument_start_point]);
-        PhoneCall call = new PhoneCall(args[call_argument_start_point], "None", args[call_argument_start_point+1],
+        PhoneCall call = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
                 args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
@@ -246,9 +246,37 @@ public class Project3 {
       }
       if (to_check.equalsIgnoreCase("-pretty"))
       {
+        if (bill == null)
+          bill = new PhoneBill(args[call_argument_start_point]);
         System.out.println("pretty called");
+        Path path = Paths.get(args[pretty_file_name]);
+        File result = null;
+        if (!Files.exists(path)) {
+          System.err.println("not path");
+          System.out.println(args[pretty_file_name]);
+          File cwd = new File(userDir);
+          result = Project3.find(getFileNameOnlyNotPath(args[pretty_file_name]), cwd);
+        }
+        else {
+          System.out.println(args[pretty_file_name]);
+          result = new File(args[pretty_file_name]);
+        }
+        test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
+                args[call_argument_start_point+2],
+                args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
+                args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
+        if (result == null) {
+          System.err.println("sda");
+          result = new File(args[pretty_file_name]);
+          // return;
+        }
+        PrettyPrinter prettyPrinter = new PrettyPrinter(bill);
+        prettyPrinter.dump();
+        if (to_check.contains("y"))
+          System.out.println("contains correct");
+        prettyPrinter.dump(result);
+        }
       }
     }
-  }
-
 }
+
