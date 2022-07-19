@@ -358,4 +358,14 @@ public class PhoneCallTest {
     assertThat(call.getEndTimeString(), containsString("1/1/00"));
   }
 
+  /**
+   * This will test the compare to method, to make sure that it returns a correct value for the comparison of two phone calls
+   */
+  @Test
+  void testComparePhoneCall(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "222-211-2222", "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am");
+    PhoneCall call1 = new PhoneCall("Name is", "Also this", "222-211-2222", "333-333-3333", "01/01/1000 10:10 am", "01/01/1000 11:30 am");
+    assertThat(call.compareTo(call1), is(-1200000));
+  }
+
 }

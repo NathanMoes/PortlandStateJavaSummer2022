@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.*;
+import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -184,6 +185,16 @@ class Project3Test {
     String [] args = {"-textFile", "valid-phonebill.txt", "-print" , "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30 AM", "11/12/2011", "11:30 AM"};
     Project3.main(args);
+  }
+
+  /**
+   * Test that the call of end dates and begin dates that are incorrect returns false
+   */
+  @Test
+  void testIncorrectCallTimes(){
+    long begin = 10000;
+    long end = 1000;
+    assertThat(Project3.checkCallTimeNotZero(new Date(begin), new Date(end)), is(false));
   }
 
 }
