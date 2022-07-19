@@ -50,7 +50,7 @@ class Project3ITT extends InvokeMainTestCase {
     @Test
     void testMainResultIsNullAndToStringPrint(){
         String [] args = {"-print", "-textFile", "empty-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-                "10:30 AM", "11/12/2011", "11:30 AM"};
+                "10:30", "AM", "11/12/2011", "11:30", "AM"};
         String check_against = "Phone call from Mike to Not given from 11/11/11 to 11/12/11";
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
@@ -63,10 +63,23 @@ class Project3ITT extends InvokeMainTestCase {
     @Test
     void testWeGetNullInResultBranch() {
         String [] args = {"-textFile", "definatrlynotafilethatexists.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-                "10:30 AM", "11/12/2011", "11:30 AM"};
+                "10:30", "AM", "11/12/2011", "11:30", "AM"};
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
         // MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
     }
 
+
+    /**
+     * -textFile moes/moes.txt -pretty moesout.txt Thomas 111-234-2341 123-421-4362 09/28/2000 9:16 pm 09/28/2000 9:20 pm
+     * Tests that we get pretty print to print to standard out for the data passsed in
+     */
+    @Test
+    void testWeGetPrettyOut(){
+        String [] args = {"-textFile", "moes/moes.txt", "-pretty", "moesout.txt", "Thomas", "111-234-2341",
+                "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+        String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+        InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
+        MatcherAssert.assertThat(result.getTextWrittenToStandardOut(), CoreMatchers.containsString(check_against));
+    }
 
 }

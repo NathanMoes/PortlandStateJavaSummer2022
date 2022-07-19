@@ -46,6 +46,10 @@ public class PrettyPrinter implements PhoneBillDumper<PhoneBill> {
 
     }
 
+    /**
+     * This function acts to dump the pretty print to standard output
+     * just as the above does for a file
+     */
     public void dump(){
             // System.out.println("Phone bill of " + bill.getCustomer() + ", with calls: ");
             if (bill.getPhoneCalls() != null) {

@@ -169,17 +169,19 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    * @param inp_calleeNumber callee number from command line
    * @param inp_callBegin call being time
    * @param inp_callEnd call end time
+   *                    DateFormat.getDateInstance(DateFormat.SHORT).format(this.callEndTime)
    */
 
   PhoneCall(String inp_caller, String inp_callee, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
     if (this.validateJavaDate(inp_callBegin))
-      this.callBeginTime = new Date(inp_callBegin); // Throws illegal arument exception?
+      this.callBeginTime = new Date(dateFormat.format(new Date(inp_callBegin))); // Throws illegal arument exception?
     else {
       System.err.println("Invalid date begin format");
       this.callBeginTime = null;
     }
     if (this.validateJavaDate(inp_callEnd))
-      this.callEndTime = new Date(inp_callEnd);
+      this.callEndTime = new Date(dateFormat.format(new Date(inp_callEnd)));
     else {
       System.err.println("Invalid date end format");
       this.callEndTime = null;
@@ -278,7 +280,7 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    * gets the begin time for a call but preserves the date and time information
    */
   public String getCallBegin(){
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
     return dateFormat.format(this.callBeginTime);
   }
 
@@ -286,7 +288,7 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    * gets the end time for a call but preserves the date and time information
    */
   public String getCallEnd(){
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
     return dateFormat.format(this.callEndTime);
   }
 
@@ -303,7 +305,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
 
   /**
    * @param o the object to be compared.
-   * @return
+   * @return returns the value of the comparison just a strcmp does
+   * Function just acts to sort via the compare to function
    */
   @Override
   public int compareTo(PhoneCall o) {

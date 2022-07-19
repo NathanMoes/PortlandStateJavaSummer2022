@@ -13,6 +13,7 @@ import java.nio.file.*;
 /**
  * The main class for the CS410J Phone Bill Project
  * Note to self, need to make it so we can read and add in from a file with path aka moes/moes.txt etc
+ * -textFile moes/moes.txt -pretty moesout.txt Thomas 342-234-2341 123-421-4362 "01/02/2022" "9:16 pm" "01/02/2022" "9:20 pm"
  */
 public class Project3 {
   // -textFile valid-phonebill.txt -print Mike 342-234-2341 123-421-4362 11/11/2011 10:30 11/12/2011 11:30
@@ -106,7 +107,7 @@ public class Project3 {
     int index = 0;
     for (to_check = args[index]; index < args.length -1; to_check = args[index]){
       index += 1;
-      if (to_check.startsWith("-")){
+      if (to_check.startsWith("-") && !to_check.equals("-")){
         numberOfOptions += 1;
         if (!to_check.equalsIgnoreCase("-print") && !to_check.equalsIgnoreCase("-README") &&
                 !to_check.equalsIgnoreCase("-textFile") && !to_check.equalsIgnoreCase("-pretty")){
@@ -127,7 +128,7 @@ public class Project3 {
         call_argument_start_point += 2;
       }
     }
-    if ((args.length - call_argument_start_point) > 7){
+    if ((args.length - call_argument_start_point) > 9){
       System.err.println("too many command line arguments");
       return;
     }
@@ -176,8 +177,8 @@ public class Project3 {
         Date validateStart = null;
         Date validateEnd = null;
         try {
-          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4]);
-          validateEnd = new Date(args[call_argument_start_point + 5] + " " + args[call_argument_start_point + 6]);
+          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5]);
+          validateEnd = new Date(args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         }
         catch (IllegalArgumentException e){
           System.err.println(e.getMessage());
@@ -191,8 +192,8 @@ public class Project3 {
         }
         test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
-                args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
-                args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
+                args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
+                args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         if (result == null) {
           bill = new PhoneBill(args[call_argument_start_point]);
           bill.addPhoneCall(test);
@@ -201,7 +202,6 @@ public class Project3 {
           Writer output_file = null;
           try{
             output_file = new FileWriter(temp_file);
-            // output_file = new FileWriter(temp_file);
           }
           catch (IOException e){
             System.err.println(e.getMessage());
@@ -234,7 +234,6 @@ public class Project3 {
             bill.addPhoneCall(test);
             Writer output_file = null;
             result.delete();
-            // result = new File(args[text_file_name]);
             result = new File(getFileNameOnlyNotPath(args[text_file_name]));
             try {
               output_file = new FileWriter(result);
@@ -243,15 +242,12 @@ public class Project3 {
             }
             TextDumper to_dump = new TextDumper(output_file);
             to_dump.dump(bill);
-            // return;
           }
           else {
             bill = new PhoneBill(args[call_argument_start_point]);
             bill.addPhoneCall(test);
             Writer output_file = null;
             result.delete();
-            // result = new File(args[text_file_name]);
-            // getFileNameOnlyNotPath(args[text_file_name])
             result = new File(getFileNameOnlyNotPath(args[text_file_name]));
             try {
               output_file = new FileWriter(result);
@@ -264,13 +260,12 @@ public class Project3 {
         }
       }
       if (to_check.equalsIgnoreCase("-print")){
-        // System.out.println("print called");
         bill = new PhoneBill(args[call_argument_start_point]);
         Date validateStart = null;
         Date validateEnd = null;
         try {
-          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4]);
-          validateEnd = new Date(args[call_argument_start_point + 5] + " " + args[call_argument_start_point + 6]);
+          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5]);
+          validateEnd = new Date(args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         }
         catch (IllegalArgumentException e){
           System.err.println(e.getMessage());
@@ -284,8 +279,8 @@ public class Project3 {
         }
         PhoneCall call = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
-                args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
-                args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
+                args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
+                args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         bill.addPhoneCall(call);
         System.out.println(call.toString());
         System.out.println(call.getCaller());
@@ -299,24 +294,27 @@ public class Project3 {
       {
         if (bill == null)
           bill = new PhoneBill(args[call_argument_start_point]);
-        System.out.println("pretty called");
+        Collections.sort(bill.calls);
+        PrettyPrinter prettyPrinter = new PrettyPrinter(bill);
+        if (args[pretty_file_name].equals("-")) {
+          prettyPrinter.dump();
+          return;
+        }
         Path path = Paths.get(args[pretty_file_name]);
         File result = null;
         if (!Files.exists(path)) {
           System.err.println("not path");
-          System.out.println(args[pretty_file_name]);
           File cwd = new File(userDir);
           result = Project3.find(getFileNameOnlyNotPath(args[pretty_file_name]), cwd);
         }
         else {
-          System.out.println(args[pretty_file_name]);
           result = new File(args[pretty_file_name]);
         }
         Date validateStart = null;
         Date validateEnd = null;
         try {
-          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4]);
-          validateEnd = new Date(args[call_argument_start_point + 5] + " " + args[call_argument_start_point + 6]);
+          validateStart = new Date(args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5]);
+          validateEnd = new Date(args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         }
         catch (IllegalArgumentException e){
           System.err.println(e.getMessage());
@@ -330,20 +328,14 @@ public class Project3 {
         }
         test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
-                args[call_argument_start_point+3] + " " + args[call_argument_start_point+4],
-                args[call_argument_start_point+5] + " " + args[call_argument_start_point+6]);
+                args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
+                args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         if (result == null) {
           System.err.println("sda");
           result = new File(args[pretty_file_name]);
           // return;
         }
-        Collections.sort(bill.calls);
-        PrettyPrinter prettyPrinter = new PrettyPrinter(bill);
-        prettyPrinter.dump();
-        if (to_check.contains("y"))
-          System.out.println("contains correct");
         prettyPrinter.dump(result);
-        // Collections.sort(bill.calls);
         }
       }
     }

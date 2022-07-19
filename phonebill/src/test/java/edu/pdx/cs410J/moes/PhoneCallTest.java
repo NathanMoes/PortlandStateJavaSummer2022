@@ -217,7 +217,7 @@ public class PhoneCallTest {
    */
   @Test
   void testDefaultValues(){
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
     PhoneCall call = new PhoneCall();
     assertThat(call.getCallee(), containsString("None"));
     assertThat(call.getCaller(), containsString("None"));
@@ -349,10 +349,13 @@ public class PhoneCallTest {
     assertThat(call.validateJavaDate("01/02/2022 9.23 fm"), is(false));
   }
 
+  /**
+   * This test is to check that the system gets a valid date from the get end time string function
+   */
   @Test
   void testGetBeginTimeNewDate(){
     PhoneCall call = new PhoneCall("Name is", "Also this", "222-211-2222", "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am");
-    System.out.println(call.getEndTimeString());
+    assertThat(call.getEndTimeString(), containsString("1/1/00"));
   }
 
 }
