@@ -1,0 +1,2 @@
+Phone bill of Default customer, with calls: 
+Call from None to None, at 07/20/2022 11:02 AM to 07/20/2022 11:02 AM. Originating from 000-000-0000 and contacting 000-000-0000.
