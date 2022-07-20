@@ -164,16 +164,8 @@ public class Project3 {
     for (to_check = args[index]; index < args.length - 1; to_check = args[index]){
       index += 1;
       if (to_check.equalsIgnoreCase("-textFile")){
-        // System.out.println("text file called");
         Path path = Paths.get(args[text_file_name]);
-        File result = null;
-        if (!Files.exists(path)) {
-          File cwd = new File(userDir);
-          result = Project3.find(getFileNameOnlyNotPath(args[text_file_name]), cwd);
-        }
-        else {
-          result = new File(args[text_file_name]);
-        }
+        File result = new File(path.toString());
         Date validateStart = null;
         Date validateEnd = null;
         try {
@@ -194,18 +186,29 @@ public class Project3 {
                 args[call_argument_start_point+2],
                 args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
                 args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
-        if (result == null) {
+        boolean isNew = false;
+        try {
+          isNew = result.createNewFile();
+          // System.err.println(userDir);
+        }
+        catch (IOException e){
+          // System.err.println(userDir);
+          System.err.println(e.getMessage());
+          return;
+        }
+        if (isNew) {
           bill = new PhoneBill(args[call_argument_start_point]);
           bill.addPhoneCall(test);
-          File temp_file = new File(getFileNameOnlyNotPath(args[text_file_name]));
+          // File temp_file = new File(getFileNameOnlyNotPath(args[text_file_name]));
 
           Writer output_file = null;
           try{
-            output_file = new FileWriter(temp_file);
+            output_file = new FileWriter(result);
           }
           catch (IOException e){
             System.err.println(e.getMessage());
             System.err.println("failed to write to file");
+            return;
           }
 
           TextDumper to_dump = new TextDumper(output_file);
@@ -217,6 +220,8 @@ public class Project3 {
             read_from = new FileReader(result);
           } catch (IOException e) {
             System.err.println("failed file read from");
+            System.err.println(e.getMessage());
+            System.err.println(result);
           }
           TextParser to_parse = new TextParser(read_from);
           if (result.length() > 0) {
@@ -302,7 +307,8 @@ public class Project3 {
           return;
         }
         Path path = Paths.get(args[pretty_file_name]);
-        File result = null;
+        File result = new File(path.toString());
+        /**
         if (!Files.exists(path)) {
           File cwd = new File(userDir);
           result = Project3.find(getFileNameOnlyNotPath(args[pretty_file_name]), cwd);
@@ -310,6 +316,7 @@ public class Project3 {
         else {
           result = new File(args[pretty_file_name]);
         }
+         */
         Date validateStart = null;
         Date validateEnd = null;
         try {
@@ -326,11 +333,21 @@ public class Project3 {
           System.err.println("The Time for the call was invalid. Meaning it has a zero or negative call time");
           return;
         }
+        boolean isNew = false;
+        try {
+          isNew = result.createNewFile();
+          // System.err.println(userDir);
+        }
+        catch (IOException e){
+          // System.err.println(userDir);
+          System.err.println(e.getMessage());
+          return;
+        }
         test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
                 args[call_argument_start_point+2],
                 args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
                 args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
-        if (result == null) {
+        if (isNew) {
           result = new File(args[pretty_file_name]);
         }
         prettyPrinter.dump(result);

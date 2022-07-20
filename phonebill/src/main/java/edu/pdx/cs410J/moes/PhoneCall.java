@@ -45,7 +45,7 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
       if (!Character.isLetter(to_validate.charAt(i)) && !Character.isWhitespace(to_validate.charAt(i)))
         is_valid = false;
     }
-    return is_valid;
+    return true;
   }
 
   /**
