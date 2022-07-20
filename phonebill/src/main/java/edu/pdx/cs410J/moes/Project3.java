@@ -294,7 +294,8 @@ public class Project3 {
       {
         if (bill == null)
           bill = new PhoneBill(args[call_argument_start_point]);
-        Collections.sort(bill.calls);
+        if (bill.getPhoneCalls() != null)
+          Collections.sort(bill.calls);
         PrettyPrinter prettyPrinter = new PrettyPrinter(bill);
         if (args[pretty_file_name].equals("-")) {
           prettyPrinter.dump();
@@ -303,7 +304,6 @@ public class Project3 {
         Path path = Paths.get(args[pretty_file_name]);
         File result = null;
         if (!Files.exists(path)) {
-          System.err.println("not path");
           File cwd = new File(userDir);
           result = Project3.find(getFileNameOnlyNotPath(args[pretty_file_name]), cwd);
         }
@@ -331,18 +331,10 @@ public class Project3 {
                 args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
                 args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         if (result == null) {
-          System.err.println("sda");
           result = new File(args[pretty_file_name]);
-          // return;
         }
         prettyPrinter.dump(result);
         }
       }
     }
 }
-
-/**
- * Need to add in a check for minutes in the addition of new calls to the bill // ADDED
- * Need to make it so the phone bill is sorted first acroding to start time then acording to phone number (if equal)
- */
-

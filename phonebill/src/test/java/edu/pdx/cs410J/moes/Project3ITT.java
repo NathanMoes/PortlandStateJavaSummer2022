@@ -75,7 +75,7 @@ class Project3ITT extends InvokeMainTestCase {
      */
     @Test
     void testWeGetPrettyOut(){
-        String [] args = {"-textFile", "moes/moes.txt", "-pretty", "moesout.txt", "Thomas", "111-234-2341",
+        String [] args = {"-textFile", "moes/moes.txt", "-pretty", "-", "Thomas", "111-234-2341",
                 "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
         String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
         InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
@@ -83,7 +83,13 @@ class Project3ITT extends InvokeMainTestCase {
     }
 
     /**
-     * Testing to see that
+     * Testing to see that it prints to a file
      */
+    @Test
+    void testWeGetPrettyToPrintToFile(){
+        String [] args = {"-textFile", "moes/moes.txt", "-pretty", "moesout.txt", "Thomas", "111-234-2341",
+                "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+        InvokeMainTestCase.MainMethodResult result = this.invokeMain(args);
+    }
 
 }

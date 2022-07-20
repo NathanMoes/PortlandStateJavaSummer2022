@@ -1,5 +1,8 @@
 package edu.pdx.cs410J.moes;
 
+import edu.pdx.cs410J.InvokeMainTestCase;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -196,5 +199,93 @@ class Project3Test {
     long end = 1000;
     assertThat(Project3.checkCallTimeNotZero(new Date(begin), new Date(end)), is(false));
   }
+
+  /**
+   * Testing to see that it can call the function to print to file
+   */
+  @Test
+  void testWeGetPrettyToPrintToFile(){
+    String [] args = {"-textFile", "moes/moes.txt", "-pretty", "moesout.txt", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+    Project3.main(args);
+  }
+
+  /**
+   * Tests to see that it can call to print to standard out
+   */
+  @Test
+  void testWeGetPrettyOut(){
+    String [] args = {"-textFile", "moes/moes.txt", "-pretty", "-", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+  }
+
+  /**
+   * Tests to see that it can call to print file that should not exist before hand
+   */
+  @Test
+  void testWeGetPrettyOutFileNotExist(){
+    File file = new File("thisFileDoesNotExistNorShouldIt.txt");
+    String [] args = {"-textFile", "moes/moes.txt", "-pretty", "thisFileDoesNotExistNorShouldIt.txt", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+    file.delete();
+  }
+
+  /**
+   * Tests to see that it can call to print file while invalid date
+   */
+  @Test
+  void testWeGetPrettyOutFileNotExistInvalidDate(){
+    File file = new File("thisFileDoesNotExistNorShouldIt.txt");
+    String [] args = {"-pretty", "thisFileDoesNotExistNorShouldIt.txt", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:10", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+    file.delete();
+  }
+
+
+  /**
+   * Tests to see that it can call to print file while invalid date, as above but it has illformed date
+   */
+  @Test
+  void testWeGetPrettyOutFileNotExistIllDate(){
+    File file = new File("thisFileDoesNotExistNorShouldIt.txt");
+    String [] args = {"-pretty", "thisFileDoesNotExistNorShouldIt.txt", "Thomas", "111-234-2341",
+            "123-421-4362", "09/285411/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+    file.delete();
+  }
+
+  /**
+   * Tests to see if print with invaid dates does bad thing
+   */
+  @Test
+  void testBadThingPrintBadDate(){
+    File file = new File("thisFileDoesNotExistNorShouldIt.txt");
+    String [] args = {"-print", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:10", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+    file.delete();
+  }
+
+  /**
+   * Tests to see if print with fine dates prints
+   */
+  @Test
+  void testGoodPrint(){
+    File file = new File("thisFileDoesNotExistNorShouldIt.txt");
+    String [] args = {"-print", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+    file.delete();
+  }
+
 
 }
