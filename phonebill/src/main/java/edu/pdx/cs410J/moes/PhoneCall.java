@@ -35,19 +35,6 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
     return true;
   }
 
-
-  /**
-   * Checks if the name is a valid name aka does not have numbers in it
-   */
-  public boolean validate_name(String to_validate){
-    boolean is_valid = true;
-    for (int i = 0; i < to_validate.length(); i+=1){
-      if (!Character.isLetter(to_validate.charAt(i)) && !Character.isWhitespace(to_validate.charAt(i)))
-        is_valid = false;
-    }
-    return true;
-  }
-
   /**
    * Check if the number is a valid phone number
    */
@@ -186,18 +173,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
       System.err.println("Invalid date end format");
       this.callEndTime = null;
     }
-    if (this.validate_name(inp_caller))
-      this.caller = inp_caller;
-    else{
-      System.err.println("Invalid name given for caller");
-      this.caller = null;
-    }
-    if (this.validate_name(inp_callee))
-      this.callee = inp_callee;
-    else {
-      System.err.println("Invalid name given for callee");
-      this.callee = null;
-    }
+    this.caller = inp_caller;
+    this.callee = inp_callee;
     if (this.validate_number(inp_callerNumber))
       this.callerNumber = inp_callerNumber;
     else {
