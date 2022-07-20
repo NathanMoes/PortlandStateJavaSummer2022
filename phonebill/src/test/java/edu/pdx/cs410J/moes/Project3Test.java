@@ -80,7 +80,7 @@ class Project3Test {
    */
   @Test
   void testCorrectTextFile(){
-    String [] args = {"-textFile tacos.txt", "Nathan Moes", "342-234-2341", "123-421-4362", "11/11/2011",
+    String [] args = {"-textFile" , "tacos.txt", "Nathan Moes", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30" , "AM", "11/12/2011", "11:30" , "AM"};
     Project3.main(args);
   }
@@ -111,7 +111,7 @@ class Project3Test {
    */
   @Test
   void testMainResultIsNullAndToStringPrint(){
-    String [] args = {"-print", "-textFile", "empty-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
+    String [] args = {"-print", "-textFile", "empty-testing-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
             "10:30", "AM", "11/12/2011", "11:30",  "AM"};
     Project3.main(args);
   }
@@ -137,7 +137,7 @@ class Project3Test {
    */
   @Test
   void testInvalidOption(){
-    String [] args = {"-fred"};
+    String [] args = {"-fred", "Name", "213-123-1231", "123-213-1241", "09/28/2012" , "10:30", "AM", "09/28/2012", "11:30", "AM"};
     Project3.main(args);
   }
 
@@ -205,7 +205,7 @@ class Project3Test {
    */
   @Test
   void testWeGetPrettyToPrintToFile(){
-    String [] args = {"-textFile", "moes/moes.txt", "-pretty", "moesout.txt", "Thomas", "111-234-2341",
+    String [] args = {"-textFile", "moes.txt", "-pretty", "moesout.txt", "Thomas", "111-234-2341",
             "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
     Project3.main(args);
   }
@@ -215,7 +215,7 @@ class Project3Test {
    */
   @Test
   void testWeGetPrettyOut(){
-    String [] args = {"-textFile", "moes/moes.txt", "-pretty", "-", "Thomas", "111-234-2341",
+    String [] args = {"-textFile", "moes.txt", "-pretty", "-", "Thomas", "111-234-2341",
             "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
     String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
     Project3.main(args);
@@ -227,7 +227,7 @@ class Project3Test {
   @Test
   void testWeGetPrettyOutFileNotExist(){
     File file = new File("thisFileDoesNotExistNorShouldIt.txt");
-    String [] args = {"-textFile", "moes/moes.txt", "-pretty", "thisFileDoesNotExistNorShouldIt.txt", "Thomas", "111-234-2341",
+    String [] args = {"-textFile", "moes.txt", "-pretty", "thisFileDoesNotExistNorShouldIt.txt", "Thomas", "111-234-2341",
             "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
     String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
     Project3.main(args);
@@ -281,6 +281,19 @@ class Project3Test {
   void testGoodPrint(){
     File file = new File("thisFileDoesNotExistNorShouldIt.txt");
     String [] args = {"-print", "Thomas", "111-234-2341",
+            "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
+    String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
+    Project3.main(args);
+    file.delete();
+  }
+
+  /**
+   * Tests to check if we pass invlaid path file in and get error
+   */
+  @Test
+  void testInvalidPath(){
+    File file = new File("thisFileDoesNotExistNorShouldIt.txt");
+    String [] args = {"-textFile", "moes/testing.txt" ,"-print", "Thomas", "111-234-2341",
             "123-421-4362", "09/28/2000", "9:16", "pm", "09/28/2000", "9:20", "pm"};
     String check_against = "Call from Thomas to Not given, at 09/28/2000 09:16 PM to 09/28/2000 09:20 PM. Originating from 111-234-2341 and contacting 123-421-4362, and lasting 4 minutes";
     Project3.main(args);
