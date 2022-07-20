@@ -40,8 +40,8 @@ class Project3Test {
    */
   @Test
   void testValidInputPrint(){
-    String [] args = {"-print" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30 AM" ,
-            "09/26/2000", "11:30 AM"};
+    String [] args = {"-print" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30" , "AM" ,
+            "09/26/2000", "11:30", "AM"};
     Project3.main(args);
   }
 
@@ -60,8 +60,8 @@ class Project3Test {
    */
   @Test
   void testTooManyArgs(){
-    String [] args = {"-print" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30" ,
-            "09/26/2000", "11:30", "And another one bits the dust"};
+    String [] args = {"-print" , "Nathan Moes" , "971-655-7829" , "971-521-1458" , "09/26/2000" , "10:30" , "AM",
+            "09/26/2000", "11:30", "AM", "And another one bits the dust"};
     Project3.main(args);
   }
 
@@ -81,7 +81,7 @@ class Project3Test {
   @Test
   void testCorrectTextFile(){
     String [] args = {"-textFile tacos.txt", "Nathan Moes", "342-234-2341", "123-421-4362", "11/11/2011",
-            "10:30", "11/12/2011", "11:30"};
+            "10:30" , "AM", "11/12/2011", "11:30" , "AM"};
     Project3.main(args);
   }
 
@@ -102,7 +102,7 @@ class Project3Test {
   void testMainResultIsNull(){
     // -textFile tacos.txt "Nathan Moes" 342-234-2341 123-421-4362 11/11/2011 10:30 11/12/2011 11:30
     String [] args = {"-textFile", "Mike.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-            "10:30 AM", "11/12/2011", "11:30 AM"};
+            "10:30", "AM", "11/12/2011", "11:30",  "AM"};
     Project3.main(args);
   }
 
@@ -112,7 +112,7 @@ class Project3Test {
   @Test
   void testMainResultIsNullAndToStringPrint(){
     String [] args = {"-print", "-textFile", "empty-phonebill.txt", "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-            "10:30 AM", "11/12/2011", "11:30 AM"};
+            "10:30", "AM", "11/12/2011", "11:30",  "AM"};
     Project3.main(args);
   }
 
@@ -186,7 +186,7 @@ class Project3Test {
   @Test
   void testPrintWithTextArgs(){
     String [] args = {"-textFile", "valid-phonebill.txt", "-print" , "Mike", "342-234-2341", "123-421-4362", "11/11/2011",
-            "10:30 AM", "11/12/2011", "11:30 AM"};
+            "10:30", "AM", "11/12/2011", "11:30",  "AM"};
     Project3.main(args);
   }
 
