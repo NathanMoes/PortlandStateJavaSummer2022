@@ -17,3 +17,7 @@ If there is no file that matches the name after the textFile then one will be cr
 If there is a matching file the system will attempt to read in all the data and create a phone bill object from it
 Else when a new file is created the new data will be written to if from the new PhoneBill and call
 If the name of the customer in the file does not match the name provided then there will be an error printed to the screen
+If the -pretty is present on the command line it will then allow the user to print to a file specifed just after
+Such as -pretty text.txt which will pretty print to the text file. If the file name is instead just a "-" then it will
+print to standard out. The dates and times are now changed to be using the java.util.date class. Thus some modification
+has also been made to the command line inputs to include the time with AM/PM at the end.
