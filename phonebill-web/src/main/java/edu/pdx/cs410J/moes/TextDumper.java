@@ -22,4 +22,27 @@ public class TextDumper {
       pw.flush();
     }
   }
+
+  /**
+   * This dumps a phone bill to a file set by the writer passed in for the clas
+   * @param bill the phone bill to dump
+   */
+  public void dump(PhoneBill bill) {
+    try (
+            PrintWriter pw = new PrintWriter(this.writer)
+    ) {
+      pw.println(bill.getCustomer());
+      if (bill.getPhoneCalls() != null) {
+        for (PhoneCall to_add : bill.getPhoneCalls()) {
+          pw.println(to_add.getCaller());
+          pw.println(to_add.getCallee());
+          pw.println(to_add.getCallerNumber());
+          pw.println(to_add.getCalleeNumber());
+          pw.println(to_add.getCallBegin());
+          pw.println(to_add.getCallEnd());
+        }
+      }
+      pw.flush();
+    }
+  }
 }

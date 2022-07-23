@@ -80,7 +80,5 @@ public class PrettyPrinter implements PhoneBillDumper<PhoneBill> {
      * Aka sys.out etc
      */
 
-    // -textFile
-    //moes/moes.txt
 
 }

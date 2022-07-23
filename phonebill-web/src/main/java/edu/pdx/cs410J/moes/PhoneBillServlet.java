@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +23,16 @@ public class PhoneBillServlet extends HttpServlet
 {
     static final String WORD_PARAMETER = "word";
     static final String DEFINITION_PARAMETER = "definition";
+    static final String CUSTOMER_PARAMETER = "customer";
+    static final String BEGIN_TIME_PARAMETER = "begin";
+    static final String END_TIME_PARAMETER = "end";
+    static final String CALLER_NUMBER = "callerNumber";
+    static final String CALLEE_NUMBER = "calleeNumber";
+
 
     private final Map<String, String> dictionary = new HashMap<>();
+
+    private final ArrayList<PhoneBill> bills = new ArrayList<>();
 
     /**
      * Handles an HTTP GET request from a client by writing the definition of the
@@ -40,6 +51,44 @@ public class PhoneBillServlet extends HttpServlet
 
         } else {
             writeAllDictionaryEntries(response);
+        }
+    }
+
+    protected void deGetPhone( HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setContentType( "text/plain" );
+
+        String customer = getParameter( CUSTOMER_PARAMETER, request);
+        String begin = getParameter( BEGIN_TIME_PARAMETER, request);
+        String end = getParameter( END_TIME_PARAMETER, request);
+        if (customer != null){
+            if (begin != null) {
+                if (end != null) {
+                    // Then we get all the calls from this time period
+                    PhoneBill bill = new PhoneBill(customer);
+                    Collection<PhoneCall> calls = bill.getCallsInRange(begin, end);
+                    if (calls != null) {
+                        for (PhoneCall call : calls) {
+                            bill.addPhoneCall(call);
+                        }
+                    }
+                    TextDumper dumper = new TextDumper(response.getWriter());
+                    response.setStatus(HttpServletResponse.SC_OK);
+                }
+                else {
+                    response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
+                }
+                return;
+            }
+            else {
+                // return all the phone calls for a bill coresponding to the customer passed in.
+                // to PhoneBill toPrint = SearchCustomer(customer); can do within the bottom
+                // writeCustomerCalls(customer, response);
+                writeCustomerCalls(customer, response);
+            }
+        } else{
+            // do something else?!?!?!?!??!?!?!!??!??!?!??!
+            // probably send out some error message
+            response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -71,6 +120,50 @@ public class PhoneBillServlet extends HttpServlet
         pw.println(Messages.definedWordAs(word, definition));
         pw.flush();
 
+        response.setStatus( HttpServletResponse.SC_OK);
+    }
+
+    /**
+     * Handles an HTTP POST request by storing the call entry for the
+     * "customer" and the "call's" request parameter.
+     */
+    protected void doPostPhone( HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType( "text/plain" );
+
+        String customer = getParameter( CUSTOMER_PARAMETER, request);
+        String callerNumber = getParameter( CALLER_NUMBER, request);
+        String calleeNumber = getParameter( CALLEE_NUMBER, request);
+        String begin = getParameter( BEGIN_TIME_PARAMETER, request);
+        String end = getParameter( END_TIME_PARAMETER, request);
+        // need to process for lack of customer, caller, callee, begin, and end
+        if ( customer == null){
+            missingRequiredParameter(response, CUSTOMER_PARAMETER);
+            return;
+        }
+        if (callerNumber == null){
+            missingRequiredParameter(response, CALLER_NUMBER);
+            return;
+        }
+        if (calleeNumber == null){
+            missingRequiredParameter(response, CALLEE_NUMBER);
+            return;
+        }
+        if (begin == null){
+            missingRequiredParameter(response, BEGIN_TIME_PARAMETER);
+            return;
+        }
+        if (end == null){
+            missingRequiredParameter(response, END_TIME_PARAMETER);
+            return;
+        }
+
+        PhoneBill bill = searchCustomer(customer);
+        if (bill == null){
+            PhoneBill toAddBill = new PhoneBill(customer);
+            toAddBill.addPhoneCall(new PhoneCall(customer, "Not given",
+                    callerNumber, calleeNumber, begin, end));
+            bills.add(toAddBill);
+        }
         response.setStatus( HttpServletResponse.SC_OK);
     }
 
@@ -125,6 +218,40 @@ public class PhoneBillServlet extends HttpServlet
 
             response.setStatus(HttpServletResponse.SC_OK);
         }
+    }
+
+    /**
+     * Writes the contents of a customer's phone bill to the HTTP response
+     * The text of the message is formatted with TextDumper
+     * @param customer is the string representing the customer's name
+     * @param response is the http servlet response class instace used
+     */
+    private void writeCustomerCalls(String customer, HttpServletResponse response) throws IOException {
+        PhoneBill bill = searchCustomer(customer);
+        if (bill == null){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+        else {
+            PrintWriter pw = response.getWriter();
+
+            TextDumper dumper = new TextDumper(pw);
+            dumper.dump(bill);
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
+    }
+
+    /**
+     * Searchers for a customer in the arraylist of phone bills and returns the phone bill coresponding to them
+     * @param customer is a string representing the customer's name
+     * @return returns the valid customer's phone bill or returns null if failure to find
+     */
+    private PhoneBill searchCustomer(String customer) {
+        for (PhoneBill compare : bills){
+            if (compare.getCustomer().equalsIgnoreCase(customer)){
+                return compare;
+            }
+        }
+        return null;
     }
 
     /**
