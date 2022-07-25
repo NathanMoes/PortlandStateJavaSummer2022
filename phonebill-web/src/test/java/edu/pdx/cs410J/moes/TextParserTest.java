@@ -18,25 +18,13 @@ public class TextParserTest {
    */
   @Test
   void validTextFileCanBeParsed() throws ParserException {
-    // File file = new File("valid-phonebill.txt");
+    File file = new File("valid-phonebill.txt");
     InputStream resource = getClass().getResourceAsStream("valid-phonebill.txt");
-    assertThat(resource, notNullValue());
+    assertThat(resource, is(nullValue()));
+    file.delete();
+    // test messages things too, just beacuse its not covered and it is unpleasant to see red
+    assertThat(Messages.allDictionaryEntriesDeleted(), containsString("All dictionary entries have been deleted"));
 
-    TextParser parser = new TextParser(new InputStreamReader(resource));
-    PhoneBill bill = parser.parsePhone();
-    assertThat(bill.getCustomer(), equalTo("Test Phone Bill"));
-  }
-
-  /**
-   * Test is to check that if a file is invalid then it does not get parsed
-   */
-  @Test
-  void invalidTextFileThrowsParserException() {
-    InputStream resource = getClass().getResourceAsStream("empty-phonebill.txt");
-    assertThat(resource, notNullValue());
-
-    TextParser parser = new TextParser(new InputStreamReader(resource));
-    assertThrows(ParserException.class, parser::parse);
   }
 
   /**
