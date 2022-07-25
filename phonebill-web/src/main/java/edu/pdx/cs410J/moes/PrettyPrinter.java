@@ -8,7 +8,7 @@ import java.util.Map;
 public class PrettyPrinter {
   private final Writer writer;
 
-  @VisibleForTesting
+   @VisibleForTesting
   static String formatWordCount(int count )
   {
     return String.format( "Dictionary on server contains %d words", count );
@@ -24,6 +24,7 @@ public class PrettyPrinter {
   public PrettyPrinter(Writer writer) {
     this.writer = writer;
   }
+
 
   public void dump(Map<String, String> dictionary) {
     try (

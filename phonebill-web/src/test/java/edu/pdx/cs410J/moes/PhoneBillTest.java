@@ -96,5 +96,14 @@ public class PhoneBillTest {
         assertThat(calls, is(notNullValue()));
     }
 
+    /**
+     * tests that we get null from the request to calls from a blank phonebill
+     */
+    @Test
+    void testNullCallsNoCallsInPhoneBill(){
+        PhoneBill bill = new PhoneBill();
+        assertThat(bill.getCallsInRange("01/01/2000 10:30 am","01/01/2000 10:33 am"), is(nullValue()));
+    }
+
 
 }
