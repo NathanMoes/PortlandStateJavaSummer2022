@@ -33,7 +33,7 @@ public class PrettyPrinter implements PhoneBillDumper<PhoneBill> {
                     pw.println("Call from " + to_add.getCaller() + " to " + to_add.getCallee() + ", at " +
                             to_add.getCallBegin() + " to " + to_add.getCallEnd() + "." +
                             " Originating from " + to_add.getCallerNumber() + " and contacting " +
-                            to_add.getCalleeNumber() + ".");
+                            to_add.getCalleeNumber() + ", and lasting " + to_add.getCallTimeMinute() + " minutes");
                 }
             }
             else {

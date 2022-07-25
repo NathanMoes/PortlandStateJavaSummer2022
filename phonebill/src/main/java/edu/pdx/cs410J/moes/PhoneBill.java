@@ -6,6 +6,7 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Phone Bill class, implements a phone bill with array of phone calls for a customer
@@ -54,6 +55,7 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
     if (call == null)
       return;
     calls.add(call);
+    Collections.sort(calls);
     //throw new UnsupportedOperationException("This method is not implemented yet");
   }
 
@@ -65,6 +67,13 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
   public Collection<PhoneCall> getPhoneCalls() {
     return this.calls;
     //throw new UnsupportedOperationException("This method is not implemented yet");
+  }
+
+  /**
+   * This function sort the calls in the phone bill
+   */
+  public void sortProper(){
+
   }
 
 }

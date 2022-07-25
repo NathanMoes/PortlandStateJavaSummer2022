@@ -90,6 +90,7 @@ public class Project3 {
   public static void main(String[] args) {
     String userDir = System.getProperty("user.dir");
     System.getProperty("root");
+    System.err.println(userDir);
     // System.out.println(userDir);
     int call_argument_start_point = 0;
     int text_file_name = 0;
@@ -165,7 +166,8 @@ public class Project3 {
       index += 1;
       if (to_check.equalsIgnoreCase("-textFile")){
         Path path = Paths.get(args[text_file_name]);
-        File result = new File(path.toString());
+        boolean isNew = Files.notExists(path);
+        File result = new File(args[text_file_name]);
         Date validateStart = null;
         Date validateEnd = null;
         try {
@@ -186,9 +188,10 @@ public class Project3 {
                 args[call_argument_start_point+2],
                 args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
                 args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
-        boolean isNew = false;
+        /**
         try {
           isNew = result.createNewFile();
+          System.err.println("creating new file thing");
           // System.err.println(userDir);
         }
         catch (IOException e){
@@ -196,9 +199,12 @@ public class Project3 {
           System.err.println(e.getMessage());
           return;
         }
+         */
         if (isNew) {
           bill = new PhoneBill(args[call_argument_start_point]);
           bill.addPhoneCall(test);
+          Collections.sort(bill.calls);
+          bill.sortProper();
           // File temp_file = new File(getFileNameOnlyNotPath(args[text_file_name]));
 
           Writer output_file = null;
@@ -237,9 +243,12 @@ public class Project3 {
               return;
             }
             bill.addPhoneCall(test);
+            Collections.sort(bill.calls);
+            bill.sortProper();
             Writer output_file = null;
             result.delete();
-            result = new File(getFileNameOnlyNotPath(args[text_file_name]));
+            // result = new File(getFileNameOnlyNotPath(args[text_file_name]));
+            result = new File(path.toString());
             try {
               output_file = new FileWriter(result);
             } catch (IOException e) {
@@ -251,9 +260,12 @@ public class Project3 {
           else {
             bill = new PhoneBill(args[call_argument_start_point]);
             bill.addPhoneCall(test);
+            Collections.sort(bill.calls);
+            bill.sortProper();
             Writer output_file = null;
             result.delete();
-            result = new File(getFileNameOnlyNotPath(args[text_file_name]));
+            // result = new File(getFileNameOnlyNotPath(args[text_file_name]));
+            result = new File(path.toString());
             try {
               output_file = new FileWriter(result);
             } catch (IOException e) {
@@ -297,10 +309,13 @@ public class Project3 {
       }
       if (to_check.equalsIgnoreCase("-pretty"))
       {
-        if (bill == null)
+        if (bill == null) {
           bill = new PhoneBill(args[call_argument_start_point]);
-        if (bill.getPhoneCalls() != null)
+        }
+        if (bill.getPhoneCalls() != null) {
           Collections.sort(bill.calls);
+          bill.sortProper();
+        }
         PrettyPrinter prettyPrinter = new PrettyPrinter(bill);
         if (args[pretty_file_name].equals("-")) {
           prettyPrinter.dump();
@@ -343,10 +358,6 @@ public class Project3 {
           System.err.println(e.getMessage());
           return;
         }
-        test = new PhoneCall(args[call_argument_start_point], "Not given", args[call_argument_start_point+1],
-                args[call_argument_start_point+2],
-                args[call_argument_start_point + 3] + " " + args[call_argument_start_point + 4] + " " + args[call_argument_start_point+5],
-                args[call_argument_start_point + 6] + " " + args[call_argument_start_point + 7] + " " + args[call_argument_start_point+8]);
         if (isNew) {
           result = new File(args[pretty_file_name]);
         }
