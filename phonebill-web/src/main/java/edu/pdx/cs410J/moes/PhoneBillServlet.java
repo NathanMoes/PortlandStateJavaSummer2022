@@ -45,18 +45,6 @@ public class PhoneBillServlet extends HttpServlet
     {
         response.setContentType( "text/plain" );
 
-        String word = getParameter( WORD_PARAMETER, request );
-        if (word != null) {
-            writeDefinition(word, response);
-
-        } else {
-            writeAllDictionaryEntries(response);
-        }
-    }
-
-    protected void deGetPhone( HttpServletRequest request, HttpServletResponse response) throws IOException{
-        response.setContentType( "text/plain" );
-
         String customer = getParameter( CUSTOMER_PARAMETER, request);
         String begin = getParameter( BEGIN_TIME_PARAMETER, request);
         String end = getParameter( END_TIME_PARAMETER, request);
@@ -64,33 +52,84 @@ public class PhoneBillServlet extends HttpServlet
             if (begin != null) {
                 if (end != null) {
                     // Then we get all the calls from this time period
-                    PhoneBill bill = new PhoneBill(customer);
-                    Collection<PhoneCall> calls = bill.getCallsInRange(begin, end);
-                    if (calls != null) {
-                        for (PhoneCall call : calls) {
-                            bill.addPhoneCall(call);
+                    if (!customer.endsWith("-pretty")) {
+                        PhoneBill billCheck = searchCustomer(customer);
+                        if (billCheck == null) {
+                            System.err.println("Error, no valid bill exists under that name");
+                            response.setStatus( HttpServletResponse.SC_BAD_REQUEST );
+                            return;
+                            // bill = new PhoneBill(customer);
                         }
+                        Collection<PhoneCall> calls = billCheck.getCallsInRange(begin, end);
+                        // System.err.println(begin);
+                        // System.err.println(end);
+                        PhoneBill bill = new PhoneBill(customer);
+                        if (calls != null) {
+                            for (PhoneCall call : calls) {
+                                bill.addPhoneCall(call);
+                            }
+                        } else {
+                            PrintWriter writer = new PrintWriter(response.getWriter());
+                            writer.println("No valid calls in given time range: " + begin + " to " + end + ".");
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            return;
+                        }
+                        PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
+                        prettyPrinter.dump(bill);
+                        response.setStatus(HttpServletResponse.SC_OK);
                     }
-                    TextDumper dumper = new TextDumper(response.getWriter());
-                    response.setStatus(HttpServletResponse.SC_OK);
+                    else{
+                        // need to make new bill to print from other wise it adds more
+                        customer = customer.replace("-pretty", "");
+                        PhoneBill billCheck = searchCustomer(customer);
+                        if (billCheck == null)
+                        {
+                            System.err.println("No matching customer");
+                            response.setStatus( HttpServletResponse.SC_OK);
+                            return;
+                        }
+                        PhoneBill bill = new PhoneBill(customer);
+                        Collection<PhoneCall> calls = billCheck.getCallsInRange(begin, end);
+                        if (calls != null) {
+                            for (PhoneCall call : calls) {
+                                bill.addPhoneCall(call);
+                            }
+                        } else {
+                            PrintWriter writer = new PrintWriter(response.getWriter());
+                            writer.println("No valid calls in given time range: " + begin + " to " + end + ".");
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            return;
+                        }
+                        PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
+                        prettyPrinter.dumpStandard(bill);
+                        response.setStatus(HttpServletResponse.SC_OK);
+                    }
                 }
                 else {
                     response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
                 }
-                return;
             }
             else {
                 // return all the phone calls for a bill coresponding to the customer passed in.
                 // to PhoneBill toPrint = SearchCustomer(customer); can do within the bottom
                 // writeCustomerCalls(customer, response);
+                if (customer.endsWith("-pretty")){
+                    String passIn = customer.replace("-pretty", "");
+                    prettyPrintIt(passIn, response);
+                    response.setStatus( HttpServletResponse.SC_OK);
+                    return;
+                }
                 writeCustomerCalls(customer, response);
+                response.setStatus( HttpServletResponse.SC_OK);
             }
+            return;
         } else{
             // do something else?!?!?!?!??!?!?!!??!??!?!??!
             // probably send out some error message
             response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
         }
     }
+
 
     /**
      * Handles an HTTP POST request by storing the dictionary entry for the
@@ -102,25 +141,48 @@ public class PhoneBillServlet extends HttpServlet
     {
         response.setContentType( "text/plain" );
 
-        String word = getParameter(WORD_PARAMETER, request );
-        if (word == null) {
-            missingRequiredParameter(response, WORD_PARAMETER);
+        String customer = getParameter( CUSTOMER_PARAMETER, request);
+        String callerNumber = getParameter( CALLER_NUMBER, request);
+        String calleeNumber = getParameter( CALLEE_NUMBER, request);
+        String begin = getParameter( BEGIN_TIME_PARAMETER, request);
+        String end = getParameter( END_TIME_PARAMETER, request);
+        // need to process for lack of customer, caller, callee, begin, and end
+        if ( customer == null){
+            missingRequiredParameter(response, CUSTOMER_PARAMETER);
+            return;
+        }
+        if (callerNumber == null){
+            missingRequiredParameter(response, CALLER_NUMBER);
+            return;
+        }
+        if (calleeNumber == null){
+            missingRequiredParameter(response, CALLEE_NUMBER);
+            return;
+        }
+        if (begin == null){
+            missingRequiredParameter(response, BEGIN_TIME_PARAMETER);
+            return;
+        }
+        if (end == null){
+            missingRequiredParameter(response, END_TIME_PARAMETER);
             return;
         }
 
-        String definition = getParameter(DEFINITION_PARAMETER, request );
-        if ( definition == null) {
-            missingRequiredParameter( response, DEFINITION_PARAMETER );
-            return;
+        PhoneBill bill = searchCustomer(customer);
+        if (bill == null){
+            System.err.println("bill not exist creating one now");
+            PhoneBill toAddBill = new PhoneBill(customer);
+            toAddBill.addPhoneCall(new PhoneCall(customer, "Not given",
+                    callerNumber, calleeNumber, begin, end));
+            bills.add(toAddBill);
         }
-
-        this.dictionary.put(word, definition);
-
-        PrintWriter pw = response.getWriter();
-        pw.println(Messages.definedWordAs(word, definition));
-        pw.flush();
-
+        else{
+            PhoneCall call = new PhoneCall(customer, "Not given",
+                    callerNumber, calleeNumber, begin, end);
+            bill.addPhoneCall(call);
+        }
         response.setStatus( HttpServletResponse.SC_OK);
+
     }
 
     /**
@@ -252,6 +314,22 @@ public class PhoneBillServlet extends HttpServlet
             }
         }
         return null;
+    }
+
+    /**
+     * Does pretty print for the client
+     * @param customer is a string to represent the customer name
+     */
+    public void prettyPrintIt(String customer, HttpServletResponse response) throws IOException{
+        PhoneBill bill = searchCustomer(customer);
+        if (bill == null) {
+            System.err.println("Unable to find customer: " + customer + ". Customer does not exist in the system");
+            return;
+        }
+        else{
+            PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
+            prettyPrinter.dumpStandard(bill);
+        }
     }
 
     /**

@@ -2,6 +2,8 @@ package edu.pdx.cs410J.moes;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -76,5 +78,23 @@ public class PhoneBillTest {
         assertThat(testing.getCustomer(), containsString("Dave"));
     }
 
-            
+    /**
+     * tests that we get some valid return from calls in range
+     */
+    @Test
+    void testCallsInRange(){
+        PhoneBill bill = new PhoneBill("Dave");
+        bill.addPhoneCall(new PhoneCall("Dave", "Also this", "222-211-2222",
+                "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am"));
+        bill.addPhoneCall(new PhoneCall("Dave", "Also this", "222-211-2222",
+                "333-333-3333", "01/01/1000 11:30 am", "01/01/1000 11:40 am"));
+        Collection<PhoneCall> calls = bill.getCallsInRange("01/01/1000 10:30 am", "01/01/1000 10:30 am");
+        for (PhoneCall call : calls){
+            // System.out.println(call.toString());
+            assertThat(call.toString(), containsString("Phone call from Dave to Also this from 1/1/00 to 1/1/00"));
+        }
+        assertThat(calls, is(notNullValue()));
+    }
+
+
 }
