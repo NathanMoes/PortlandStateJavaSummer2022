@@ -73,6 +73,8 @@ public class PhoneBillServlet extends HttpServlet
 
     /**
      * Check if the number is a valid phone number
+     * @param to_validate is the string to validate
+     * @param response is the http response
      */
     public boolean validate_number(String to_validate, HttpServletResponse response) throws IOException{
         PrintWriter writer = new PrintWriter(response.getWriter());
@@ -157,7 +159,7 @@ public class PhoneBillServlet extends HttpServlet
                         PhoneBill bill = new PhoneBill(customer);
                         Collection<PhoneCall> calls = billCheck.getCallsInRange(begin, end);
                         if (calls != null) {
-                            writer.println("Customer: " + bill.getCustomer());
+                            writer.println("Customer: " + bill.getCustomer() + " Calls matching time under name:");
                             for (PhoneCall call : calls) {
                                 bill.addPhoneCall(call);
                                 writer.println(call.toString());

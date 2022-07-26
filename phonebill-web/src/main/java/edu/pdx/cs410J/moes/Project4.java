@@ -189,6 +189,9 @@ public class Project4 {
         String message = "";
         try {
             if (numberOfArguments == 9){
+                if (searchCheck){
+                    System.err.println("Please enter the name and dates for a search and not with the phone numbers.");
+                }
                 if (printCheck){
                     PhoneCall call = new PhoneCall(args[argumentsStartPoint], "Not given", args[argumentsStartPoint+1],
                             args[argumentsStartPoint+2], args[argumentsStartPoint+3] + " " + args[argumentsStartPoint+4] +
@@ -198,15 +201,17 @@ public class Project4 {
                     System.out.println(call.getCallee());
                     System.out.println(call.getCallerNumber());
                     System.out.println(call.getCalleeNumber());
-                    // System.out.println(call.getBeginTime().toString());
-                    // System.out.println(call.getEndTime().toString());
+                    System.out.println(call.getBeginTimeString());
+                    System.out.println(call.getEndTimeString());
                 }
                 String beginCheck = args[argumentsStartPoint+3] + " " + args[argumentsStartPoint+4] +
                         " " + args[argumentsStartPoint+5];
                 String endCheck = args[argumentsStartPoint+6] + " "
                         + args[argumentsStartPoint+7] + " " + args[argumentsStartPoint+8];
-                if (!quickDateCheck(beginCheck, endCheck))
+                if (!quickDateCheck(beginCheck, endCheck)) {
+                    System.err.println("BAD DATES");
                     return;
+                }
                 if (!validate_number(args[argumentsStartPoint+1])){
                     System.err.println("malformed caller number");
                     System.err.println("expected format is 123-123-1234 aka nnn-nnn-nnnn");
