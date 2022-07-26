@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -20,6 +21,52 @@ import static org.mockito.Mockito.*;
  * provide mock http requests and responses.
  */
 class PhoneBillServletTest {
+
+  /**
+   * This test will test that we can invoke the get request from the server
+   */
+  @Test
+  void testGet() throws IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    servlet.doGet(request, response);
+  }
+
+
+  /**
+   * This test will test that we can invoke the post request from the server
+   */
+  @Test
+  void testPost() throws IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    servlet.doPost(request, response);
+  }
+
+  /**
+   * This test will test that we can invoke the delete request from the server
+   */
+  @Test
+  void testDelete() throws IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    // servlet.doGet(request, response);
+    servlet.doDelete(request, response);
+  }
+
+  /**
+   * Test that pretty print can be called with bad data and it wil not find it
+   */
+  @Test
+  void testPrettyPrintItButNoValidCustomer() throws IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    servlet.prettyPrintIt("invalid", response);
+  }
 
 
 /**

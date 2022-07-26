@@ -15,8 +15,9 @@ import java.util.Date;
  * The main class that parses the command line and communicates with the
  * Phone Bill server using REST.
  * NEED TO DO:
- *  Print new call
- *  Search for calls
+ *  Print new call - done
+ *  Search for calls - done
+ *  Tests
  */
 public class Project4 {
 
