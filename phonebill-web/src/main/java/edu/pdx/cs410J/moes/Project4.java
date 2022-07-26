@@ -97,6 +97,7 @@ public class Project4 {
         boolean portCheck = false;
         boolean hostCheck = false;
         boolean searchCheck = false;
+        boolean printCheck = false;
         if (args[0].equalsIgnoreCase("-README")) {
             try (InputStream read_meF = Project4.class.getResourceAsStream("README.txt"))
             {
@@ -151,6 +152,8 @@ public class Project4 {
                 return;
             } else if (to_check.equalsIgnoreCase("-search")){
                 searchCheck = true;
+            } else if (to_check.equalsIgnoreCase("-print")){
+                printCheck = true;
             }
         }
         if (!(portCheck && hostCheck)){
@@ -186,6 +189,18 @@ public class Project4 {
         String message = "";
         try {
             if (numberOfArguments == 9){
+                if (printCheck){
+                    PhoneCall call = new PhoneCall(args[argumentsStartPoint], "Not given", args[argumentsStartPoint+1],
+                            args[argumentsStartPoint+2], args[argumentsStartPoint+3] + " " + args[argumentsStartPoint+4] +
+                            " " + args[argumentsStartPoint+5], args[argumentsStartPoint+6] + " "
+                            + args[argumentsStartPoint+7] + " " + args[argumentsStartPoint+8]);
+                    System.out.println(call.getCaller());
+                    System.out.println(call.getCallee());
+                    System.out.println(call.getCallerNumber());
+                    System.out.println(call.getCalleeNumber());
+                    // System.out.println(call.getBeginTime().toString());
+                    // System.out.println(call.getEndTime().toString());
+                }
                 String beginCheck = args[argumentsStartPoint+3] + " " + args[argumentsStartPoint+4] +
                         " " + args[argumentsStartPoint+5];
                 String endCheck = args[argumentsStartPoint+6] + " "
