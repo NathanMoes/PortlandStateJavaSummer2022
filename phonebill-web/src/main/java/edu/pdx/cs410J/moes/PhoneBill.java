@@ -1,12 +1,15 @@
 package edu.pdx.cs410J.moes;
 
 import edu.pdx.cs410J.AbstractPhoneBill;
+import edu.pdx.cs410J.AbstractPhoneCall;
+import org.checkerframework.checker.units.qual.A;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Phone Bill class, implements a phone bill with array of phone calls for a customer
@@ -55,6 +58,7 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
     if (call == null)
       return;
     calls.add(call);
+    Collections.sort(calls);
     //throw new UnsupportedOperationException("This method is not implemented yet");
   }
 

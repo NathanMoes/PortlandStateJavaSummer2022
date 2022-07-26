@@ -40,6 +40,7 @@ class PhoneBillRestClientIT {
     assertThat(dictionary.size(), equalTo(0));
   }
 
+  /**
   @Test
   void test2DefineOneWord() throws IOException, ParserException {
     PhoneBillRestClient client = newPhoneBillRestClient();
@@ -50,7 +51,9 @@ class PhoneBillRestClientIT {
     String definition = client.getDefinition(testWord);
     assertThat(definition, equalTo(testDefinition));
   }
+  */
 
+  /**
   @Test
   void test4EmptyWordThrowsException() {
     PhoneBillRestClient client = newPhoneBillRestClient();
@@ -61,5 +64,6 @@ class PhoneBillRestClientIT {
     assertThat(ex.getHttpStatusCode(), equalTo(HttpURLConnection.HTTP_PRECON_FAILED));
     assertThat(ex.getMessage(), equalTo(Messages.missingRequiredParameter("word")));
   }
+  */
 
 }
