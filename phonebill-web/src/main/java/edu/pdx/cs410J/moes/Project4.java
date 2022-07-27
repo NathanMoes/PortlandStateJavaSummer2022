@@ -15,8 +15,9 @@ import java.util.Date;
  * The main class that parses the command line and communicates with the
  * Phone Bill server using REST.
  * NEED TO DO:
- *  Print new call
- *  Search for calls
+ *  Print new call - done
+ *  Search for calls - done
+ *  Tests
  */
 public class Project4 {
 
@@ -97,6 +98,7 @@ public class Project4 {
         boolean portCheck = false;
         boolean hostCheck = false;
         boolean searchCheck = false;
+        boolean printCheck = false;
         if (args[0].equalsIgnoreCase("-README")) {
             try (InputStream read_meF = Project4.class.getResourceAsStream("README.txt"))
             {
@@ -151,6 +153,8 @@ public class Project4 {
                 return;
             } else if (to_check.equalsIgnoreCase("-search")){
                 searchCheck = true;
+            } else if (to_check.equalsIgnoreCase("-print")){
+                printCheck = true;
             }
         }
         if (!(portCheck && hostCheck)){
@@ -186,12 +190,29 @@ public class Project4 {
         String message = "";
         try {
             if (numberOfArguments == 9){
+                if (searchCheck){
+                    System.err.println("Please enter the name and dates for a search and not with the phone numbers.");
+                }
+                if (printCheck){
+                    PhoneCall call = new PhoneCall(args[argumentsStartPoint], "Not given", args[argumentsStartPoint+1],
+                            args[argumentsStartPoint+2], args[argumentsStartPoint+3] + " " + args[argumentsStartPoint+4] +
+                            " " + args[argumentsStartPoint+5], args[argumentsStartPoint+6] + " "
+                            + args[argumentsStartPoint+7] + " " + args[argumentsStartPoint+8]);
+                    System.out.println(call.getCaller());
+                    System.out.println(call.getCallee());
+                    System.out.println(call.getCallerNumber());
+                    System.out.println(call.getCalleeNumber());
+                    System.out.println(call.getBeginTimeString());
+                    System.out.println(call.getEndTimeString());
+                }
                 String beginCheck = args[argumentsStartPoint+3] + " " + args[argumentsStartPoint+4] +
                         " " + args[argumentsStartPoint+5];
                 String endCheck = args[argumentsStartPoint+6] + " "
                         + args[argumentsStartPoint+7] + " " + args[argumentsStartPoint+8];
-                if (!quickDateCheck(beginCheck, endCheck))
+                if (!quickDateCheck(beginCheck, endCheck)) {
+                    System.err.println("BAD DATES");
                     return;
+                }
                 if (!validate_number(args[argumentsStartPoint+1])){
                     System.err.println("malformed caller number");
                     System.err.println("expected format is 123-123-1234 aka nnn-nnn-nnnn");
@@ -208,8 +229,10 @@ public class Project4 {
                                 + args[argumentsStartPoint+7] + " " + args[argumentsStartPoint+8]);
                 return;
             } else if (numberOfArguments == 7){
-                if (!searchCheck)
+                if (!searchCheck) {
                     System.err.println("Need to use option -search to search for calls");
+                    return;
+                }
                 String beginCheck = args[argumentsStartPoint+1] + " " +
                         args[argumentsStartPoint+2] + " " + args[argumentsStartPoint+3];
                 String endCheck = args[argumentsStartPoint+4] + " " + args[argumentsStartPoint+5] + " " +

@@ -95,4 +95,134 @@ public class Project4Test {
         Project4.main(args);
     }
 
+    /**
+     * Test quick date check with bad date for begin
+     */
+    @Test
+    void testBadBeginDateQuickDateCheckReturnsFalse(){
+        assertThat(Project4.quickDateCheck("21391239021839012839129381298321983/213/12/312/3/12/312", "10/10/2022 10:30 am"), is(false));
+    }
+
+    /**
+     * Test quick date check with bad date for end
+     */
+    @Test
+    void testBadEndDateQuickDateCheckReturnsFalse(){
+        assertThat(Project4.quickDateCheck("10/10/2022 10:30 am", "12312/123/12/312/3/213/123/123/123"), is(false));
+    }
+
+    /**
+     * Test that we get an error for too few dashes in phone number
+     */
+    @Test
+    void tooFewDashedNumberToValidateNumber(){
+        assertThat(Project4.validate_number("123123-1234"), is(false));
+    }
+
+    /**
+     * Test that we get an error for too many dashes in phone number
+     */
+    @Test
+    void tooManyDashedNumberToValidateNumber(){
+        assertThat(Project4.validate_number("1231---1234"), is(false));
+    }
+
+    /**
+     * Tests that we get the readme read when prompted with other args
+     */
+    @Test
+    void testMainReadmeMoreArgs(){
+        String args [] = {"taco", "time", "-README", "more time for tacos!"};
+        Project4.main(args);
+
+    }
+
+    /**
+     * Test that we can get the search check to be true with -search in arguments
+     */
+    @Test
+    void searchCheckIsTrue(){
+        String args  [] = {"something valid", "-search", "also something valid i guess"};
+        Project4.main(args);
+    }
+
+    /**
+     * Test that we can get the print check to be true with -search in arguments
+     */
+    @Test
+    void printCheckIsTrue(){
+        String args  [] = {"something valid", "-print", "also something valid i guess"};
+        Project4.main(args);
+    }
+
+    /**
+     * Test that we get an error for too many command line arguemnts that are options
+     */
+    @Test
+    void tooManyCommandLineArgOptions(){
+        String args  [] = {"-port", "-host", "-search", "-search", "-search", "-print", "-print"};
+        Project4.main(args);
+    }
+
+    /**
+     * Test that we get an error for too many command line arguemnts
+     */
+    @Test
+    void tooManyCommandLineArg(){
+        String args  [] = {"-port", "-host", "good", "soup", "is", "soup", "that is", "good", "or", "is", "tasty",
+        "or", "is quite", "delicious"};
+        Project4.main(args);
+    }
+
+    /**
+     * Tests that main can be invoked with args and not get an error, and with print check
+     */
+    @Test
+    void testMainInvokedCorrectlyNoErrorPrintCheck(){
+        String args [] = {"-host", "localhost", "-port", "8080", "-print" , "Nathan", "123-123-1234", "123-123-1234", "10/10/2022"
+                ,"10:30", "AM", "10/10/2022", "2:30", "PM"};
+        Project4.main(args);
+    }
+
+    /**
+     * Tests that with bad dates we get an error in adding calls
+     */
+    @Test
+    void testBadDatesInCallCreation(){
+        String args [] = {"-host", "localhost", "-port", "8080", "-print" , "Nathan", "123-123-1234", "123-123-1234", "101232131"
+                ,"10:30", "AM", "10/10/2022", "2:30", "PM"};
+        Project4.main(args);
+    }
+
+
+    /**
+     * Tests that main can be invoked with args to create call but give bad caller number and show error msg
+     */
+    @Test
+    void testMainInvokedCorrectlyIncorrectCallerNumber(){
+        String args [] = {"-host", "localhost", "-port", "8080", "-print" , "Nathan", "1231231231231123-1234", "123-123-1234", "10/10/2022"
+                ,"10:30", "AM", "10/10/2022", "2:30", "PM"};
+        Project4.main(args);
+    }
+
+
+    /**
+     * Tests that main can be invoked with args to create call but give bad callee number and show error msg
+     */
+    @Test
+    void testMainInvokedCorrectlyIncorrectCalleeNumber(){
+        String args [] = {"-host", "localhost", "-port", "8080", "-print" , "Nathan", "123-123-1234", "12323123213123-1234", "10/10/2022"
+                ,"10:30", "AM", "10/10/2022", "2:30", "PM"};
+        Project4.main(args);
+    }
+
+    /**
+     * Tests that main can be invoked with args of 7 and search to search for soething
+     */
+    @Test
+    void testMainInvokedCorrectlyNoErrorSevenArgsSearch(){
+        String args [] = {"-host", "localhost", "-port", "8080", "-search", "Nathan", "10/10/2022"
+                ,"10:30", "AM", "10/10/2022", "2:30", "PM"};
+        Project4.main(args);
+    }
 }

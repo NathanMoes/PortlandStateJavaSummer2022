@@ -32,6 +32,7 @@ public class PhoneBillServlet extends HttpServlet
     static final String END_TIME_PARAMETER = "end";
     static final String CALLER_NUMBER = "callerNumber";
     static final String CALLEE_NUMBER = "calleeNumber";
+    static final String DELETE_COMPLETE = "phone bills deleted successfully";
 
     public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
 
@@ -73,6 +74,8 @@ public class PhoneBillServlet extends HttpServlet
 
     /**
      * Check if the number is a valid phone number
+     * @param to_validate is the string to validate
+     * @param response is the http response
      */
     public boolean validate_number(String to_validate, HttpServletResponse response) throws IOException{
         PrintWriter writer = new PrintWriter(response.getWriter());
@@ -105,7 +108,7 @@ public class PhoneBillServlet extends HttpServlet
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws IOException
     {
-        PrintWriter writer = new PrintWriter(response.getWriter());
+        // PrintWriter writer = new PrintWriter(response.getWriter());
 
         response.setContentType( "text/plain" );
 
@@ -113,10 +116,13 @@ public class PhoneBillServlet extends HttpServlet
         String begin = getParameter( BEGIN_TIME_PARAMETER, request);
         String end = getParameter( END_TIME_PARAMETER, request);
         if (customer != null){
+            PrintWriter writer = new PrintWriter(response.getWriter());
             if (begin != null) {
                 if (end != null) {
-                    if (!quickDateCheck(begin, end, response))
+                    if (!quickDateCheck(begin, end, response)) {
+                        response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
                         return;
+                    }
                     // Then we get all the calls from this time period
                     if (!customer.endsWith("-pretty")) {
                         PhoneBill billCheck = searchCustomer(customer);
@@ -157,7 +163,7 @@ public class PhoneBillServlet extends HttpServlet
                         PhoneBill bill = new PhoneBill(customer);
                         Collection<PhoneCall> calls = billCheck.getCallsInRange(begin, end);
                         if (calls != null) {
-                            writer.println("Customer: " + bill.getCustomer());
+                            writer.println("Customer: " + bill.getCustomer() + " Calls matching time under name:");
                             for (PhoneCall call : calls) {
                                 bill.addPhoneCall(call);
                                 writer.println(call.toString());
@@ -214,7 +220,7 @@ public class PhoneBillServlet extends HttpServlet
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws IOException
     {
-        PrintWriter writer = new PrintWriter(response.getWriter());
+        // PrintWriter writer = new PrintWriter(response.getWriter());
 
         response.setContentType( "text/plain" );
 
@@ -244,6 +250,7 @@ public class PhoneBillServlet extends HttpServlet
             missingRequiredParameter(response, END_TIME_PARAMETER);
             return;
         }
+        PrintWriter writer = new PrintWriter(response.getWriter());
         if (!quickDateCheck(begin, end, response))
             return;
         if (!validate_number(calleeNumber, response)) {
@@ -254,6 +261,7 @@ public class PhoneBillServlet extends HttpServlet
             writer.println("Malformed caller number");
             return;
         }
+        // PrintWriter writer = new PrintWriter(response.getWriter());
         PhoneBill bill = searchCustomer(customer);
         if (bill == null){
             // System.err.println("bill not exist creating one now");
@@ -280,12 +288,14 @@ public class PhoneBillServlet extends HttpServlet
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
 
-        this.dictionary.clear();
+        // this.dictionary.clear();
+        this.bills.clear();
 
         PrintWriter pw = response.getWriter();
-        pw.println(Messages.allDictionaryEntriesDeleted());
-        pw.flush();
-
+        if (pw != null) {
+            pw.println(DELETE_COMPLETE);
+            pw.flush();
+        }
         response.setStatus(HttpServletResponse.SC_OK);
 
     }
