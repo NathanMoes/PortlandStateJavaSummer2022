@@ -23,19 +23,73 @@ class Project4IT extends InvokeMainTestCase {
     private static final String HOSTNAME = "localhost";
     private static final String PORT = System.getProperty("http.port", "8080");
 
-    @Test
-    void test0RemoveAllMappings() throws IOException {
-      PhoneBillRestClient client = new PhoneBillRestClient(HOSTNAME, Integer.parseInt(PORT));
-      client.removeAllDictionaryEntries();
-    }
 
-    /**
     @Test
     void test1NoCommandLineArguments() {
         MainMethodResult result = invokeMain( Project4.class );
         assertThat(result.getTextWrittenToStandardError(), containsString(Project4.MISSING_ARGS));
     }
 
+    /**
+     * This test is to test that we can send valid command line input to create a new call, and it will not throw error
+     */
+    @Test
+    void testValidInputToAddNewCallFromMain(){
+        String [] args = {"-host", "localhost", "-port", "8080", "Nathan", "123-123-1234", "123-123-1234", "10/10/2030",
+                "10:30", "AM", "10/10/2030", "2:30", "PM"};
+        MainMethodResult result = invokeMain(Project4.class, args);
+    }
+
+    /**
+     * This is a test to see that we get an error when a port but not a host is provided
+     */
+    @Test
+    void testPortNotHost(){
+        String [] args = {"-port", "8080", "Nathan", "123-123-1234", "123-123-1234", "10/10/2030",
+                "10:30", "AM", "10/10/2030", "2:30", "PM"};
+        MainMethodResult result = invokeMain(Project4.class, args);
+    }
+
+    /**
+     * Tests that we get an invalid port passed in giving an error
+     */
+    @Test
+    void testInvalidPortError(){
+        String args [] = {"-host", "hostname", "-port", "tacobell"};
+        MainMethodResult result = invokeMain(Project4.class, args);
+    }
+
+    /**
+     * This test is to test that we can use valid search query
+     */
+    @Test
+    void testValidSearch(){
+        String [] args = {"-host", "localhost", "-port", "8080", "-search" , "Nathan", "10/10/2030",
+                "10:30", "AM", "10/10/2030", "2:30", "PM"};
+        MainMethodResult result = invokeMain(Project4.class, args);
+    }
+
+    /**
+     * This test is to test that we can send valid command line input to create a new call, and print it
+     */
+    @Test
+    void testValidInputToAddNewCallFromMainAndPrint(){
+        String [] args = {"-host", "localhost", "-port", "8080", "-print", "Nathan", "123-123-1234", "123-123-1234",
+                "10/10/2030", "10:30", "AM", "10/10/2030", "2:30", "PM"};
+        MainMethodResult result = invokeMain(Project4.class, args);
+    }
+
+    /**
+     * This test is to test that we can send valid command line input to create a new call, and include the search param
+     */
+    @Test
+    void testValidInputToAddNewCallFromMainAndSearch(){
+        String [] args = {"-host", "localhost", "-port", "8080", "-search", "Nathan", "123-123-1234", "123-123-1234",
+                "10/10/2030", "10:30", "AM", "10/10/2030", "2:30", "PM"};
+        MainMethodResult result = invokeMain(Project4.class, args);
+    }
+
+    /**
     @Test
     void test2EmptyServer() {
         MainMethodResult result = invokeMain( Project4.class, "-host", HOSTNAME, "-port" , PORT );

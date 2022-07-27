@@ -367,4 +367,23 @@ public class PhoneCallTest {
     assertThat(call.compareTo(call1), is(-1200000));
   }
 
+  /**
+   * This test will test the compare to method with phone calls that have the exact time so that we are comparing the caller number instead of date-time
+   */
+  @Test
+  void testCompareDatesSameButNumberDifferent(){
+    PhoneCall call = new PhoneCall("Name is", "Also this", "333-211-2222", "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am");
+    PhoneCall call1 = new PhoneCall("Name is", "Also this", "222-211-2222", "333-333-3333", "01/01/1000 10:30 am", "01/01/1000 11:30 am");
+    assertThat(call.compareTo(call1), is(-1));
+  }
+
+  /**
+   * This test will test the vali_date method for invalid minute
+   */
+  @Test
+  void testValidDateInvalidMinute(){
+    PhoneCall call = new PhoneCall();
+    assertThat(call.vali_date("10:ac"), is(false));
+  }
+
 }

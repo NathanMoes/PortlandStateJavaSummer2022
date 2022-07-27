@@ -119,8 +119,10 @@ public class PhoneBillServlet extends HttpServlet
             PrintWriter writer = new PrintWriter(response.getWriter());
             if (begin != null) {
                 if (end != null) {
-                    if (!quickDateCheck(begin, end, response))
+                    if (!quickDateCheck(begin, end, response)) {
+                        response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
                         return;
+                    }
                     // Then we get all the calls from this time period
                     if (!customer.endsWith("-pretty")) {
                         PhoneBill billCheck = searchCustomer(customer);

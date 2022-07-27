@@ -229,8 +229,10 @@ public class Project4 {
                                 + args[argumentsStartPoint+7] + " " + args[argumentsStartPoint+8]);
                 return;
             } else if (numberOfArguments == 7){
-                if (!searchCheck)
+                if (!searchCheck) {
                     System.err.println("Need to use option -search to search for calls");
+                    return;
+                }
                 String beginCheck = args[argumentsStartPoint+1] + " " +
                         args[argumentsStartPoint+2] + " " + args[argumentsStartPoint+3];
                 String endCheck = args[argumentsStartPoint+4] + " " + args[argumentsStartPoint+5] + " " +

@@ -27,31 +27,40 @@ class PhoneBillRestClientIT {
     return new PhoneBillRestClient(HOSTNAME, port);
   }
 
+  /**
+   * Test that we can call return all calls customer with valid input added in before to server
+   * probalby add in a call then do return all calls for customer with name valid
+   */
   @Test
-  void test0RemoveAllDictionaryEntries() throws IOException {
+  void testValidReturnAllCallsCustomer() throws IOException{
     PhoneBillRestClient client = newPhoneBillRestClient();
-    client.removeAllDictionaryEntries();
-  }
-
-  @Test
-  void test1EmptyServerContainsNoDictionaryEntries() throws IOException, ParserException {
-    PhoneBillRestClient client = newPhoneBillRestClient();
-    Map<String, String> dictionary = client.getAllDictionaryEntries();
-    assertThat(dictionary.size(), equalTo(0));
+    client.createNewCallInBill("Nathan", "123-123-1234", "123-123-1234",
+            "10/10/2022 10:30 am", "10/10/2022 11:30 am");
+    client.returnAllCallsCustomer("Nathan");
   }
 
   /**
+   * Test that we can call get calls in range with valid input and data previous in the server
+   */
   @Test
-  void test2DefineOneWord() throws IOException, ParserException {
+  void testValidPhoneCallRangeReturnWithValidDataAddedAlready() throws IOException{
     PhoneBillRestClient client = newPhoneBillRestClient();
-    String testWord = "TEST WORD";
-    String testDefinition = "TEST DEFINITION";
-    client.addDictionaryEntry(testWord, testDefinition);
-
-    String definition = client.getDefinition(testWord);
-    assertThat(definition, equalTo(testDefinition));
+    client.createNewCallInBill("Nathan", "123-123-1234", "123-123-1234",
+            "10/10/2022 10:30 am", "10/10/2022 11:30 am");
+    client.returnAllCallsCustomerTimeRange("Nathan", "10/10/2022 10:30 am", "10/10/2022 11:30 am");
   }
-  */
+
+  /**
+   * Tests the pretty print it function
+   */
+  @Test
+  void testPrettyPrintItFunction() throws IOException {
+    PhoneBillRestClient client = newPhoneBillRestClient();
+    client.createNewCallInBill("Nathan", "123-123-1234", "123-123-1234",
+            "10/10/2022 10:30 am", "10/10/2022 11:30 am");
+    client.prettyPrintIt("Nathan");
+  }
+
 
   /**
   @Test
