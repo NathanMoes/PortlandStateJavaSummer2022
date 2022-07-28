@@ -118,8 +118,9 @@ public class PhoneBillServlet extends HttpServlet
         if (customer != null && !customer.equals("")){
             PrintWriter writer = new PrintWriter(response.getWriter());
             if (begin != null && !begin.equals("")) {
-                if (end != null && end.equals("")) {
+                if (end != null && !end.equals("")) {
                     if (!quickDateCheck(begin, end, response)) {
+                        writer.println("ill formed dates passed in");
                         response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
                         return;
                     }
@@ -146,8 +147,8 @@ public class PhoneBillServlet extends HttpServlet
                             response.setStatus(HttpServletResponse.SC_OK);
                             return;
                         }
-                        PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
-                        prettyPrinter.dump(bill);
+                        TextDumper dumper = new TextDumper(response.getWriter());
+                        dumper.dump(bill);
                         response.setStatus(HttpServletResponse.SC_OK);
                     }
                     else{
@@ -164,6 +165,12 @@ public class PhoneBillServlet extends HttpServlet
                         Collection<PhoneCall> calls = billCheck.getCallsInRange(begin, end);
                         if (calls != null) {
                             writer.println("Customer: " + bill.getCustomer() + " Calls matching time under name:");
+                            PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
+                            for (PhoneCall call : calls){
+                                bill.addPhoneCall(call);
+                            }
+                            prettyPrinter.dump(bill);
+                            /*
                             for (PhoneCall call : calls) {
                                 bill.addPhoneCall(call);
                                 writer.println(call.toString());
@@ -174,6 +181,7 @@ public class PhoneBillServlet extends HttpServlet
                                 writer.println(call.getBeginTimeString());
                                 writer.println(call.getEndTimeString());
                             }
+                            */
                         } else {
                             // PrintWriter writer = new PrintWriter(response.getWriter());
                             writer.println("No valid calls in given time range: " + begin + " to " + end + ".");
@@ -182,13 +190,14 @@ public class PhoneBillServlet extends HttpServlet
                         }
                         // PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
                         // prettyPrinter.dumpStandard(bill);
-                        response.setStatus(HttpServletResponse.SC_OK);
-                        return;
                     }
+                    response.setStatus(HttpServletResponse.SC_OK);
                 }
                 else {
+                    writer.println("failed to include valid end date/time");
                     response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
                 }
+                return;
             }
             else {
                 // return all the phone calls for a bill coresponding to the customer passed in.
@@ -203,12 +212,13 @@ public class PhoneBillServlet extends HttpServlet
                 writeCustomerCalls(customer, response);
                 response.setStatus( HttpServletResponse.SC_OK);
             }
-            return;
         } else{
             // do something else?!?!?!?!??!?!?!!??!??!?!??!
             // probably send out some error message
+            // PrintWriter writer = new PrintWriter(response.getWriter());
             response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
         }
+        return;
     }
 
 
@@ -321,6 +331,8 @@ public class PhoneBillServlet extends HttpServlet
     private void writeCustomerCalls(String customer, HttpServletResponse response) throws IOException {
         PhoneBill bill = searchCustomer(customer);
         if (bill == null){
+            PrintWriter pw = response.getWriter();
+            pw.println("customer not found");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         else {
