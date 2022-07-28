@@ -115,10 +115,10 @@ public class PhoneBillServlet extends HttpServlet
         String customer = getParameter( CUSTOMER_PARAMETER, request);
         String begin = getParameter( BEGIN_TIME_PARAMETER, request);
         String end = getParameter( END_TIME_PARAMETER, request);
-        if (customer != null){
+        if (customer != null && !customer.equals("")){
             PrintWriter writer = new PrintWriter(response.getWriter());
-            if (begin != null) {
-                if (end != null) {
+            if (begin != null && !begin.equals("")) {
+                if (end != null && end.equals("")) {
                     if (!quickDateCheck(begin, end, response)) {
                         response.setStatus( HttpServletResponse.SC_BAD_REQUEST);
                         return;
@@ -230,23 +230,23 @@ public class PhoneBillServlet extends HttpServlet
         String begin = getParameter( BEGIN_TIME_PARAMETER, request);
         String end = getParameter( END_TIME_PARAMETER, request);
         // need to process for lack of customer, caller, callee, begin, and end
-        if ( customer == null){
+        if ( customer == null || customer.equals("")){
             missingRequiredParameter(response, CUSTOMER_PARAMETER);
             return;
         }
-        if (callerNumber == null){
+        if (callerNumber == null || callerNumber.equals("")){
             missingRequiredParameter(response, CALLER_NUMBER);
             return;
         }
-        if (calleeNumber == null){
+        if (calleeNumber == null || calleeNumber.equals("")){
             missingRequiredParameter(response, CALLEE_NUMBER);
             return;
         }
-        if (begin == null){
+        if (begin == null || begin.equals("")){
             missingRequiredParameter(response, BEGIN_TIME_PARAMETER);
             return;
         }
-        if (end == null){
+        if (end == null || end.equals("")){
             missingRequiredParameter(response, END_TIME_PARAMETER);
             return;
         }

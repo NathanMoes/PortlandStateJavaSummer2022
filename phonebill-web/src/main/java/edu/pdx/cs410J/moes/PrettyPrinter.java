@@ -25,7 +25,10 @@ public class PrettyPrinter {
     this.writer = writer;
   }
 
-
+  /**
+   * dumps the data in a map from passed in arguments
+   * @param dictionary is a mapping of string to string
+   */
   public void dump(Map<String, String> dictionary) {
     try (
       PrintWriter pw = new PrintWriter(this.writer)

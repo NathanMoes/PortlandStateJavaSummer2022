@@ -41,6 +41,10 @@ public class PhoneBillRestClient {
   }
 
 
+  /**
+   * check if the reponse from a request is ok or not, and gives info on that
+   * @param response is the http response
+   */
     private void throwExceptionIfNotOkayHttpStatus(Response response) {
       int code = response.getHttpStatusCode();
       if (code != HTTP_OK) {

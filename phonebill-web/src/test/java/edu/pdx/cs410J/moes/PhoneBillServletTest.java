@@ -97,50 +97,358 @@ class PhoneBillServletTest {
     verify(response).setStatus(HttpServletResponse.SC_BAD_REQUEST);
   }
 
-  /**
-   * TEsting stuff idk man
-   */
-  @Test
-  void testingSomething() throws IOException {
-    String hostName = "localHost";
-    int port = 8080;
-    PhoneBillRestClient client = mock(PhoneBillRestClient.class);
-    client.createNewCallInBill("Customer", "123-123-1234", "123-123-1234",
-            "10/10/2022 11:30 AM", "10/10/2022 12:30 AM");
-    try {
-      client.returnAllCallsCustomerTimeRange("Customer", "10/10/2022 11:30 AM", "10/10/2022 12:30 AM");
-    }
-    catch (HttpRequestHelper.RestException e){
-      System.out.println(e.getMessage());
-    }
-  }
 
   /**
-   * TEst
+   * Test to make sure doGet can be properly called with valid args
+   * with no customer added in before hand
    */
   @Test
-  void testThing() throws IOException {
+  void testDoGetWorksWithValidArgsPassedInNoPreviousCustomer() throws ServletException, IOException{
     PhoneBillServlet servlet = new PhoneBillServlet();
-    HttpRequestHelper http = mock(HttpRequestHelper.class);
-    HttpServletResponse response = mock(HttpServletResponse.class);
+
     HttpServletRequest request = mock(HttpServletRequest.class);
-    http.post(Map.of("customer", "Tom", "callerNumber", "123-123-1234", "calleeNumber", "123-123-1234",
-            "10/10/2022 10:30 am", "10/10/2022 11:30 am"));
-    http.get(Map.of("customer", "Tom", "begin", "10/10/2022", "end", "10/10/2022 11:30 am"));
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+
+    servlet.doGet(request, response);
+
   }
 
 
   /**
-   * TEst
+   * Test to make sure doGet can be properly called with valid args
+   * with no customer added in before hand but with -pretty in customer name
    */
   @Test
-  void testQuickDateCheck() throws IOException {
+  void testDoGetWorksWithValidArgsPassedInNoPreviousCustomerPretty() throws ServletException, IOException{
     PhoneBillServlet servlet = new PhoneBillServlet();
-    HttpRequestHelper http = mock(HttpRequestHelper.class);
-    HttpServletResponse response = mock(HttpServletResponse.class);
+
     HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan-pretty";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+
+    servlet.doGet(request, response);
 
   }
+
+  /**
+   * Test to make sure doGet can be properly called with malfored date
+   * with no customer added in before hand but with -pretty in customer name
+   */
+  @Test
+  void testDoGetWorksBadDatePassed() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan-pretty";
+    String begin = "dasdqw d q dw q dq qw ";
+    String end = "10/10/2022 11:30 am";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+
+    servlet.doGet(request, response);
+  }
+
+
+
+  /**
+   * Test to make sure doPost can be properly called with valid args
+   *
+   */
+  @Test
+  void testDoPostWorksWithValidArgsPassedIn() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, customer name
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedInCustomer() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, begin time
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedInBegin() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, end time
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedInEnd() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "";
+    String callerNumber = "123-123-1234";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, caller
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedIncallerNumber() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, callee
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedIncalleeNumber() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234";
+    String calleeNumber = "";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, callee malformed
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedIncalleeNumberMalformed() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234";
+    String calleeNumber = "123-213-123-12-312-3-13-123-213-12-3";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure doPost can be properly called with non valid args, caller malformed
+   *
+   */
+  @Test
+  void testDoPostWorksWithNonValidArgsPassedIncallerNumberMalformed() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234-12312-312-3-123-12-312-3-123-12-3";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+
+  }
+
+  /**
+   * Test to make sure that we can add a call when there is already a name under the system for the customer bill
+   *
+   */
+  @Test
+  void testDoPostWorkdsValidCustomerExistsWhenAddingAnother() throws ServletException, IOException{
+    PhoneBillServlet servlet = new PhoneBillServlet();
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    String customer = "Nathan";
+    String begin = "10/10/2022 10:30 am";
+    String end = "10/10/2022 11:30 am";
+    String callerNumber = "123-123-1234-12312-312-3-123-12-312-3-123-12-3";
+    String calleeNumber = "123-123-1234";
+
+    when(request.getParameter("customer")).thenReturn(customer);
+    when(request.getParameter("begin")).thenReturn(begin);
+    when(request.getParameter("end")).thenReturn(end);
+    when(request.getParameter("calleeNumber")).thenReturn(calleeNumber);
+    when(request.getParameter("callerNumber")).thenReturn(callerNumber);
+
+    servlet.doPost(request, response);
+    servlet.doPost(request, response);
+
+  }
+
 
 /**
   @Test
@@ -167,7 +475,8 @@ class PhoneBillServletTest {
     String word = "TEST WORD";
     String definition = "TEST DEFINITION";
 
-    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletRequest request = mock(HttpServletRequest.class); ///////////////////////////////////////////////////
+  /////////////////////////////// NOTE TO SELF USE THIS TO TEST GET AND POST STUFF
     when(request.getParameter("word")).thenReturn(word);
     when(request.getParameter("definition")).thenReturn(definition);
 

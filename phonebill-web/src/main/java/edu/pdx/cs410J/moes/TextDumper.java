@@ -11,6 +11,10 @@ public class TextDumper {
     this.writer = writer;
   }
 
+  /**
+   * dumps the map of string to string
+   * @param dictionary
+   */
   public void dump(Map<String, String> dictionary) {
     try (
       PrintWriter pw = new PrintWriter(this.writer)

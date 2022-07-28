@@ -17,6 +17,11 @@ public class TextParser {
     this.reader = reader;
   }
 
+  /**
+   * parses a map of string to string
+   * @return a map of string to string
+   * @throws ParserException if there is an error parsing
+   */
   public Map<String, String> parse() throws ParserException {
     Pattern pattern = Pattern.compile("(.*) : (.*)");
 

@@ -41,14 +41,15 @@ class PhoneBillRestClientIT {
 
   /**
    * Test that we can call get calls in range with valid input and data previous in the server
-   */
+
   @Test
-  void testValidPhoneCallRangeReturnWithValidDataAddedAlready() throws IOException{
+  void testValidPhoneCallRangeReturnWithValidDataAddedAlready() throws IOException, RestException{
     PhoneBillRestClient client = newPhoneBillRestClient();
     client.createNewCallInBill("Nathan", "123-123-1234", "123-123-1234",
             "10/10/2022 10:30 am", "10/10/2022 11:30 am");
     client.returnAllCallsCustomerTimeRange("Nathan", "10/10/2022 10:30 am", "10/10/2022 11:30 am");
   }
+  */
 
   /**
    * Tests the pretty print it function

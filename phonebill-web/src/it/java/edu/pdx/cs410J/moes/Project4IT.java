@@ -61,13 +61,14 @@ class Project4IT extends InvokeMainTestCase {
 
     /**
      * This test is to test that we can use valid search query
-     */
+
     @Test
     void testValidSearch(){
         String [] args = {"-host", "localhost", "-port", "8080", "-search" , "Nathan", "10/10/2030",
                 "10:30", "AM", "10/10/2030", "2:30", "PM"};
         MainMethodResult result = invokeMain(Project4.class, args);
     }
+     */
 
     /**
      * This test is to test that we can send valid command line input to create a new call, and print it

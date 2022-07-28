@@ -192,6 +192,7 @@ public class Project4 {
             if (numberOfArguments == 9){
                 if (searchCheck){
                     System.err.println("Please enter the name and dates for a search and not with the phone numbers.");
+                    return;
                 }
                 if (printCheck){
                     PhoneCall call = new PhoneCall(args[argumentsStartPoint], "Not given", args[argumentsStartPoint+1],

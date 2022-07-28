@@ -48,5 +48,4 @@ public class PhoneBillRestClientTest {
     PhoneBillRestClient client = new PhoneBillRestClient(http);
   }
 
-
 }

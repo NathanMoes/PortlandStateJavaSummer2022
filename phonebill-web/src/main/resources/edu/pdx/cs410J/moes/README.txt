@@ -1,5 +1,5 @@
 This is a README file!
-Nathan Moes - Appclasses/PhoneBill
+Nathan Moes - PhoneBill-web
 Command line input is [options] <customer> <callerNumber> <calleeNumber> <begin date> <begin time> <end date> <end time>
 -README option open readme file from this projects resources
 -print will show the information related to a created phonecall class object
@@ -21,3 +21,9 @@ If the -pretty is present on the command line it will then allow the user to pri
 Such as -pretty text.txt which will pretty print to the text file. If the file name is instead just a "-" then it will
 print to standard out. The dates and times are now changed to be using the java.util.date class. Thus some modification
 has also been made to the command line inputs to include the time with AM/PM at the end.
+
+Now with phonebill web we dont have the file aruments but instead use a server!
+With the host and port being passed in at each invokation from the main to connect.
+The same features as before being that we will be able to add in calls and view them, but now it will also be
+avalible from http requests. Such as get and post requests. This will be done mostly by adding calls in the main function
+to the client, but data can be easily requested from the http with valid parameters.
