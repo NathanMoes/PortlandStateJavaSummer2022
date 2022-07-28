@@ -63,7 +63,7 @@ public class Project4Test {
      */
     @Test
     void testMainInvokedCorrectlyNoErrorSevenArgs(){
-        String args [] = {"-host", "localhost", "-port", "8080", "Nathan", "10/10/2022"
+        String args [] = {"-host", "localhost", "-port", "8080", "-search" ,"Nathan", "10/10/2022"
                 ,"10:30", "AM", "10/10/2022", "2:30", "PM"};
         Project4.main(args);
     }
