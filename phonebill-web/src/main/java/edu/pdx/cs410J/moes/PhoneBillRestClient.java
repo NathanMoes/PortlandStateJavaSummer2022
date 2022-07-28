@@ -95,9 +95,11 @@ public class PhoneBillRestClient {
    * This function is mostly just a wrapper class to the pretty print to standard out for the client
    * @param customer is the customer name as a stringggggggggggggg
    */
-  public void prettyPrintIt(String customer) throws IOException{
-    Response response = http.get(Map.of("customer", (customer + "-pretty")));
+  public String prettyPrintIt(String customer) throws IOException{
+    customer = (customer + "-pretty");
+    Response response = http.get(Map.of("customer", customer));
     throwExceptionIfNotOkayHttpStatus(response);
+    return response.getContent();
   }
 
 }

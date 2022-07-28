@@ -205,7 +205,14 @@ public class PhoneBillServlet extends HttpServlet
                 // writeCustomerCalls(customer, response);
                 if (customer.endsWith("-pretty")){
                     String passIn = customer.replace("-pretty", "");
-                    prettyPrintIt(passIn, response);
+                    // prettyPrintIt(passIn, response);
+                    PrintWriter pw = response.getWriter();
+                    PrettyPrinter prettyPrinter = new PrettyPrinter(pw);
+                    PhoneBill bill = searchCustomer(passIn);
+                    if (bill != null)
+                        prettyPrinter.dump(bill);
+                    else
+                        pw.println("customer not found");
                     response.setStatus( HttpServletResponse.SC_OK);
                     return;
                 }
@@ -370,7 +377,8 @@ public class PhoneBillServlet extends HttpServlet
         }
         else{
             PrettyPrinter prettyPrinter = new PrettyPrinter(response.getWriter());
-            prettyPrinter.dumpStandard(bill);
+            prettyPrinter.dump(bill);
+            ////// change here
         }
     }
 

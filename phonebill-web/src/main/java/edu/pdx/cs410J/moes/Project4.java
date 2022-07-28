@@ -246,7 +246,8 @@ public class Project4 {
                 System.out.println(message);
                 return;
             } else if (numberOfArguments == 1){
-                client.prettyPrintIt(args[argumentsStartPoint]);
+                message = client.prettyPrintIt(args[argumentsStartPoint]);
+                System.out.println(message);
                 return;
                 // not correct we need to pp it and return to user.
             }
