@@ -4,8 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2055" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/activity_add_phone_call.xml" value="0.3109375" />
         <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/activity_caculator.xml" value="0.2327760891590679" />
         <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/activity_search_customer_bill.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/content_add_phone_call.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/content_search_customer_bill.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/fragment_first.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/fragment_first2.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/fragment_second.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/fragment_second2.xml" value="0.3109375" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/promptinput.xml" value="0.3098958333333333" />
+        <entry key="..\:/Users/natha/AndroidStudioProjects/PhoneBill-android/app/src/main/res/layout/searchresult.xml" value="0.3098958333333333" />
       </map>
     </option>
   </component>

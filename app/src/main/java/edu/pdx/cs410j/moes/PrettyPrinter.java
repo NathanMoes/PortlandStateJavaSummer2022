@@ -13,6 +13,10 @@ public class PrettyPrinter {
     this.writer = writer;
   }
 
+  public PrettyPrinter(){
+    this.writer = null;
+  }
+
 
   /**
    * This function acts to pretty print a phone bill to a file
@@ -57,5 +61,20 @@ public class PrettyPrinter {
     else {
       System.out.println("Phone bill of " + bill.getCustomer() + ", with zero calls");
     }
+  }
+
+  /**
+   * This function does a dump to a string
+   * just as the above but for a string
+   */
+  public String dumpString(PhoneBill bill){
+    StringBuilder toReturn = new StringBuilder();
+    if (bill.getPhoneCalls() != null){
+      toReturn.append("Phone bill of ").append(bill.getCustomer()).append(", with calls: ");
+    }
+    for (PhoneCall to_add : bill.getPhoneCalls()){
+      toReturn.append("Call from ").append(to_add.getCaller()).append(", at ").append(to_add.getCallBegin()).append(" to ").append(to_add.getCallEnd()).append(".").append(" Originating from ").append(to_add.getCallerNumber()).append(" and contacting ").append(to_add.getCalleeNumber()).append(", and lasting ").append(to_add.getCallTimeMinute()).append(" minutes");
+    }
+    return toReturn.toString();
   }
 }
