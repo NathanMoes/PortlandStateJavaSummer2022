@@ -15,13 +15,14 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/customer"
         app:layout_constraintBottom_toTopOf="@+id/CallerNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/CallerNumber"
@@ -32,13 +33,14 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/callernumber"
         app:layout_constraintBottom_toTopOf="@+id/CalleeNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CustomerName" />
+        app:layout_constraintTop_toBottomOf="@+id/CustomerName"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/CalleeNumber"
@@ -49,13 +51,14 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/calleenumber"
         app:layout_constraintBottom_toTopOf="@+id/BeginTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CallerNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/CallerNumber"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/BeginTime"
@@ -66,13 +69,14 @@
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/begin_time"
         app:layout_constraintBottom_toTopOf="@+id/EndTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CalleeNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/CalleeNumber"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/EndTime"
@@ -83,13 +87,14 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="253dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/end_time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BeginTime" />
+        app:layout_constraintTop_toBottomOf="@+id/BeginTime"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/SubmitNewCall"

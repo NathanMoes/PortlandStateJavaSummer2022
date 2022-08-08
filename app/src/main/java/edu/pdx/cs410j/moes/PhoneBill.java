@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Phone Bill class, implements a phone bill with array of phone calls for a customer
@@ -80,7 +81,8 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
   public Collection<PhoneCall> getCallsInRange(String beginTime, String endTime){
     if (this.calls == null)
       return null;
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa",
+            Locale.getDefault());
     Date begin = new Date(dateFormat.format(new Date(beginTime)));
     Date end = new Date(dateFormat.format(new Date(endTime)));
     ArrayList<PhoneCall> toReturn = new ArrayList<>();

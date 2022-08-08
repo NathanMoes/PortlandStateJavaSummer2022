@@ -69,11 +69,14 @@ public class PrettyPrinter {
    */
   public String dumpString(PhoneBill bill){
     StringBuilder toReturn = new StringBuilder();
-    if (bill.getPhoneCalls() != null){
-      toReturn.append("Phone bill of ").append(bill.getCustomer()).append(", with calls: ");
+    if (bill.getPhoneCalls() != null) {
+      toReturn.append("Phone bill of ").append(bill.getCustomer()).append(", with calls: \n");
+      for (PhoneCall to_add : bill.getPhoneCalls()) {
+        toReturn.append("Call from " + to_add.getCaller() + ", at " + to_add.getCallBegin() + " to " + to_add.getCallEnd() + "." + " Originating from " + to_add.getCallerNumber() + " and contacting " + to_add.getCalleeNumber() + ", and lasting " + to_add.getCallTimeMinute() + " minutes\n");
+      }
     }
-    for (PhoneCall to_add : bill.getPhoneCalls()){
-      toReturn.append("Call from ").append(to_add.getCaller()).append(", at ").append(to_add.getCallBegin()).append(" to ").append(to_add.getCallEnd()).append(".").append(" Originating from ").append(to_add.getCallerNumber()).append(" and contacting ").append(to_add.getCalleeNumber()).append(", and lasting ").append(to_add.getCallTimeMinute()).append(" minutes");
+    else{
+      toReturn.append("Phone bill of " + bill.getCustomer() + ", with no calls\n");
     }
     return toReturn.toString();
   }
