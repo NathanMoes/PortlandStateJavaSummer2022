@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     bill = new PhoneBill(customerName);
                 bill.addPhoneCall(newCall);
                 bills.add(bill);
-                Toast.makeText(MainActivity.this, customer.getText().toString() + " Call submitted", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, customer.getText().toString() + " Call submitted: " + newCall.toString(), Toast.LENGTH_LONG).show();
             }
             else{
                 // Toast.makeText(MainActivity.this, "Malformed phone number used", Toast.LENGTH_LONG).show();
@@ -296,7 +296,17 @@ public class MainActivity extends AppCompatActivity {
                 "For other functions please press button and enter input in all prompts as displayed\n" +
                 "Each will give information as to the input to use\n" +
                 "For dates the expected format is dd/MM/yyyy hh:mm aa\n" +
-                "";
+                "For the phone number the expected input is nnn-nnn-nnnn eg 123-123-1234\n" +
+                "For adding in a new phone bill with no calls, simply enter the customer name and" +
+                "hit the create blank bill\n" +
+                "For searching for a call, hit the search calls in range button and enter all input requested\n" +
+                "For adding a new phone call simply do the same. Adding in all the requested input\n" +
+                "When the screen is turned to a new screen with no buttons for display, simply 'go back'\n" +
+                "Aka hit the back arrow on the android phone\n" +
+                "This acts to display the needed functionality of the application developed by\n" +
+                "Nathan Moes for CS410J adv java programming\n" +
+                " "
+                ;
         Intent intent = new Intent(this, DisplayText.class);
         intent.putExtra("toDisplay", toDisplay);
         startActivity(intent);
