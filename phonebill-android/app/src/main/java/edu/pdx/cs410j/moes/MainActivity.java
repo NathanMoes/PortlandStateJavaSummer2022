@@ -130,13 +130,18 @@ public class MainActivity extends AppCompatActivity {
                 if (bills == null) {
                     bills = new ArrayList<PhoneBill>();
                 }
-                // search for phone bill
-                bill = searchCustomer(customerName);
-                if (bill == null)
-                    bill = new PhoneBill(customerName);
-                bill.addPhoneCall(newCall);
-                bills.add(bill);
-                Toast.makeText(MainActivity.this, customer.getText().toString() + " Call submitted: " + newCall.toString(), Toast.LENGTH_LONG).show();
+                if (newCall.getCallTimeMinute() < 0){
+                    Toast.makeText(this, "Invalid call duration, call time must not be negative", Toast.LENGTH_LONG).show();
+                    setContentView(R.layout.activity_main);
+                }
+                else {
+                    bill = searchCustomer(customerName);
+                    if (bill == null)
+                        bill = new PhoneBill(customerName);
+                    bill.addPhoneCall(newCall);
+                    bills.add(bill);
+                    Toast.makeText(MainActivity.this, customer.getText().toString() + " Call submitted: " + newCall.toString(), Toast.LENGTH_LONG).show();
+                }
             }
             else{
                 // Toast.makeText(MainActivity.this, "Malformed phone number used", Toast.LENGTH_LONG).show();
