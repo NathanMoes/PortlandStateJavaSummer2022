@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-mergeDebugResources-23:\\layout\\promptinput.xml",
+        "source": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-main-26:\\layout\\promptinput.xml"
+    },
+    {
+        "merged": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-mergeDebugResources-23:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-main-26:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-mergeDebugResources-23:\\layout\\activity_display_text.xml",
+        "source": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-main-26:\\layout\\activity_display_text.xml"
+    },
+    {
+        "merged": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-mergeDebugResources-23:\\layout\\searchresult.xml",
+        "source": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-main-26:\\layout\\searchresult.xml"
+    },
+    {
+        "merged": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-mergeDebugResources-23:\\layout\\activity_add_phone_call.xml",
+        "source": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-main-26:\\layout\\activity_add_phone_call.xml"
+    },
+    {
+        "merged": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-mergeDebugResources-23:\\layout\\activity_caculator.xml",
+        "source": "C:\\Users\\natha\\.gradle\\daemon\\7.3.3\\edu.pdx.cs410j.moes.app-main-26:\\layout\\activity_caculator.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeDebugResources-23:/layout/activity_main.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-26:/layout/activity_main.xml"
+    }
+]

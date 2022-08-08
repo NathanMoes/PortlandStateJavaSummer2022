@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.2.1" type="incidents">
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 29. Merge all the resources in this folder into `drawable`.">
+        <fix-data file="${:app*debug*sourceProvider*0*resDir*0}/drawable-v24" folderName="drawable" requiresApi="29"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/drawable-v24"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="9"
+            column="6"
+            startOffset="378"
+            endLine="9"
+            endColumn="14"
+            endOffset="386"/>
+    </incident>
+
+    <incident
+        id="TextFields"
+        severity="warning"
+        message="The view name (`@+id/CallerNumber`) suggests this is a number, but it does not include a numeric `inputType` (such as &apos;`numberSigned`&apos;)">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="35"
+            column="9"
+            startOffset="1388"
+            endLine="35"
+            endColumn="43"
+            endOffset="1422"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="27"
+            column="9"
+            startOffset="1068"
+            endLine="27"
+            endColumn="39"
+            endOffset="1098"
+            message="id defined here"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="26"
+            column="6"
+            startOffset="1051"
+            endLine="26"
+            endColumn="14"
+            endOffset="1059"/>
+    </incident>
+
+    <incident
+        id="TextFields"
+        severity="warning"
+        message="The view name (`@+id/CalleeNumber`) suggests this is a number, but it does not include a numeric `inputType` (such as &apos;`numberSigned`&apos;)">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="52"
+            column="9"
+            startOffset="2078"
+            endLine="52"
+            endColumn="43"
+            endOffset="2112"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="44"
+            column="9"
+            startOffset="1758"
+            endLine="44"
+            endColumn="39"
+            endOffset="1788"
+            message="id defined here"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="43"
+            column="6"
+            startOffset="1741"
+            endLine="43"
+            endColumn="14"
+            endOffset="1749"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="60"
+            column="6"
+            startOffset="2428"
+            endLine="60"
+            endColumn="14"
+            endOffset="2436"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"
+            line="77"
+            column="6"
+            startOffset="3108"
+            endLine="77"
+            endColumn="14"
+            endOffset="3116"/>
+    </incident>
+
+    <incident
+        id="LintError"
+        severity="error"
+        message="The lint detector&#xA;    `androidx.appcompat.view.OnClickXmlDetector`&#xA;called `context.getMainProject()` during module analysis.&#xA;&#xA;This does not work correctly when running in AGP (7.2.1).&#xA;&#xA;In particular, there may be false positives or false negatives because&#xA;the lint check may be using the minSdkVersion or manifest information&#xA;from the library instead of any consuming app module.&#xA;&#xA;Contact the vendor of the lint issue to get it fixed/updated (if&#xA;known, listed below), and in the meantime you can try to work around&#xA;this by disabling the following issues:&#xA;&#xA;&quot;UsingOnClickInXml&quot;&#xA;&#xA;Issue Vendors:&#xA;Vendor: Android Open Source Project (appcompat-1.3.0)&#xA;Identifier: appcompat-1.3.0&#xA;Feedback: https://issuetracker.google.com/issues/new?component=192731&#xA;&#xA;Call stack: Context.getMainProject(Context.kt:117)←OnClickXmlDetector.visitAttribute(OnClickXmlDetector.kt:51)←ResourceVisitor.visitElement(ResourceVisitor.java:161)←ResourceVisitor.visitElement(ResourceVisitor.java:177)←ResourceVisitor.visitFile(ResourceVisitor.java:125)←LintDriver$checkResourceFolder$1.run(LintDriver.kt:2295)←LintClient.runReadAction(LintClient.kt:1795)←LintDriver$LintClientWrapper.runReadAction(LintDriver.kt:2769)←LintDriver.checkResourceFolder(LintDriver.kt:2290)←LintDriver.checkResFolder(LintDriver.kt:2243)←LintDriver.runFileDetectors(LintDriver.kt:1392)←LintDriver.checkProject(LintDriver.kt:1184)←LintDriver.checkProjectRoot(LintDriver.kt:644)←LintDriver.access$checkProjectRoot(LintDriver.kt:159)←LintDriver$analyzeOnly$1.invoke(LintDriver.kt:458)←LintDriver$analyzeOnly$1.invoke(LintDriver.kt:451)←LintDriver.doAnalyze(LintDriver.kt:518)←LintDriver.analyzeOnly(LintDriver.kt:451)←LintCliClient$analyzeOnly$1.invoke(LintCliClient.kt:243)←LintCliClient$analyzeOnly$1.invoke(LintCliClient.kt:243)">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_add_phone_call.xml"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;TextView&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_display_text.xml"
+            line="17"
+            column="9"
+            startOffset="690"
+            endLine="17"
+            endColumn="32"
+            endOffset="713"/>
+    </incident>
+
+    <incident
+        id="FragmentTagUsage"
+        severity="warning"
+        message="Replace the &lt;fragment> tag with FragmentContainerView.">
+        <fix-replace
+            description="Replace with androidx.fragment.app.FragmentContainerView"
+            oldString="fragment"
+            replacement="androidx.fragment.app.FragmentContainerView"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/content_display_text.xml"
+            line="9"
+            column="6"
+            startOffset="362"
+            endLine="9"
+            endColumn="14"
+            endOffset="370"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/promptinput.xml"
+            line="42"
+            column="6"
+            startOffset="1771"
+            endLine="42"
+            endColumn="14"
+            endOffset="1779"/>
+    </incident>
+
+    <incident
+        id="Autofill"
+        severity="warning"
+        message="Missing `autofillHints` attribute">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set autofillHints"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="autofillHints"
+                value=""
+                dot="0"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAutofill=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAutofill"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/promptinput.xml"
+            line="59"
+            column="6"
+            startOffset="2486"
+            endLine="59"
+            endColumn="14"
+            endOffset="2494"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 29. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <fix-data file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-anydpi-v26" folderName="mipmap-anydpi" requiresApi="29"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-anydpi-v26"/>
+    </incident>
+
+    <incident
+        id="SimpleDateFormat"
+        severity="warning"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/edu/pdx/cs410j/moes/MainActivity.java"
+            line="33"
+            column="49"
+            startOffset="829"
+            endLine="33"
+            endColumn="92"
+            endOffset="872"/>
+    </incident>
+
+    <incident
+        id="SimpleDateFormat"
+        severity="warning"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/edu/pdx/cs410j/moes/PhoneBill.java"
+            line="83"
+            column="29"
+            startOffset="2294"
+            endLine="83"
+            endColumn="72"
+            endOffset="2337"/>
+    </incident>
+
+    <incident
+        id="SimpleDateFormat"
+        severity="warning"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/edu/pdx/cs410j/moes/PhoneCall.java"
+            line="26"
+            column="29"
+            startOffset="851"
+            endLine="26"
+            endColumn="72"
+            endOffset="894"/>
+    </incident>
+
+    <incident
+        id="SimpleDateFormat"
+        severity="warning"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/edu/pdx/cs410j/moes/PhoneCall.java"
+            line="161"
+            column="29"
+            startOffset="5140"
+            endLine="161"
+            endColumn="72"
+            endOffset="5183"/>
+    </incident>
+
+    <incident
+        id="SimpleDateFormat"
+        severity="warning"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/edu/pdx/cs410j/moes/PhoneCall.java"
+            line="258"
+            column="29"
+            startOffset="7957"
+            endLine="258"
+            endColumn="72"
+            endOffset="8000"/>
+    </incident>
+
+    <incident
+        id="SimpleDateFormat"
+        severity="warning"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/edu/pdx/cs410j/moes/PhoneCall.java"
+            line="266"
+            column="29"
+            startOffset="8205"
+            endLine="266"
+            endColumn="72"
+            endOffset="8248"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.3.0 is available: 1.4.2">
+        <fix-replace
+            description="Change to 1.4.2"
+            family="Update versions"
+            oldString="1.3.0"
+            replacement="1.4.2"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="35"
+            column="20"
+            startOffset="717"
+            endLine="35"
+            endColumn="56"
+            endOffset="753"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.4.0 is available: 1.6.1">
+        <fix-replace
+            description="Change to 1.6.1"
+            family="Update versions"
+            oldString="1.4.0"
+            replacement="1.6.1"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="36"
+            column="20"
+            startOffset="773"
+            endLine="36"
+            endColumn="64"
+            endOffset="817"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.0.4 is available: 2.1.4">
+        <fix-replace
+            description="Change to 2.1.4"
+            family="Update versions"
+            oldString="2.0.4"
+            replacement="2.1.4"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="37"
+            column="20"
+            startOffset="837"
+            endLine="37"
+            endColumn="70"
+            endOffset="887"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.navigation:navigation-fragment than 2.3.5 is available: 2.5.1">
+        <fix-replace
+            description="Change to 2.5.1"
+            family="Update versions"
+            oldString="2.3.5"
+            replacement="2.5.1"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="39"
+            column="20"
+            startOffset="977"
+            endLine="39"
+            endColumn="67"
+            endOffset="1024"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.navigation:navigation-ui than 2.3.5 is available: 2.5.1">
+        <fix-replace
+            description="Change to 2.5.1"
+            family="Update versions"
+            oldString="2.3.5"
+            replacement="2.5.1"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="40"
+            column="20"
+            startOffset="1044"
+            endLine="40"
+            endColumn="61"
+            endOffset="1085"/>
+    </incident>
+
+</incidents>

@@ -5,6 +5,7 @@ import edu.pdx.cs410J.ParserException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -123,5 +124,89 @@ public class TextParser {
     }
   }
 
+
+  /**
+   * This parses a reader for a phone bill object creation. Creating a phone bill object in the process
+   * @return returns a phone bill object created by the parsing
+   */
+  public ArrayList<PhoneBill> parsePhoneFromFile() {
+    try (
+            BufferedReader br = new BufferedReader(this.reader)
+    ) {
+      int phone_call_args = 0;
+      String customer = br.readLine();
+      if (customer == null) {
+        return null;
+      }
+      ArrayList<PhoneBill> to_return = new ArrayList<PhoneBill>();
+      PhoneBill bill = new PhoneBill(customer);
+      // to_return.add(bill);
+      PhoneCall to_add_in = null;
+      String caller_name = null;
+      String caller_num = null;
+      String callee_num = null;
+      String start_time = null;
+      String end_time = null;
+      while (customer != null) {
+        customer = br.readLine();
+        if (customer.equals("- - - - - -")){
+          customer = br.readLine();
+          if (caller_name == null && callee_num == null && caller_num == null && start_time == null
+          && end_time == null){
+            to_return.add(bill);
+            if (customer != null)
+              bill = new PhoneBill(customer);
+          }
+          continue;
+        }
+        if (phone_call_args % 5 == 4){
+          end_time = customer;
+          phone_call_args += 1;
+          if (caller_name == null || caller_num == null || callee_num == null || start_time
+                  == null || end_time == null){
+            return to_return;
+          }
+          to_add_in = new PhoneCall(caller_name, caller_num, callee_num, start_time, end_time);
+          if (to_add_in.callEndTime == null || to_add_in.callBeginTime == null || to_add_in.calleeNumber == null ||
+                  to_add_in.callerNumber == null || to_add_in.caller == null)
+          {
+            System.err.println("Malformed file");
+            return to_return;
+          }
+          caller_name = caller_num = callee_num = start_time = end_time = null;
+          bill.addPhoneCall(to_add_in);
+          // to_return.add(bill);
+        }
+        else {
+          if (phone_call_args % 5 == 0) {
+            caller_name = customer;
+            phone_call_args += 1;
+          }
+          else {
+            if (phone_call_args % 5 == 1) {
+              caller_num = customer;
+              phone_call_args += 1;
+            }
+            else {
+              if (phone_call_args % 5 == 2) {
+                callee_num = customer;
+                phone_call_args += 1;
+              }
+              else {
+                if (phone_call_args % 5 == 3) {
+                  start_time = customer;
+                  phone_call_args += 1;
+                }
+              }
+            }
+          }
+        }
+      }
+      return to_return;
+    } catch (IOException e) {
+      System.err.println("failed to set buffered reader");
+    }
+    return null;
+  }
 
 }

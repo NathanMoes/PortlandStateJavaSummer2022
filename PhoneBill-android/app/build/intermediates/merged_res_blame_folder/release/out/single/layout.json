@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/activity_add_phone_call.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_add_phone_call.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/searchresult.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/searchresult.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/activity_caculator.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_caculator.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/content_display_text.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/content_display_text.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/activity_main.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_main.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/activity_display_text.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_display_text.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-mergeReleaseResources-23:/layout/promptinput.xml",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/promptinput.xml"
+    }
+]

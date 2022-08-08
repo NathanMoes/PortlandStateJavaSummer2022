@@ -1,0 +1,313 @@
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml: Error: The lint detector
+    androidx.appcompat.view.OnClickXmlDetector
+called context.getMainProject() during module analysis.
+
+This does not work correctly when running in AGP (7.2.1).
+
+In particular, there may be false positives or false negatives because
+the lint check may be using the minSdkVersion or manifest information
+from the library instead of any consuming app module.
+
+Contact the vendor of the lint issue to get it fixed/updated (if
+known, listed below), and in the meantime you can try to work around
+this by disabling the following issues:
+
+"UsingOnClickInXml"
+
+Issue Vendors:
+Vendor: Android Open Source Project (appcompat-1.3.0)
+Identifier: appcompat-1.3.0
+Feedback: https://issuetracker.google.com/issues/new?component=192731
+
+Call stack: Context.getMainProject(Context.kt:117)←OnClickXmlDetector.visitAttribute(OnClickXmlDetector.kt:51)←ResourceVisitor.visitElement(ResourceVisitor.java:161)←ResourceVisitor.visitElement(ResourceVisitor.java:177)←ResourceVisitor.visitFile(ResourceVisitor.java:125)←LintDriver$checkResourceFolder$1.run(LintDriver.kt:2295)←LintClient.runReadAction(LintClient.kt:1795)←LintDriver$LintClientWrapper.runReadAction(LintDriver.kt:2769)←LintDriver.checkResourceFolder(LintDriver.kt:2290)←LintDriver.checkResFolder(LintDriver.kt:2243)←LintDriver.runFileDetectors(LintDriver.kt:1392)←LintDriver.checkProject(LintDriver.kt:1184)←LintDriver.checkProjectRoot(LintDriver.kt:644)←LintDriver.access$checkProjectRoot(LintDriver.kt:159)←LintDriver$analyzeOnly$1.invoke(LintDriver.kt:458)←LintDriver$analyzeOnly$1.invoke(LintDriver.kt:451)←LintDriver.doAnalyze(LintDriver.kt:518)←LintDriver.analyzeOnly(LintDriver.kt:451)←LintCliClient$analyzeOnly$1.invoke(LintCliClient.kt:243)←LintCliClient$analyzeOnly$1.invoke(LintCliClient.kt:243) [LintError]
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\java\edu\pdx\cs410j\moes\MainActivity.java:33: Warning: To get local formatting use getDateInstance(), getDateTimeInstance(), or getTimeInstance(), or use new SimpleDateFormat(String template, Locale locale) with for example Locale.US for ASCII dates. [SimpleDateFormat]
+    public static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\java\edu\pdx\cs410j\moes\PhoneBill.java:83: Warning: To get local formatting use getDateInstance(), getDateTimeInstance(), or getTimeInstance(), or use new SimpleDateFormat(String template, Locale locale) with for example Locale.US for ASCII dates. [SimpleDateFormat]
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\java\edu\pdx\cs410j\moes\PhoneCall.java:26: Warning: To get local formatting use getDateInstance(), getDateTimeInstance(), or getTimeInstance(), or use new SimpleDateFormat(String template, Locale locale) with for example Locale.US for ASCII dates. [SimpleDateFormat]
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\java\edu\pdx\cs410j\moes\PhoneCall.java:161: Warning: To get local formatting use getDateInstance(), getDateTimeInstance(), or getTimeInstance(), or use new SimpleDateFormat(String template, Locale locale) with for example Locale.US for ASCII dates. [SimpleDateFormat]
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\java\edu\pdx\cs410j\moes\PhoneCall.java:258: Warning: To get local formatting use getDateInstance(), getDateTimeInstance(), or getTimeInstance(), or use new SimpleDateFormat(String template, Locale locale) with for example Locale.US for ASCII dates. [SimpleDateFormat]
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\java\edu\pdx\cs410j\moes\PhoneCall.java:266: Warning: To get local formatting use getDateInstance(), getDateTimeInstance(), or getTimeInstance(), or use new SimpleDateFormat(String template, Locale locale) with for example Locale.US for ASCII dates. [SimpleDateFormat]
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SimpleDateFormat":
+   Almost all callers should use getDateInstance(), getDateTimeInstance(), or
+   getTimeInstance() to get a ready-made instance of SimpleDateFormat suitable
+   for the user's locale. The main reason you'd create an instance this class
+   directly is because you need to format/parse a specific machine-readable
+   format, in which case you almost certainly want to explicitly ask for US to
+   ensure that you get ASCII digits (rather than, say, Arabic digits).
+
+   Therefore, you should either use the form of the SimpleDateFormat
+   constructor where you pass in an explicit locale, such as Locale.US, or use
+   one of the get instance methods, or suppress this error if really know what
+   you are doing.
+
+   https://developer.android.com/reference/java/text/SimpleDateFormat.html
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\content_display_text.xml:9: Warning: Replace the <fragment> tag with FragmentContainerView. [FragmentTagUsage from fragment-1.3.4]
+    <fragment
+     ~~~~~~~~
+
+   Explanation for issues of type "FragmentTagUsage":
+   FragmentContainerView replaces the <fragment> tag as the preferred         
+          way of adding fragments via XML. Unlike the <fragment> tag,
+   FragmentContainerView                 uses a normal FragmentTransaction
+   under the hood to add the initial fragment,                 allowing
+   further FragmentTransaction operations on the FragmentContainerView        
+           and providing a consistent timing for lifecycle events.
+
+   https://developer.android.com/reference/androidx/fragment/app/FragmentContainerView.html
+
+   Vendor: Android Open Source Project (fragment-1.3.4)
+   Identifier: fragment-1.3.4
+   Feedback: https://issuetracker.google.com/issues/new?component=192731
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\build.gradle:35: Warning: A newer version of androidx.appcompat:appcompat than 1.3.0 is available: 1.4.2 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\build.gradle:36: Warning: A newer version of com.google.android.material:material than 1.4.0 is available: 1.6.1 [GradleDependency]
+    implementation 'com.google.android.material:material:1.4.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\build.gradle:37: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.0.4 is available: 2.1.4 [GradleDependency]
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\build.gradle:39: Warning: A newer version of androidx.navigation:navigation-fragment than 2.3.5 is available: 2.5.1 [GradleDependency]
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\build.gradle:40: Warning: A newer version of androidx.navigation:navigation-ui than 2.3.5 is available: 2.5.1 [GradleDependency]
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\drawable-v24: Warning: This folder configuration (v24) is unnecessary; minSdkVersion is 29. Merge all the resources in this folder into drawable. [ObsoleteSdkInt]
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\mipmap-anydpi-v26: Warning: This folder configuration (v26) is unnecessary; minSdkVersion is 29. Merge all the resources in this folder into mipmap-anydpi. [ObsoleteSdkInt]
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values-night\themes.xml:13: Warning: Unnecessary; SDK_INT is always >= 21 [ObsoleteSdkInt]
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+                                            ~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\themes.xml:13: Warning: Unnecessary; SDK_INT is always >= 21 [ObsoleteSdkInt]
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+                                            ~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\content_display_text.xml:2: Warning: The resource R.layout.content_display_text appears to be unused [UnusedResources]
+<androidx.constraintlayout.widget.ConstraintLayout
+^
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\dimens.xml:2: Warning: The resource R.dimen.fab_margin appears to be unused [UnusedResources]
+    <dimen name="fab_margin">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\navigation\nav_graph.xml:2: Warning: The resource R.navigation.nav_graph appears to be unused [UnusedResources]
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\navigation\nav_graph2.xml:2: Warning: The resource R.navigation.nav_graph2 appears to be unused [UnusedResources]
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\navigation\nav_graph3.xml:2: Warning: The resource R.navigation.nav_graph3 appears to be unused [UnusedResources]
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\searchresult.xml:2: Warning: The resource R.layout.searchresult appears to be unused [UnusedResources]
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:4: Warning: The resource R.string.title_activity_add_phone_call appears to be unused [UnusedResources]
+    <string name="title_activity_add_phone_call">AddPhoneCall</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:6: Warning: The resource R.string.first_fragment_label appears to be unused [UnusedResources]
+    <string name="first_fragment_label">First Fragment</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:7: Warning: The resource R.string.second_fragment_label appears to be unused [UnusedResources]
+    <string name="second_fragment_label">Second Fragment</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:8: Warning: The resource R.string.next appears to be unused [UnusedResources]
+    <string name="next">Next</string>
+            ~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:9: Warning: The resource R.string.previous appears to be unused [UnusedResources]
+    <string name="previous">Previous</string>
+            ~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:11: Warning: The resource R.string.hello_first_fragment appears to be unused [UnusedResources]
+    <string name="hello_first_fragment">Hello first fragment</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:12: Warning: The resource R.string.hello_second_fragment appears to be unused [UnusedResources]
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:19: Warning: The resource R.string.title_activity_search_customer_bill appears to be unused [UnusedResources]
+    <string name="title_activity_search_customer_bill">SearchCustomerBill</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:22: Warning: The resource R.string.input appears to be unused [UnusedResources]
+    <string name="input">Input</string>
+            ~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:23: Warning: The resource R.string.return_home appears to be unused [UnusedResources]
+    <string name="return_home">Return Home</string>
+            ~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:24: Warning: The resource R.string.NoCustomerFound appears to be unused [UnusedResources]
+    <string name="NoCustomerFound">No cutomer found</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\strings.xml:25: Warning: The resource R.string.title_activity_display_text appears to be unused [UnusedResources]
+    <string name="title_activity_display_text">DisplayText</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\themes.xml:17: Warning: The resource R.style.Theme_PhoneBill_NoActionBar appears to be unused [UnusedResources]
+    <style name="Theme.PhoneBill.NoActionBar">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\themes.xml:22: Warning: The resource R.style.Theme_PhoneBill_AppBarOverlay appears to be unused [UnusedResources]
+    <style name="Theme.PhoneBill.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\values\themes.xml:24: Warning: The resource R.style.Theme_PhoneBill_PopupOverlay appears to be unused [UnusedResources]
+    <style name="Theme.PhoneBill.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests=true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests=true.
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:35: Warning: The view name (@+id/CallerNumber) suggests this is a number, but it does not include a numeric inputType (such as 'numberSigned') [TextFields]
+        android:inputType="textPersonName"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:27: id defined here
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:52: Warning: The view name (@+id/CalleeNumber) suggests this is a number, but it does not include a numeric inputType (such as 'numberSigned') [TextFields]
+        android:inputType="textPersonName"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:44: id defined here
+
+   Explanation for issues of type "TextFields":
+   Providing an inputType attribute on a text field improves usability because
+   depending on the data to be input, optimized keyboards can be shown to the
+   user (such as just digits and parentheses for a phone number). 
+
+   The lint detector also looks at the id of the view, and if the id offers a
+   hint of the purpose of the field (for example, the id contains the phrase
+   phone or email), then lint will also ensure that the inputType contains the
+   corresponding type attributes.
+
+   If you really want to keep the text field generic, you can suppress this
+   warning by setting inputType="text".
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:9: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:26: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:43: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:60: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:77: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\promptinput.xml:42: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\promptinput.xml:59: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:9: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:26: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:43: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:60: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_add_phone_call.xml:77: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_main.xml:55: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\promptinput.xml:8: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\promptinput.xml:42: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\promptinput.xml:59: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+    <EditText
+     ~~~~~~~~
+
+   Explanation for issues of type "LabelFor":
+   Editable text fields should provide an android:hint or, provided your
+   minSdkVersion is at least 17, they may be referenced by a view with a
+   android:labelFor attribute.
+
+   When using android:labelFor, be sure to provide an android:text or an
+   android:contentDescription.
+
+   If your view is labeled but by a label in a different layout which includes
+   this one, just suppress this warning from lint.
+
+C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\res\layout\activity_display_text.xml:17: Warning: Hardcoded string "TextView", should use @string resource [HardcodedText]
+        android:text="TextView"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+1 errors, 56 warnings

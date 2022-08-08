@@ -6,48 +6,66 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="29"
-8-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml
+8-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="32" />
-9-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml
+9-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml
 10
 11    <application
-11-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:6:5-25:19
+11-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:6:5-34:19
 12        android:allowBackup="true"
-12-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:7:9-35
+12-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:7:9-35
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-13-->[androidx.core:core:1.5.0] C:\Users\natha\.gradle\caches\transforms-3\4cb2d3ae910a25e4d3b75b6b0d8d1b11\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+13-->[androidx.core:core:1.5.0] C:\Users\User\.gradle\caches\transforms-3\4cb2d3ae910a25e4d3b75b6b0d8d1b11\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
 14        android:dataExtractionRules="@xml/data_extraction_rules"
-14-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:8:9-65
+14-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:8:9-65
 15        android:extractNativeLibs="false"
 16        android:fullBackupContent="@xml/backup_rules"
-16-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:9:9-54
+16-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:9:9-54
 17        android:icon="@mipmap/ic_launcher"
-17-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:10:9-43
+17-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:10:9-43
 18        android:label="@string/app_name"
-18-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:11:9-41
+18-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:11:9-41
 19        android:roundIcon="@mipmap/ic_launcher_round"
-19-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:12:9-54
+19-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:12:9-54
 20        android:supportsRtl="true"
-20-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:13:9-35
+20-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:13:9-35
 21        android:theme="@style/Theme.PhoneBill" >
-21-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:14:9-47
+21-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:14:9-47
 22        <activity
-22-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:16:9-24:20
-23            android:name="edu.pdx.cs410j.moes.MainActivity"
-23-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:17:13-41
-24            android:exported="true" >
-24-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:18:13-36
-25            <intent-filter>
-25-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:19:13-23:29
-26                <action android:name="android.intent.action.MAIN" />
-26-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:20:17-69
-26-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:20:25-66
-27
-28                <category android:name="android.intent.category.LAUNCHER" />
-28-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:22:17-77
-28-->C:\Users\natha\AndroidStudioProjects\PhoneBill-android\app\src\main\AndroidManifest.xml:22:27-74
-29            </intent-filter>
-30        </activity>
-31    </application>
-32
-33</manifest>
+22-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:16:9-18:40
+23            android:name="edu.pdx.cs410j.moes.DisplayText"
+23-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:17:13-40
+24            android:exported="false" />
+24-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:18:13-37
+25        <activity
+25-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:19:9-21:40
+26            android:name="edu.pdx.cs410j.moes.AddPhoneCall"
+26-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:20:13-41
+27            android:exported="false" />
+27-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:21:13-37
+28        <activity
+28-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:22:9-24:40
+29            android:name="edu.pdx.cs410j.moes.CalculatorActivity"
+29-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:23:13-47
+30            android:exported="false" />
+30-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:24:13-37
+31        <activity
+31-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:25:9-33:20
+32            android:name="edu.pdx.cs410j.moes.MainActivity"
+32-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:26:13-41
+33            android:exported="true" >
+33-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:27:13-36
+34            <intent-filter>
+34-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:28:13-32:29
+35                <action android:name="android.intent.action.MAIN" />
+35-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:29:17-69
+35-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:29:25-66
+36
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:31:17-77
+37-->C:\Users\User\StudioProjects\IDK\PhoneBill-android\app\src\main\AndroidManifest.xml:31:27-74
+38            </intent-filter>
+39        </activity>
+40    </application>
+41
+42</manifest>

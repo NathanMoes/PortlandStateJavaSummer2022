@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall>{
 
@@ -23,7 +24,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    * Checks to see if the java.util.date is a valid date
    */
   public boolean validateJavaDate(String to_validate){
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa",
+            Locale.getDefault());
     try{
       dateFormat.parse(to_validate);
     }
@@ -158,7 +160,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    */
 
   PhoneCall(String inp_caller, String inp_callerNumber, String inp_calleeNumber, String inp_callBegin, String inp_callEnd){
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa",
+            Locale.getDefault());
     if (this.validateJavaDate(inp_callBegin))
       this.callBeginTime = new Date(dateFormat.format(new Date(inp_callBegin))); // Throws illegal arument exception?
     else {
@@ -209,7 +212,6 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    */
   @Override
   public String getCaller() {
-    //throw new UnsupportedOperationException("This method is not implemented yet");
     return this.caller;
   }
 
@@ -219,7 +221,6 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    */
   @Override
   public String getCallee() {
-    //return "This method is not implemented yet";
     return this.calleeNumber;
   }
 
@@ -229,8 +230,6 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    */
   @Override
   public String getBeginTimeString() {
-    // throw new UnsupportedOperationException("This method is not implemented yet");
-    // return this.callBegin;
     if (this.callBeginTime != null)
       return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callBeginTime);
     else
@@ -243,8 +242,6 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    */
   @Override
   public String getEndTimeString() {
-    // throw new UnsupportedOperationException("This method is not implemented yet");
-    // return this.callEnd;
     if (this.callEndTime != null)
       return DateFormat.getDateInstance(DateFormat.SHORT).format(this.callEndTime);
     else
@@ -255,7 +252,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    * gets the begin time for a call but preserves the date and time information
    */
   public String getCallBegin(){
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa",
+            Locale.getDefault());
     return dateFormat.format(this.callBeginTime);
   }
 
@@ -263,7 +261,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
    * gets the end time for a call but preserves the date and time information
    */
   public String getCallEnd(){
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa",
+            Locale.getDefault());
     return dateFormat.format(this.callEndTime);
   }
 

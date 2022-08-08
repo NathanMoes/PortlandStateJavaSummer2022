@@ -20,6 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhoneBill" >
         <activity
+            android:name="edu.pdx.cs410j.moes.DisplayText"
+            android:exported="false" />
+        <activity
+            android:name="edu.pdx.cs410j.moes.AddPhoneCall"
+            android:exported="false" />
+        <activity
+            android:name="edu.pdx.cs410j.moes.CalculatorActivity"
+            android:exported="false" />
+        <activity
             android:name="edu.pdx.cs410j.moes.MainActivity"
             android:exported="true" >
             <intent-filter>

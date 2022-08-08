@@ -1,70 +1,106 @@
 [
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/layout_activity_main.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/layout/activity_main.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/navigation_nav_graph3.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/navigation/nav_graph3.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/xml_backup_rules.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/xml/backup_rules.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_searchresult.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/searchresult.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_activity_caculator.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_caculator.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_activity_display_text.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_display_text.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/xml_data_extraction_rules.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/xml/data_extraction_rules.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_content_display_text.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/content_display_text.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_activity_add_phone_call.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_add_phone_call.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_promptinput.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/promptinput.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/drawable_ic_launcher_background.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/drawable/ic_launcher_background.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/navigation_nav_graph.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/navigation/nav_graph.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/navigation_nav_graph2.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/navigation/nav_graph2.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/drawable-v24/ic_launcher_foreground.xml"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/drawable_ic_launcher_background.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "edu.pdx.cs410j.moes.app-merged_res-19:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "edu.pdx.cs410j.moes.app-main-20:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/xml_backup_rules.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/xml_data_extraction_rules.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/layout_activity_main.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/layout/activity_main.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "edu.pdx.cs410j.moes.app-merged_res-24:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "edu.pdx.cs410j.moes.app-main-25:/mipmap-xxxhdpi/ic_launcher.webp"
     }
 ]
